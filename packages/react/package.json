@@ -5,15 +5,17 @@
   "files": [
     "build/**"
   ],
-  "main": "build/index.cjs.js",
-  "module": "build/index.js",
+  "main": "build/index.js",
+  "module": "build/index.esm.js",
   "types": "build/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "dev": "pnpm run clean && rollup --config --watch",
     "build": "pnpm run clean && rollup --config",
     "clean": "rimraf build",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -57,13 +59,27 @@
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-terser": "^0.4.3",
     "@rollup/plugin-typescript": "^11.1.1",
+    "@storybook/addon-essentials": "7.0.18",
+    "@storybook/addon-interactions": "7.0.18",
+    "@storybook/addon-links": "7.0.18",
+    "@storybook/blocks": "7.0.18",
+    "@storybook/react": "^7.0.18",
+    "@storybook/react-vite": "7.0.18",
+    "@storybook/testing-library": "0.0.14-next.2",
     "@types/react": "^18.2.7",
     "@types/rollup-plugin-peer-deps-external": "^2.2.1",
+    "eslint-plugin-storybook": "^0.6.12",
     "postcss-preset-env": "^8.4.1",
+    "prop-types": "15.8.1",
     "react": "^18.2.0",
+    "react-dom": "18.2.0",
     "rollup": "^3.23.0",
     "rollup-plugin-dts": "^5.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.2"
+    "rollup-plugin-postcss": "^4.0.2",
+    "storybook": "7.0.18"
+  },
+  "dependencies": {
+    "clsx": "^1.2.1"
   }
 }
