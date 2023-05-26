@@ -1,0 +1,9 @@
+# Dependencies
+node_modules
+
+# Build products
+build
+coverage
+dist
+lib
+.next

@@ -1,0 +1,35 @@
+{
+  "name": "@color-ui/website",
+  "version": "1.0.0",
+  "description": "Homepage of color-ui",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PawanKolhe/color-ui.git",
+    "directory": "packages/website"
+  },
+  "bugs": {
+    "url": "https://github.com/PawanKolhe/color-ui/issues"
+  },
+  "homepage": "https://github.com/PawanKolhe/color-ui#readme",
+  "author": "Pawan Kolhe",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^13.4.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/next": "^9.0.0",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "eslint-config-next": "^13.4.4"
+  }
+}

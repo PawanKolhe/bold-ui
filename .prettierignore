@@ -1,0 +1,15 @@
+# Dependencies
+node_modules
+
+# Build products
+build
+coverage
+dist
+lib
+.next
+
+# Lock file
+pnpm-lock.yaml
+
+# Configs
+tsconfig.base.json
