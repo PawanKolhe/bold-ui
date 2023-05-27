@@ -1,6 +1,6 @@
 {
   "name": "@color-ui/react",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Simple, fast, and accessible React component library",
   "files": [
     "build/**"
@@ -10,7 +10,8 @@
   "types": "build/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "dev": "pnpm run clean && rollup --config --watch",
+    "dev": "run-p -ncr start storybook",
+    "start": "pnpm run clean-build && rollup --config --watch",
     "build": "pnpm run clean-build && rollup --config",
     "clean-build": "rimraf ./build",
     "lint-staged": "lint-staged",
@@ -29,9 +30,9 @@
   "homepage": "https://github.com/PawanKolhe/color-ui#readme",
   "keywords": [
     "react",
-    "react-component",
-    "ui",
-    "color ui"
+    "react-components",
+    "design-system",
+    "ui"
   ],
   "author": "Pawan Kolhe <pawanashishkolhe@gmail.com> (https://pawankolhe.com/)",
   "license": "MIT",
