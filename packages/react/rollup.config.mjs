@@ -23,6 +23,7 @@ const config = {
       sourcemap: true,
     },
   ],
+  external: ["react"],
   plugins: [
     //@ts-expect-error
     peerDepsExternal({
