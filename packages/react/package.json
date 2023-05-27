@@ -11,12 +11,12 @@
   "sideEffects": false,
   "scripts": {
     "dev": "pnpm run clean && rollup --config --watch",
-    "build": "pnpm run clean && rollup --config",
-    "clean": "rimraf build",
+    "build": "pnpm run clean-build && rollup --config",
+    "clean-build": "rimraf ./build",
     "lint-staged": "lint-staged",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "publish": "pnpm run build && pnpm publish --dry-run"
+    "publish-build": "pnpm run build && pnpm publish --dry-run"
   },
   "repository": {
     "type": "git",
