@@ -10,11 +10,12 @@
   },
   "scripts": {
     "dev": "pnpm --filter @color-ui/react run storybook",
-    "website": "pnpm --filter @color-ui/website run start",
+    "dev-website": "pnpm --filter @color-ui/website run dev",
     "publish": "pnpm --filter @color-ui/react run publish",
     "eslint": "eslint . --ext js,jsx,ts,tsx --cache --max-warnings=0 ",
     "eslint-fix": "eslint . --ext js,jsx,ts,tsx --fix",
-    "clean": "rimraf node_modules"
+    "clean": "git clean -fXd",
+    "clean-node-modules": "rimraf node_modules"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.43.0",
