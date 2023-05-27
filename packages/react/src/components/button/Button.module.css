@@ -1,4 +1,5 @@
 .Button {
+  padding: 4px 8px;
   border: 2px solid black;
   background-color: white;
   border-radius: 4px;

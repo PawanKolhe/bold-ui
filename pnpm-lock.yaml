@@ -73,7 +73,7 @@ importers:
         version: 0.4.3(rollup@3.23.0)
       '@rollup/plugin-typescript':
         specifier: ^11.1.1
-        version: 11.1.1(rollup@3.23.0)(typescript@5.0.4)
+        version: 11.1.1(rollup@3.23.0)(tslib@2.5.2)(typescript@5.0.4)
       '@storybook/addon-a11y':
         specifier: ^7.0.18
         version: 7.0.18(react-dom@18.2.0)(react@18.2.0)
@@ -134,6 +134,9 @@ importers:
 
   packages/website:
     dependencies:
+      '@color-ui/react':
+        specifier: workspace:*
+        version: link:../react
       next:
         specifier: ^13.4.4
         version: 13.4.4(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
@@ -2501,7 +2504,7 @@ packages:
       terser: 5.17.6
     dev: true
 
-  /@rollup/plugin-typescript@11.1.1(rollup@3.23.0)(typescript@5.0.4):
+  /@rollup/plugin-typescript@11.1.1(rollup@3.23.0)(tslib@2.5.2)(typescript@5.0.4):
     resolution: {integrity: sha512-Ioir+x5Bejv72Lx2Zbz3/qGg7tvGbxQZALCLoJaGrkNXak/19+vKgKYJYM3i/fJxvsb23I9FuFQ8CUBEfsmBRg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2517,6 +2520,7 @@ packages:
       '@rollup/pluginutils': 5.0.2(rollup@3.23.0)
       resolve: 1.22.2
       rollup: 3.23.0
+      tslib: 2.5.2
       typescript: 5.0.4
     dev: true
 
