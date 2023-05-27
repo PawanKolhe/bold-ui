@@ -23,3 +23,10 @@ export const Secondary: Story = {
     children: "Secondary",
   },
 };
+
+export const Depth: Story = {
+  args: {
+    children: "Depth",
+    hasDepth: true,
+  },
+};

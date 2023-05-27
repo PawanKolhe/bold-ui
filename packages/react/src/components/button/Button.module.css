@@ -1,9 +1,12 @@
 .Button {
   padding: 4px 8px;
   border: 2px solid black;
-  border-bottom-width: 4px;
   background-color: white;
   border-radius: 4px;
+}
+
+.Button__hasDepth {
+  border-bottom-width: 4px;
 
   &:active {
     transform: translateY(2px);
