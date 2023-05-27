@@ -9,7 +9,8 @@
     "pnpm": ">=8"
   },
   "scripts": {
-    "start": "pnpm --filter website run start",
+    "dev": "pnpm --filter @color-ui/react run storybook",
+    "website": "pnpm --filter @color-ui/website run start",
     "eslint": "eslint . --ext js,jsx,ts,tsx --cache --max-warnings=0 ",
     "eslint-fix": "eslint . --ext js,jsx,ts,tsx --fix",
     "clean": "rimraf node_modules"
