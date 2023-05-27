@@ -15,7 +15,8 @@
     "clean": "rimraf build",
     "lint-staged": "lint-staged",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "publish": "pnpm run build && pnpm publish --dry-run"
   },
   "repository": {
     "type": "git",
