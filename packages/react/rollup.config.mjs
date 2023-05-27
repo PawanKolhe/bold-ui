@@ -15,12 +15,12 @@ const config = {
     {
       file: packageJson.main,
       format: "cjs",
-      sourcemap: true,
+      sourcemap: !isProduction,
     },
     {
       file: packageJson.module,
       format: "esm",
-      sourcemap: true,
+      sourcemap: !isProduction,
     },
   ],
   external: ["react"],
@@ -31,7 +31,7 @@ const config = {
     }),
     resolve(),
     commonjs(),
-    typescript({ tsconfig: "./tsconfig.json" }),
+    typescript({ tsconfig: "./tsconfig.json", sourceMap: !isProduction }),
     postcss({
       plugins: [postcssPresetEnv()],
     }),
