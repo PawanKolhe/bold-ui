@@ -6,7 +6,7 @@ import postcss from "rollup-plugin-postcss";
 import postcssPresetEnv from "postcss-preset-env";
 import packageJson from "./package.json" assert { type: "json" };
 
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = !process.env.ROLLUP_WATCH;
 
 /** @type {import('rollup').RollupOptions} */
 const config = {
