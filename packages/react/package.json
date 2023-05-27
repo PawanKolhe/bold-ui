@@ -17,7 +17,7 @@
     "lint-staged": "lint-staged",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "publish-build": "pnpm run build && pnpm publish --dry-run"
+    "publish-build": "pnpm run build && pnpm publish --access public"
   },
   "repository": {
     "type": "git",
