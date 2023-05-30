@@ -14,7 +14,8 @@
     "dev-website": "pnpm --filter @color-ui/website run dev",
     "publish-build": "pnpm --filter color-ui run publish-build",
     "eslint": "eslint . --ext js,jsx,ts,tsx --cache --max-warnings=0 ",
-    "eslint-fix": "eslint . --ext js,jsx,ts,tsx --fix",
+    "eslint-fix": "eslint . --ext js,jsx,ts,tsx --fix --max-warnings=0",
+    "lint-staged": "lint-staged",
     "clean": "git clean -fXd",
     "clean-node-modules": "rimraf node_modules",
     "prepare": "husky install"

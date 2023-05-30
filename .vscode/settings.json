@@ -6,5 +6,5 @@
   "prettier.tabWidth": 2,
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
-  "workbench.settings.openDefaultSettings": true
+  "json.validate.enable": false
 }
