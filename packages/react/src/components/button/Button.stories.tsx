@@ -2,13 +2,15 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 import { type ButtonProps } from "./Button.types";
 
-export default {
+const meta: Meta<ButtonProps> = {
   component: Button,
   title: "Components/Button",
   argTypes: {
     onClick: { action: "clicked" },
   },
-} as Meta<ButtonProps>;
+};
+
+export default meta;
 
 type Story = StoryObj<ButtonProps>;
 
