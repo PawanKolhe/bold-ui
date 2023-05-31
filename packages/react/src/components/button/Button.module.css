@@ -1,15 +1,166 @@
+@import "../../common.module.css";
+
+.common {
+  display: grid;
+}
+
 .Button {
-  padding: 4px 8px;
-  border: 2px solid black;
-  background-color: white;
-  border-radius: 4px;
+  --button-height: 2rem;
+  --button-primary-color: black;
+  --button-text-color: transparent;
+  --button-background-color: transparent;
+  --button-border-color: transparent;
+  --button-focus-border-color: #ffdd00;
+  --button-border-radius: 0.25rem;
+
+  height: var(--button-height);
+  padding: 0.25rem 0.5rem;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: var(--button-border-color);
+  color: var(--button-text-color);
+  background-color: var(--button-background-color);
+  border-radius: var(--button-border-radius);
+  font-size: 0.75rem;
+  font-weight: 600;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+
+  /* Creates a lighter version of the primary color to act as an overlay */
+  .Button__overlay {
+    position: absolute;
+    top: -0.125rem;
+    right: -0.125rem;
+    bottom: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--button-border-radius);
+    opacity: 0%;
+  }
+
+  &:active {
+    transform: translateY(0.063rem);
+  }
+
+  &:focus-visible {
+    outline: 0.125rem solid var(--button-focus-border-color);
+    outline-offset: 0.125rem;
+  }
+}
+
+/* Size */
+.Button__sizeDefault {
+  --button-height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+}
+
+.Button__sizeSmall {
+  --button-height: 1.5rem;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+}
+
+.Button__sizeLarge {
+  --button-height: 2.5rem;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* Kind */
+.Button__kindDefault {
+  --button-text-color: var(--button-primary-color);
+  --button-background-color: white;
+  --button-border-color: white;
+
+  /* Background color */
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -0.125rem;
+    right: -0.125rem;
+    bottom: -0.125rem;
+    left: -0.125rem;
+    border-radius: var(--button-border-radius);
+    background-color: var(--button-primary-color);
+    opacity: 8%;
+  }
+
+  .Button__overlay {
+    background-color: var(--button-primary-color);
+  }
+  &:hover .Button__overlay {
+    display: block;
+    opacity: 6%;
+  }
+}
+
+.Button__kindOutline {
+  --button-text-color: var(--button-primary-color);
+  --button-background-color: transparent;
+  --button-border-color: var(--button-primary-color);
+
+  .Button__overlay {
+    display: block;
+    background-color: var(--button-primary-color);
+  }
+  &:hover .Button__overlay {
+    opacity: 6%;
+  }
+}
+
+.Button__kindPrimary {
+  --button-text-color: white;
+  --button-background-color: var(--button-primary-color);
+  --button-border-color: var(--button-primary-color);
+
+  .Button__overlay {
+    display: block;
+    background-color: white;
+  }
+  &:hover .Button__overlay {
+    opacity: 6%;
+  }
+}
+
+.Button__kindSubtle {
+  --button-text-color: var(--button-primary-color);
+  --button-background-color: transparent;
+  --button-border-color: transparent;
+
+  .Button__overlay {
+    display: block;
+    background-color: var(--button-primary-color);
+  }
+  &:hover .Button__overlay {
+    opacity: 8%;
+  }
+}
+
+.Button__kindLink {
+  --button-text-color: var(--button-primary-color);
+  --button-background-color: transparent;
+  --button-border-color: transparent;
+}
+
+/* Others */
+.Button__hasNoSpacing {
+  height: auto;
+  padding: 0;
 }
 
 .Button__hasDepth {
-  border-bottom-width: 4px;
+  border-bottom-width: 0.25rem;
 
   &:active {
-    transform: translateY(2px);
-    border-bottom-width: 2px;
+    height: calc(var(--button-height) - 0.125rem);
+    margin-top: 0.125rem;
+    border-bottom-width: 0.125rem;
+    transform: none;
+
+    &.Button__hasNoSpacing {
+      height: auto;
+    }
   }
 }
