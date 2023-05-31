@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { clsx } from "clsx";
 import { ButtonSize, type ButtonProps, ButtonKind } from "./Button.types";
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
@@ -9,9 +9,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       kind = ButtonKind.DEFAULT,
       size = ButtonSize.DEFAULT,
-      color = "#1a1b22",
+      color = "--color-grey-100",
       hasDepth = false,
-      hasNoSpacing = false,
+      noSpacing = false,
       className,
       ...restProps
     } = props;
@@ -32,8 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             [styles.Button__kindSubtle]: kind === ButtonKind.SUBTLE,
             [styles.Button__kindLink]: kind === ButtonKind.LINK,
             // Others
-            [styles.Button__hasNoSpacing]:
-              hasNoSpacing && kind === ButtonKind.LINK,
+            [styles.Button__noSpacing]: noSpacing && kind === ButtonKind.LINK,
             [styles.Button__hasDepth]: hasDepth && kind === ButtonKind.OUTLINE,
           },
           className

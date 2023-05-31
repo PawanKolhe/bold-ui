@@ -17,72 +17,18 @@ export default meta;
 
 type Story = StoryObj<ButtonProps>;
 
+const Container = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ display: "flex", gap: "1rem" }}>{children}</div>
+);
+
 // Size
 export const SizeDefault: Story = {
   args: {
     children: "Default",
     size: ButtonSize.DEFAULT,
   },
-};
-
-export const SizeSmall: Story = {
-  args: {
-    children: "Small",
-    size: ButtonSize.SMALL,
-  },
-};
-
-export const SizeLarge: Story = {
-  args: {
-    children: "Large",
-    size: ButtonSize.LARGE,
-  },
-};
-
-// Kind
-export const KindDefault: Story = {
-  args: {
-    children: "Default",
-    kind: ButtonKind.DEFAULT,
-  },
-};
-
-export const KindOutline: Story = {
-  args: {
-    children: "Outline",
-    kind: ButtonKind.OUTLINE,
-  },
-};
-
-export const KindPrimary: Story = {
-  args: {
-    children: "Primary",
-    kind: ButtonKind.PRIMARY,
-  },
-};
-
-export const KindSubtle: Story = {
-  args: {
-    children: "Subtle",
-    kind: ButtonKind.SUBTLE,
-  },
-};
-
-export const KindLink: Story = {
-  args: {
-    children: "Link",
-    kind: ButtonKind.LINK,
-  },
-};
-
-// Others
-export const Color: Story = {
-  args: {
-    children: "Color",
-    color: "#068000",
-  },
   render: (args) => (
-    <>
+    <Container>
       <Button {...args} kind={ButtonKind.DEFAULT}>
         Default
       </Button>
@@ -98,7 +44,112 @@ export const Color: Story = {
       <Button {...args} kind={ButtonKind.LINK}>
         Link
       </Button>
-    </>
+    </Container>
+  ),
+};
+
+export const SizeSmall: Story = {
+  args: {
+    children: "Small",
+    size: ButtonSize.SMALL,
+  },
+  render: (args) => (
+    <Container>
+      <Button {...args} kind={ButtonKind.DEFAULT}>
+        Default
+      </Button>
+      <Button {...args} kind={ButtonKind.OUTLINE}>
+        Outline
+      </Button>
+      <Button {...args} kind={ButtonKind.PRIMARY}>
+        Primary
+      </Button>
+      <Button {...args} kind={ButtonKind.SUBTLE}>
+        Subtle
+      </Button>
+      <Button {...args} kind={ButtonKind.LINK}>
+        Link
+      </Button>
+    </Container>
+  ),
+};
+
+export const SizeLarge: Story = {
+  args: {
+    children: "Large",
+    size: ButtonSize.LARGE,
+  },
+  render: (args) => (
+    <Container>
+      <Button {...args} kind={ButtonKind.DEFAULT}>
+        Default
+      </Button>
+      <Button {...args} kind={ButtonKind.OUTLINE}>
+        Outline
+      </Button>
+      <Button {...args} kind={ButtonKind.PRIMARY}>
+        Primary
+      </Button>
+      <Button {...args} kind={ButtonKind.SUBTLE}>
+        Subtle
+      </Button>
+      <Button {...args} kind={ButtonKind.LINK}>
+        Link
+      </Button>
+    </Container>
+  ),
+};
+
+// Others
+export const Disabled: Story = {
+  args: {
+    children: "Disabled",
+    disabled: true,
+  },
+  render: (args) => (
+    <Container>
+      <Button {...args} kind={ButtonKind.DEFAULT}>
+        Default
+      </Button>
+      <Button {...args} kind={ButtonKind.OUTLINE}>
+        Outline
+      </Button>
+      <Button {...args} kind={ButtonKind.PRIMARY}>
+        Primary
+      </Button>
+      <Button {...args} kind={ButtonKind.SUBTLE}>
+        Subtle
+      </Button>
+      <Button {...args} kind={ButtonKind.LINK}>
+        Link
+      </Button>
+    </Container>
+  ),
+};
+
+export const Color: Story = {
+  args: {
+    children: "Color",
+    color: "#068000",
+  },
+  render: (args) => (
+    <Container>
+      <Button {...args} kind={ButtonKind.DEFAULT}>
+        Default
+      </Button>
+      <Button {...args} kind={ButtonKind.OUTLINE}>
+        Outline
+      </Button>
+      <Button {...args} kind={ButtonKind.PRIMARY}>
+        Primary
+      </Button>
+      <Button {...args} kind={ButtonKind.SUBTLE}>
+        Subtle
+      </Button>
+      <Button {...args} kind={ButtonKind.LINK}>
+        Link
+      </Button>
+    </Container>
   ),
 };
 
@@ -106,15 +157,27 @@ export const Depth: Story = {
   args: {
     children: "Depth",
     kind: ButtonKind.OUTLINE,
-    size: ButtonSize.LARGE,
     hasDepth: true,
   },
+  render: (args) => (
+    <Container>
+      <Button {...args} size={ButtonSize.SMALL}>
+        Small
+      </Button>
+      <Button {...args} size={ButtonSize.DEFAULT}>
+        Default
+      </Button>
+      <Button {...args} size={ButtonSize.LARGE}>
+        Large
+      </Button>
+    </Container>
+  ),
 };
 
 export const NoSpacing: Story = {
   args: {
     children: "No Spacing",
     kind: ButtonKind.LINK,
-    hasNoSpacing: true,
+    noSpacing: true,
   },
 };

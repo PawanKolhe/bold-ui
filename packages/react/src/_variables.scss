@@ -1,0 +1,9 @@
+@mixin colors {
+  --color-grey-100: #161616;
+  --color-grey-90: #262626;
+  --color-grey-10: #f4f4f4;
+}
+
+@mixin common {
+  box-sizing: border-box;
+}

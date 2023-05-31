@@ -6,5 +6,7 @@
   "prettier.tabWidth": 2,
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
-  "json.validate.enable": false
+  "json.validate.enable": false,
+  "css.lint.unknownAtRules": "ignore",
+  "css.lint.validProperties": ["composes"]
 }

@@ -1,18 +1,18 @@
 import { type ButtonHTMLAttributes, type ReactNode } from "react";
 
 export enum ButtonSize {
-  SMALL = "SMALL",
-  DEFAULT = "DEFAULT",
-  LARGE = "LARGE",
+  DEFAULT = "default",
+  SMALL = "small",
+  LARGE = "large",
 }
 type ButtonSizeValues = `${ButtonSize}`;
 
 export enum ButtonKind {
-  DEFAULT = "DEFAULT",
-  OUTLINE = "OUTLINE",
-  PRIMARY = "PRIMARY",
-  SUBTLE = "SUBTLE",
-  LINK = "LINK",
+  DEFAULT = "default",
+  OUTLINE = "outlne",
+  PRIMARY = "primary",
+  SUBTLE = "subtle",
+  LINK = "link",
 }
 type ButtonKindValues = `${ButtonKind}`;
 
@@ -26,7 +26,7 @@ export type ButtonProps = {
    * Removes the padding inside the button.
    * Supported only for 'ButtonKind.LINK' button kind
    */
-  hasNoSpacing?: boolean;
+  noSpacing?: boolean;
   /**
    * Adds a 2D depth effect to the button.
    * Supported only for 'ButtonKind.OUTLINE' button kind

@@ -1,10 +1,9 @@
-@import "../../common.module.css";
-
-.common {
-  display: grid;
-}
+@use "../../variables" as *;
 
 .Button {
+  @include common;
+  @include colors;
+
   --button-height: 2rem;
   --button-primary-color: black;
   --button-text-color: transparent;
@@ -45,6 +44,12 @@
   &:focus-visible {
     outline: 0.125rem solid var(--button-focus-border-color);
     outline-offset: 0.125rem;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
   }
 }
 
@@ -87,11 +92,9 @@
     opacity: 8%;
   }
 
-  .Button__overlay {
-    background-color: var(--button-primary-color);
-  }
-  &:hover .Button__overlay {
+  &:not(:disabled):hover .Button__overlay {
     display: block;
+    background-color: var(--button-primary-color);
     opacity: 6%;
   }
 }
@@ -101,11 +104,9 @@
   --button-background-color: transparent;
   --button-border-color: var(--button-primary-color);
 
-  .Button__overlay {
+  &:not(:disabled):hover .Button__overlay {
     display: block;
     background-color: var(--button-primary-color);
-  }
-  &:hover .Button__overlay {
     opacity: 6%;
   }
 }
@@ -115,11 +116,9 @@
   --button-background-color: var(--button-primary-color);
   --button-border-color: var(--button-primary-color);
 
-  .Button__overlay {
+  &:not(:disabled):hover .Button__overlay {
     display: block;
     background-color: white;
-  }
-  &:hover .Button__overlay {
     opacity: 6%;
   }
 }
@@ -129,11 +128,9 @@
   --button-background-color: transparent;
   --button-border-color: transparent;
 
-  .Button__overlay {
+  &:not(:disabled):hover .Button__overlay {
     display: block;
     background-color: var(--button-primary-color);
-  }
-  &:hover .Button__overlay {
     opacity: 8%;
   }
 }
@@ -145,7 +142,7 @@
 }
 
 /* Others */
-.Button__hasNoSpacing {
+.Button__noSpacing {
   height: auto;
   padding: 0;
 }
@@ -159,7 +156,7 @@
     border-bottom-width: 0.125rem;
     transform: none;
 
-    &.Button__hasNoSpacing {
+    &.Button__noSpacing {
       height: auto;
     }
   }

@@ -4,7 +4,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import postcss from "rollup-plugin-postcss";
 import postcssPresetEnv from "postcss-preset-env";
-import simpleExtend from "postcss-extend";
 import packageJson from "./package.json" assert { type: "json" };
 
 const isProduction = !process.env.ROLLUP_WATCH;
@@ -30,12 +29,15 @@ const config = {
     peerDepsExternal({
       packageJsonPath: "./package.json",
     }),
+    postcss({
+      plugins: [postcssPresetEnv()],
+      extract: true,
+      modules: true,
+      use: ["sass"],
+    }),
     resolve(),
     commonjs(),
     typescript({ tsconfig: "./tsconfig.json", sourceMap: !isProduction }),
-    postcss({
-      plugins: [simpleExtend(), postcssPresetEnv()],
-    }),
     isProduction && (await import("@rollup/plugin-terser")).default(),
   ],
 };
