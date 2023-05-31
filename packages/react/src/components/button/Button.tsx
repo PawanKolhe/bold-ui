@@ -9,7 +9,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       kind = ButtonKind.DEFAULT,
       size = ButtonSize.DEFAULT,
-      color = "--color-grey-100",
+      color = "var(--color-grey-100)",
       hasDepth = false,
       noSpacing = false,
       className,
