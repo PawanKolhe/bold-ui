@@ -1,7 +1,16 @@
 @mixin colors {
   --color-grey-100: #161616;
   --color-grey-90: #262626;
+  --color-grey-80: #393939;
+  --color-grey-70: #525252;
+  --color-grey-60: #6f6f6f;
+  --color-grey-50: #8d8d8d;
+  --color-grey-40: #a8a8a8;
+  --color-grey-30: #c6c6c6;
+  --color-grey-20: #e0e0e0;
   --color-grey-10: #f4f4f4;
+  --color-danger: #c62828;
+  --color-success: #2e7d32;
 }
 
 @mixin common {
