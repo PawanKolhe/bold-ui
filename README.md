@@ -1,6 +1,9 @@
-# Color UI
+# Bold UI
 
-Simple, fast, and accessible React component library
+Modern, fast, and accessible React component library
+
+- [Demo (Storybook)](https://main--64797a8b450504bdbcae2912.chromatic.com)
+- [Docs](https://github.com/PawanKolhe/bold-ui/tree/main/packages/react#readme)
 
 ## Dev Environment
 

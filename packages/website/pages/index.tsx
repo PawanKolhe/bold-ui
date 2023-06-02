@@ -1,9 +1,9 @@
-import { Button } from "@color-ui/react";
+import { Button } from "@bold-ui/react";
 
 const HomePage = () => {
   return (
     <>
-      <div>Hello color-ui</div>
+      <div>Hello bold-ui</div>
       <Button hasDepth>Button Test</Button>
     </>
   );

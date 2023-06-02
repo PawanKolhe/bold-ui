@@ -1,7 +1,7 @@
 {
-  "name": "@color-ui/website",
+  "name": "@bold-ui/website",
   "version": "1.0.0",
-  "description": "Homepage of color-ui",
+  "description": "Homepage of bold-ui",
   "private": true,
   "main": "index.ts",
   "scripts": {
@@ -12,20 +12,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PawanKolhe/color-ui.git",
+    "url": "https://github.com/PawanKolhe/bold-ui.git",
     "directory": "packages/website"
   },
   "bugs": {
-    "url": "https://github.com/PawanKolhe/color-ui/issues"
+    "url": "https://github.com/PawanKolhe/bold-ui/issues"
   },
-  "homepage": "https://github.com/PawanKolhe/color-ui#readme",
+  "homepage": "https://github.com/PawanKolhe/bold-ui#readme",
   "author": "Pawan Kolhe",
   "license": "MIT",
   "dependencies": {
     "next": "^13.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "color-ui": "workspace:*"
+    "@bold-ui/react": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.2.7",

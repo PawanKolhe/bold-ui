@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@color-ui/react"],
+  transpilePackages: ["@bold-ui/react"],
 };
 
 module.exports = nextConfig;
