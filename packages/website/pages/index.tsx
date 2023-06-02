@@ -3,7 +3,15 @@ import { Button } from "@bold-ui/react";
 const HomePage = () => {
   return (
     <>
-      <div>Hello bold-ui</div>
+      <h1
+        style={{
+          fontFamily: "sans-serif",
+          fontSize: "2rem",
+          fontWeight: 700,
+        }}
+      >
+        Bold UI
+      </h1>
       <Button hasDepth>Button Test</Button>
     </>
   );
