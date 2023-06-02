@@ -23,7 +23,7 @@ const config = {
       sourcemap: !isProduction,
     },
   ],
-  external: ["react", "react-dom"],
+  external: ["react", "react-dom", "react/jsx-runtime"],
   plugins: [
     //@ts-expect-error
     peerDepsExternal({
