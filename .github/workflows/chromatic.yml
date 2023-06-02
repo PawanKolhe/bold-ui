@@ -12,6 +12,13 @@ jobs:
     # Job steps
     steps:
       - uses: actions/checkout@v3
+        with:
+          # 👇 Fetches all history for all tags and branches
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          # 👇 Node.js version
+          node-version: 18
       - uses: pnpm/action-setup@v2
         with:
           version: 8.6.0
