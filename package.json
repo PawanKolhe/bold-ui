@@ -13,6 +13,7 @@
     "dev-react": "pnpm --filter color-ui run dev",
     "dev-website": "pnpm --filter @color-ui/website run dev",
     "publish-build": "pnpm --filter color-ui run publish-build",
+    "chromatic": "pnpm --filter color-ui run chromatic",
     "eslint": "eslint . --ext js,jsx,ts,tsx --cache --max-warnings=0 ",
     "eslint-fix": "eslint . --ext js,jsx,ts,tsx --fix --max-warnings=0",
     "lint-staged": "lint-staged",
