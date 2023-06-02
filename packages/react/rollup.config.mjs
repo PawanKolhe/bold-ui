@@ -31,9 +31,11 @@ const config = {
     }),
     postcss({
       plugins: [postcssPresetEnv()],
-      extract: true,
+      // extract: true,
       modules: true,
       use: ["sass"],
+      minimize: isProduction,
+      sourcemap: !isProduction,
     }),
     resolve(),
     commonjs(),
