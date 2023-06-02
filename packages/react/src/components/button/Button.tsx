@@ -16,6 +16,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = ButtonSize.DEFAULT,
       shape = ButtonShape.DEFAULT,
       color = "var(--color-grey-100)",
+      leftIcon,
+      rightIcon,
       isIconOnly = false,
       isFullWidth = false,
       noSpacing = false,
@@ -71,7 +73,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...restProps}
       >
         <div className={styles.Button__overlay} />
-        <span className={styles.Button__text}>{children}</span>
+        <div className={styles.Button__contentContainer}>
+          {leftIcon && <span className={styles.Button__text}>{leftIcon}</span>}
+          <span className={styles.Button__text}>{children}</span>
+          {rightIcon && (
+            <span className={styles.Button__text}>{rightIcon}</span>
+          )}
+        </div>
       </button>
     );
   }

@@ -10,6 +10,8 @@
   --button-border-color: transparent;
   --button-border-width: 0.125rem;
   --button-border-radius: 0.25rem;
+  --button-font-size: 0.875rem;
+  --button-line-height: 1.25rem;
   --button-focus-border-color: black;
   --button-height: 2rem;
   --button-padding-left-right: 0.75rem;
@@ -29,10 +31,21 @@
   position: relative;
   isolation: isolate;
 
+  .Button__contentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+    font-size: var(--button-font-size);
+    line-height: var(--button-line-height);
+  }
+
   .Button__text {
+    font-size: inherit;
+    line-height: inherit;
     display: inline-block;
     vertical-align: baseline;
-    line-height: 1;
     position: relative;
     z-index: 1;
   }
@@ -66,8 +79,8 @@
 .Button__sizeDefault {
   --button-height: 2rem;
   --button-padding-left-right: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  --button-font-size: 0.875rem;
+  --button-line-height: 1.25rem;
 
   &.Button__isIconOnly {
     --button-padding-left-right: 0.375rem;
@@ -77,8 +90,8 @@
 .Button__sizeSmall {
   --button-height: 1.5rem;
   --button-padding-left-right: 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  --button-font-size: 0.75rem;
+  --button-line-height: 1rem;
 
   &.Button__isIconOnly {
     --button-padding-left-right: 0.25rem;
@@ -88,8 +101,8 @@
 .Button__sizeLarge {
   --button-height: 2.5rem;
   --button-padding-left-right: 1rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  --button-font-size: 1rem;
+  --button-line-height: 1.5rem;
 
   &.Button__isIconOnly {
     --button-padding-left-right: 0.5rem;

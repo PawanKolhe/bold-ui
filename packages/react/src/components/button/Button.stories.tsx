@@ -239,6 +239,22 @@ export const Color: Story = {
   },
 };
 
+export const LeftIcon: Story = {
+  args: {
+    children: "No Entry",
+    leftIcon: "⛔️",
+    kind: ButtonKind.OUTLINE,
+    color: "#f13422",
+  },
+};
+
+export const RightIcon: Story = {
+  args: {
+    children: "Next Step",
+    rightIcon: "➡️",
+  },
+};
+
 export const FullWidth: Story = {
   args: {
     children: "Full Width",

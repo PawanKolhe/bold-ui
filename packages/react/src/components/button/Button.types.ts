@@ -30,6 +30,8 @@ export type ButtonProps = {
   kind?: ButtonKindValues;
   shape?: ButtonShapeValues;
   color?: string;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
   /**
    * Set to true if button only contains an icon.
    */
