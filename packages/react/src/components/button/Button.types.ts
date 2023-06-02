@@ -11,7 +11,7 @@ export enum ButtonKind {
   DEFAULT = "default",
   OUTLINE = "outline",
   PRIMARY = "primary",
-  SUBTLE = "subtle",
+  TEXT = "text",
   LINK = "link",
 }
 type ButtonKindValues = `${ButtonKind}`;
@@ -19,7 +19,7 @@ type ButtonKindValues = `${ButtonKind}`;
 export enum ButtonShape {
   DEFAULT = "default",
   SHARP = "sharp",
-  ROUNDED = "rounded",
+  ROUND = "round",
   CIRCLE = "circle",
 }
 type ButtonShapeValues = `${ButtonShape}`;

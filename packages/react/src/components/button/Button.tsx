@@ -23,6 +23,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isDanger = false,
       isSuccess = false,
       className,
+      type = "button",
       ...restProps
     } = props;
 
@@ -49,12 +50,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             [styles.Button__kindDefault]: kind === ButtonKind.DEFAULT,
             [styles.Button__kindPrimary]: kind === ButtonKind.PRIMARY,
             [styles.Button__kindOutline]: kind === ButtonKind.OUTLINE,
-            [styles.Button__kindSubtle]: kind === ButtonKind.SUBTLE,
+            [styles.Button__kindText]: kind === ButtonKind.TEXT,
             [styles.Button__kindLink]: kind === ButtonKind.LINK,
             // Shape
             [styles.Button__shapeDefault]: shape === ButtonShape.DEFAULT,
             [styles.Button__shapeSharp]: shape === ButtonShape.SHARP,
-            [styles.Button__shapeRounded]: shape === ButtonShape.ROUNDED,
+            [styles.Button__shapeRound]: shape === ButtonShape.ROUND,
             [styles.Button__shapeCircle]: shape === ButtonShape.CIRCLE,
             // Others
             [styles.Button__isIconOnly]: isIconOnly,
@@ -65,6 +66,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         style={{ ["--button-primary-color" as string]: computedColor }}
+        type={type}
         ref={ref}
         {...restProps}
       >

@@ -56,8 +56,8 @@ export const SizeDefault: Story = {
       <Button {...args} kind={ButtonKind.OUTLINE}>
         Outline
       </Button>
-      <Button {...args} kind={ButtonKind.SUBTLE}>
-        Subtle
+      <Button {...args} kind={ButtonKind.TEXT}>
+        Text
       </Button>
       <Button {...args} kind={ButtonKind.LINK}>
         Link
@@ -81,8 +81,8 @@ export const SizeSmall: Story = {
       <Button {...args} kind={ButtonKind.OUTLINE}>
         Outline
       </Button>
-      <Button {...args} kind={ButtonKind.SUBTLE}>
-        Subtle
+      <Button {...args} kind={ButtonKind.TEXT}>
+        Text
       </Button>
       <Button {...args} kind={ButtonKind.LINK}>
         Link
@@ -106,8 +106,8 @@ export const SizeLarge: Story = {
       <Button {...args} kind={ButtonKind.OUTLINE}>
         Outline
       </Button>
-      <Button {...args} kind={ButtonKind.SUBTLE}>
-        Subtle
+      <Button {...args} kind={ButtonKind.TEXT}>
+        Text
       </Button>
       <Button {...args} kind={ButtonKind.LINK}>
         Link
@@ -132,8 +132,8 @@ export const Sharp: Story = {
       <Button {...args} kind={ButtonKind.OUTLINE}>
         Outline
       </Button>
-      <Button {...args} kind={ButtonKind.SUBTLE}>
-        Subtle
+      <Button {...args} kind={ButtonKind.TEXT}>
+        Text
       </Button>
       <Button {...args} kind={ButtonKind.LINK}>
         Link
@@ -142,9 +142,9 @@ export const Sharp: Story = {
   ),
 };
 
-export const Rounded: Story = {
+export const Round: Story = {
   args: {
-    shape: ButtonShape.ROUNDED,
+    shape: ButtonShape.ROUND,
   },
   render: (args) => (
     <Container>
@@ -157,8 +157,8 @@ export const Rounded: Story = {
       <Button {...args} kind={ButtonKind.OUTLINE}>
         Outline
       </Button>
-      <Button {...args} kind={ButtonKind.SUBTLE}>
-        Subtle
+      <Button {...args} kind={ButtonKind.TEXT}>
+        Text
       </Button>
       <Button {...args} kind={ButtonKind.LINK}>
         Link
@@ -183,8 +183,8 @@ export const Disabled: Story = {
       <Button {...args} kind={ButtonKind.OUTLINE}>
         Outline
       </Button>
-      <Button {...args} kind={ButtonKind.SUBTLE}>
-        Subtle
+      <Button {...args} kind={ButtonKind.TEXT}>
+        Text
       </Button>
       <Button {...args} kind={ButtonKind.LINK}>
         Link
@@ -210,8 +210,8 @@ export const Color: Story = {
           <Button {...args} kind={ButtonKind.OUTLINE} color={COLOR_1}>
             Outline
           </Button>
-          <Button {...args} kind={ButtonKind.SUBTLE} color={COLOR_1}>
-            Subtle
+          <Button {...args} kind={ButtonKind.TEXT} color={COLOR_1}>
+            Text
           </Button>
           <Button {...args} kind={ButtonKind.LINK} color={COLOR_1}>
             Link
@@ -227,8 +227,8 @@ export const Color: Story = {
           <Button {...args} kind={ButtonKind.OUTLINE} color={COLOR_2}>
             Outline
           </Button>
-          <Button {...args} kind={ButtonKind.SUBTLE} color={COLOR_2}>
-            Subtle
+          <Button {...args} kind={ButtonKind.TEXT} color={COLOR_2}>
+            Text
           </Button>
           <Button {...args} kind={ButtonKind.LINK} color={COLOR_2}>
             Link
@@ -286,7 +286,7 @@ export const Danger: Story = {
       <Button {...args} kind={ButtonKind.DEFAULT} />
       <Button {...args} kind={ButtonKind.PRIMARY} />
       <Button {...args} kind={ButtonKind.OUTLINE} />
-      <Button {...args} kind={ButtonKind.SUBTLE} />
+      <Button {...args} kind={ButtonKind.TEXT} />
       <Button {...args} kind={ButtonKind.LINK} />
     </Container>
   ),
@@ -303,7 +303,7 @@ export const Success: Story = {
       <Button {...args} kind={ButtonKind.DEFAULT} />
       <Button {...args} kind={ButtonKind.PRIMARY} />
       <Button {...args} kind={ButtonKind.OUTLINE} />
-      <Button {...args} kind={ButtonKind.SUBTLE} />
+      <Button {...args} kind={ButtonKind.TEXT} />
       <Button {...args} kind={ButtonKind.LINK} />
     </Container>
   ),
@@ -364,7 +364,7 @@ export const Icons: Story = {
           </Button>
           <Button
             {...args}
-            kind={ButtonKind.SUBTLE}
+            kind={ButtonKind.TEXT}
             color={ICON_1.color}
             size={ICON_1.size}
           >
@@ -406,7 +406,7 @@ export const Icons: Story = {
           </Button>
           <Button
             {...args}
-            kind={ButtonKind.SUBTLE}
+            kind={ButtonKind.TEXT}
             color={ICON_2.color}
             size={ICON_2.size}
           >
@@ -440,7 +440,7 @@ export const Icons: Story = {
           </Button>
           <Button
             {...args}
-            kind={ButtonKind.SUBTLE}
+            kind={ButtonKind.TEXT}
             color={ICON_3.color}
             size={ICON_3.size}
           >
@@ -485,7 +485,7 @@ export const Icons: Story = {
           </Button>
           <Button
             {...args}
-            kind={ButtonKind.SUBTLE}
+            kind={ButtonKind.TEXT}
             color={ICON_4.color}
             size={ICON_4.size}
             shape={ICON_4.shape}
@@ -528,8 +528,8 @@ export const DarkBackground: Story = {
       <Button {...args} kind={ButtonKind.OUTLINE}>
         Outline
       </Button>
-      <Button {...args} kind={ButtonKind.SUBTLE}>
-        Subtle
+      <Button {...args} kind={ButtonKind.TEXT}>
+        Text
       </Button>
       <Button {...args} kind={ButtonKind.LINK}>
         Link

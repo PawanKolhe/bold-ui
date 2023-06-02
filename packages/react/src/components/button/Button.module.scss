@@ -9,12 +9,14 @@
   --button-background-color: transparent;
   --button-border-color: transparent;
   --button-border-width: 0.125rem;
-  --button-focus-border-color: black;
   --button-border-radius: 0.25rem;
+  --button-focus-border-color: black;
   --button-height: 2rem;
+  --button-padding-left-right: 0.75rem;
+  --button-overlay-opacity: 0%;
 
   height: var(--button-height);
-  padding: 0.25rem 0.5rem;
+  padding: 0 var(--button-padding-left-right);
   border-width: var(--button-border-width);
   border-style: solid;
   border-color: var(--button-border-color);
@@ -39,12 +41,9 @@
   .Button__overlay {
     pointer-events: none;
     position: absolute;
-    top: -0.125rem;
-    right: -0.125rem;
-    bottom: -0.125rem;
-    left: -0.125rem;
+    inset: calc(-1 * var(--button-border-width));
     border-radius: var(--button-border-radius);
-    opacity: 0%;
+    opacity: var(--button-overlay-opacity);
   }
 
   &:active {
@@ -66,34 +65,34 @@
 /* Size */
 .Button__sizeDefault {
   --button-height: 2rem;
-  padding: 0 0.75rem;
+  --button-padding-left-right: 0.75rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
 
   &.Button__isIconOnly {
-    padding: 0 0.375rem;
+    --button-padding-left-right: 0.375rem;
   }
 }
 
 .Button__sizeSmall {
   --button-height: 1.5rem;
-  padding: 0 0.5rem;
+  --button-padding-left-right: 0.5rem;
   font-size: 0.75rem;
   line-height: 1rem;
 
   &.Button__isIconOnly {
-    padding: 0 0.25rem;
+    --button-padding-left-right: 0.25rem;
   }
 }
 
 .Button__sizeLarge {
   --button-height: 2.5rem;
-  padding: 0 1rem;
+  --button-padding-left-right: 1rem;
   font-size: 1rem;
   line-height: 1.5rem;
 
   &.Button__isIconOnly {
-    padding: 0 0.5rem;
+    --button-padding-left-right: 0.5rem;
   }
 }
 
@@ -109,10 +108,7 @@
     display: block;
     pointer-events: none;
     position: absolute;
-    top: -0.125rem;
-    right: -0.125rem;
-    bottom: -0.125rem;
-    left: -0.125rem;
+    inset: calc(-1 * var(--button-border-width));
     border-radius: var(--button-border-radius);
     background-color: var(--button-primary-color);
     opacity: 10%;
@@ -120,12 +116,8 @@
 
   &:not(:disabled):hover .Button__overlay {
     display: block;
-    top: -0.125rem;
-    right: -0.125rem;
-    bottom: -0.125rem;
-    left: -0.125rem;
     background-color: var(--button-primary-color);
-    opacity: 10%;
+    --button-overlay-opacity: 10%;
   }
 }
 
@@ -137,7 +129,7 @@
   &:not(:disabled):hover .Button__overlay {
     display: block;
     background-color: white;
-    opacity: 10%;
+    --button-overlay-opacity: 10%;
   }
 }
 
@@ -149,11 +141,11 @@
   &:not(:disabled):hover .Button__overlay {
     display: block;
     background-color: var(--button-primary-color);
-    opacity: 10%;
+    --button-overlay-opacity: 10%;
   }
 }
 
-.Button__kindSubtle {
+.Button__kindText {
   --button-text-color: var(--button-primary-color);
   --button-background-color: transparent;
   --button-border-color: transparent;
@@ -161,7 +153,7 @@
   &:not(:disabled):hover .Button__overlay {
     display: block;
     background-color: var(--button-primary-color);
-    opacity: 10%;
+    --button-overlay-opacity: 10%;
   }
 }
 
@@ -180,7 +172,7 @@
   --button-border-radius: 0;
 }
 
-.Button__shapeRounded {
+.Button__shapeRound {
   --button-border-radius: 10rem;
 }
 
@@ -198,8 +190,8 @@
 }
 
 .Button__noSpacing {
-  height: auto;
-  padding: 0;
+  --button-height: auto;
+  --button-padding-left-right: 0;
 }
 
 .Button__hasDepth {
