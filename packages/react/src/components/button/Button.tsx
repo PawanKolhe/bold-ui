@@ -18,6 +18,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       color = "var(--color-grey-100)",
       leftIcon,
       rightIcon,
+      borderWidth,
       isIconOnly = false,
       isFullWidth = false,
       noSpacing = false,
@@ -67,7 +68,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           },
           className
         )}
-        style={{ ["--button-primary-color" as string]: computedColor }}
+        style={{
+          ["--button-primary-color" as string]: computedColor,
+          ...(borderWidth
+            ? { ["--button-border-width" as string]: borderWidth }
+            : {}),
+        }}
         type={type}
         ref={ref}
         {...restProps}

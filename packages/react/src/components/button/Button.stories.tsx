@@ -255,6 +255,14 @@ export const RightIcon: Story = {
   },
 };
 
+export const BorderWidth: Story = {
+  args: {
+    children: "Border Width",
+    kind: ButtonKind.OUTLINE,
+    borderWidth: "1px",
+  },
+};
+
 export const FullWidth: Story = {
   args: {
     children: "Full Width",

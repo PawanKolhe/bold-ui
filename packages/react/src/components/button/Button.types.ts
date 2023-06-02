@@ -32,6 +32,7 @@ export type ButtonProps = {
   color?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  borderWidth?: string;
   /**
    * Set to true if button only contains an icon.
    */

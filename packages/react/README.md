@@ -2,7 +2,6 @@
 
 ⚡ Simple, fast, and accessible React component library
 
-## Dev Environment
+## Components
 
-1. pnpm install
-2. pnpm dev
+- Button
