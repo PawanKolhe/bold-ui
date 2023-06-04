@@ -85,10 +85,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <div className={styles.Button__overlay} />
         <div className={styles.Button__spinner} />
         <div className={styles.Button__contentContainer}>
-          {leftIcon && <span className={styles.Button__text}>{leftIcon}</span>}
+          {leftIcon && <span className={styles.Button__icon}>{leftIcon}</span>}
           <span className={styles.Button__text}>{children}</span>
           {rightIcon && (
-            <span className={styles.Button__text}>{rightIcon}</span>
+            <span className={styles.Button__icon}>{rightIcon}</span>
           )}
         </div>
       </button>

@@ -14,5 +14,14 @@
 }
 
 @mixin common {
-  box-sizing: border-box;
+  @include colors;
+
+  &,
+  &::before,
+  &::after,
+  & *,
+  & *::before,
+  & *::after {
+    box-sizing: border-box;
+  }
 }

@@ -1,29 +1,5 @@
 import { type ButtonHTMLAttributes, type ReactNode } from "react";
 
-export enum ButtonSize {
-  DEFAULT = "default",
-  SMALL = "small",
-  LARGE = "large",
-}
-type ButtonSizeValues = `${ButtonSize}`;
-
-export enum ButtonKind {
-  DEFAULT = "default",
-  OUTLINE = "outline",
-  PRIMARY = "primary",
-  TEXT = "text",
-  LINK = "link",
-}
-type ButtonKindValues = `${ButtonKind}`;
-
-export enum ButtonShape {
-  DEFAULT = "default",
-  SHARP = "sharp",
-  ROUND = "round",
-  CIRCLE = "circle",
-}
-type ButtonShapeValues = `${ButtonShape}`;
-
 export type ButtonProps = {
   children?: ReactNode;
   size?: ButtonSizeValues;
@@ -61,3 +37,27 @@ export type ButtonProps = {
    */
   isSuccess?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
+
+export enum ButtonSize {
+  DEFAULT = "default",
+  SMALL = "small",
+  LARGE = "large",
+}
+type ButtonSizeValues = `${ButtonSize}`;
+
+export enum ButtonKind {
+  DEFAULT = "default",
+  OUTLINE = "outline",
+  PRIMARY = "primary",
+  TEXT = "text",
+  LINK = "link",
+}
+type ButtonKindValues = `${ButtonKind}`;
+
+export enum ButtonShape {
+  DEFAULT = "default",
+  SHARP = "sharp",
+  ROUND = "round",
+  CIRCLE = "circle",
+}
+type ButtonShapeValues = `${ButtonShape}`;

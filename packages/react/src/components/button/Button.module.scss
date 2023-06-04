@@ -2,7 +2,6 @@
 
 .Button {
   @include common;
-  @include colors;
 
   --button-primary-color: black;
   --button-text-color: transparent;
@@ -15,10 +14,15 @@
   --button-focus-border-color: black;
   --button-height: 2rem;
   --button-padding-left-right: 0.75rem;
+  --button-padding-left-right-modifier: 0rem;
   --button-overlay-opacity: 0%;
 
   height: var(--button-height);
-  padding: 0 var(--button-padding-left-right);
+  padding: 0
+    calc(
+      var(--button-padding-left-right) +
+        var(--button-padding-left-right-modifier)
+    );
   border-width: var(--button-border-width);
   border-style: solid;
   border-color: var(--button-border-color);
@@ -41,7 +45,8 @@
     line-height: var(--button-line-height);
   }
 
-  .Button__text {
+  .Button__text,
+  .Button__icon {
     font-size: inherit;
     line-height: inherit;
     display: inline-block;
@@ -187,6 +192,7 @@
 
 .Button__shapeRound {
   --button-border-radius: 10rem;
+  --button-padding-left-right-modifier: 0.25rem;
 }
 
 .Button__shapeCircle {
