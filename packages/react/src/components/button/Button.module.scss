@@ -200,11 +200,11 @@
 /* Others */
 .Button__spinner {
   display: none;
-  width: 14px;
-  height: 14px;
+  width: var(--button-font-size);
+  height: var(--button-font-size);
   position: absolute;
-  top: calc(50% - 7px);
-  left: calc(50% - 7px);
+  top: calc(50% - calc(var(--button-font-size) / 2));
+  left: calc(50% - calc(var(--button-font-size) / 2));
   background: transparent;
   box-sizing: border-box;
   border-top: 2px solid var(--button-text-color);
