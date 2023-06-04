@@ -1,4 +1,5 @@
 import { Button } from "@bold-ui/react";
+import "@bold-ui/react/dist/index.css";
 
 const HomePage = () => {
   return (

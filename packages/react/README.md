@@ -6,6 +6,19 @@
 
 - [Storybook](https://main--64797a8b450504bdbcae2912.chromatic.com)
 
+## Installation
+
+```
+# npm
+npm i @bold-ui/react
+
+# yarn
+yarn add @bold-ui/react
+
+# pnpm
+pnpm add @bold-ui/react
+```
+
 ## Components
 
 - **Button**
@@ -19,30 +32,10 @@
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   borderWidth?: string;
-  /**
-   * Set to true if button only contains an icon.
-   */
   isIconOnly?: boolean;
-  /**
-   * Makes the button a full width button.
-   */
   isFullWidth?: boolean;
-  /**
-   * Removes the padding inside the button.
-   * Supported kinds: 'ButtonKind.LINK'
-   */
   noSpacing?: boolean;
-  /**
-   * Adds a 2D depth effect to the button.
-   * Supported kinds: 'ButtonKind.OUTLINE'
-   */
   hasDepth?: boolean;
-  /**
-   * Sets button color to red.
-   */
   isDanger?: boolean;
-  /**
-   * Sets button color to green.
-   */
   isSuccess?: boolean;
   ```

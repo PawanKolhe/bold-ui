@@ -1,3 +1,5 @@
+import path from "path";
+import { glob } from "glob";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -7,6 +9,28 @@ import postcssPresetEnv from "postcss-preset-env";
 import packageJson from "./package.json" assert { type: "json" };
 
 const isProduction = !process.env.ROLLUP_WATCH;
+
+const bundleCss = () => {
+  const config = [];
+  const files = glob.globSync("./src/**/*.scss");
+  files.forEach((file) => {
+    const filename = path.basename(
+      file,
+      file.includes(".module.scss") ? ".module.scss" : path.extname(file)
+    );
+    config.push(
+      postcss({
+        include: file,
+        extract: path.resolve(`./dist/css/${filename}.css`),
+        plugins: [postcssPresetEnv()],
+        use: ["sass"],
+        minimize: isProduction,
+        sourcemap: !isProduction,
+      })
+    );
+  });
+  return config;
+};
 
 /** @type {import('rollup').RollupOptions} */
 const config = {
@@ -29,14 +53,12 @@ const config = {
     peerDepsExternal({
       packageJsonPath: "./package.json",
     }),
-    postcss({
-      plugins: [postcssPresetEnv()],
-      // extract: true,
-      modules: true,
-      use: ["sass"],
-      minimize: isProduction,
-      sourcemap: !isProduction,
-    }),
+    ...bundleCss(),
+    // postcss({
+    //   extract: path.resolve("./dist/css/index.css"),
+    //   minimize: isProduction,
+    //   use: ["sass"],
+    // }),
     resolve(),
     commonjs(),
     typescript({ tsconfig: "./tsconfig.json", sourceMap: !isProduction }),

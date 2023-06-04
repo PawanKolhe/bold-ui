@@ -1,15 +1,15 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./build",
+    "outDir": "./dist",
     "declaration": true,
-    "declarationDir": "./build",
+    "declarationDir": "./dist",
     "emitDeclarationOnly": true
   },
   "include": ["src/**/*", "declarations.d.ts"],
   "exclude": [
     "node_modules",
-    "build",
+    "dist",
     "src/**/*.stories.tsx",
     "src/**/*.test.tsx",
     "src/**/*.mdx"

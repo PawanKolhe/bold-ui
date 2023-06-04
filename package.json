@@ -12,7 +12,6 @@
     "dev": "pnpm dev-react",
     "dev-react": "pnpm --filter @bold-ui/react run dev",
     "dev-website": "pnpm --filter @bold-ui/website run dev",
-    "publish-build": "pnpm --filter @bold-ui/react run publish-build",
     "build-storybook": "pnpm --filter @bold-ui/react run build-storybook",
     "chromatic": "pnpm --filter @bold-ui/react run chromatic",
     "eslint": "eslint . --ext js,jsx,ts,tsx --cache --max-warnings=0 ",
@@ -20,7 +19,8 @@
     "lint-staged": "lint-staged",
     "clean": "git clean -fXd",
     "clean-node-modules": "npx rimraf --glob **/node_modules",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publish-build": "pnpm --filter @bold-ui/react run publish-build"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.43.0",

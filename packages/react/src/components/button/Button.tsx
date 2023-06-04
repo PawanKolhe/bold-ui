@@ -25,8 +25,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       hasDepth = false,
       isDanger = false,
       isSuccess = false,
-      className,
       type = "button",
+      className,
+      style = {},
       ...restProps
     } = props;
 
@@ -73,6 +74,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ...(borderWidth
             ? { ["--button-border-width" as string]: borderWidth }
             : {}),
+          ...style,
         }}
         type={type}
         ref={ref}
