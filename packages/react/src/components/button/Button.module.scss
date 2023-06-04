@@ -215,9 +215,13 @@
   animation: rotateSpinner 0.7s linear infinite;
 }
 .Button__isLoading {
+  pointer-events: none;
+  transform: none;
+
   .Button__spinner {
     display: block;
   }
+
   .Button__contentContainer {
     visibility: hidden;
   }
