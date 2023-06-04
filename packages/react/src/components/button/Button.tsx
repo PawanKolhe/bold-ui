@@ -23,6 +23,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isFullWidth = false,
       noSpacing = false,
       hasDepth = false,
+      isLoading = false,
       isDanger = false,
       isSuccess = false,
       type = "button",
@@ -62,6 +63,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             [styles.Button__shapeRound]: shape === ButtonShape.ROUND,
             [styles.Button__shapeCircle]: shape === ButtonShape.CIRCLE,
             // Others
+            [styles.Button__isLoading]: isLoading,
             [styles.Button__isIconOnly]: isIconOnly,
             [styles.Button__isFullWidth]: isFullWidth,
             [styles.Button__noSpacing]: noSpacing && kind === ButtonKind.LINK,
@@ -81,6 +83,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...restProps}
       >
         <div className={styles.Button__overlay} />
+        <div className={styles.Button__spinner} />
         <div className={styles.Button__contentContainer}>
           {leftIcon && <span className={styles.Button__text}>{leftIcon}</span>}
           <span className={styles.Button__text}>{children}</span>

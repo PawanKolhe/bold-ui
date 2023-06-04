@@ -168,6 +168,31 @@ export const Round: Story = {
 };
 
 // Others
+export const Loading: Story = {
+  args: {
+    isLoading: true,
+  },
+  render: (args) => (
+    <Container>
+      <Button {...args} kind={ButtonKind.DEFAULT}>
+        Default
+      </Button>
+      <Button {...args} kind={ButtonKind.PRIMARY}>
+        Primary
+      </Button>
+      <Button {...args} kind={ButtonKind.OUTLINE}>
+        Outline
+      </Button>
+      <Button {...args} kind={ButtonKind.TEXT}>
+        Text
+      </Button>
+      <Button {...args} kind={ButtonKind.LINK}>
+        Link
+      </Button>
+    </Container>
+  ),
+};
+
 export const Disabled: Story = {
   args: {
     disabled: true,

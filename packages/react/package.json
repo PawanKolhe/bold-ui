@@ -94,6 +94,7 @@
     "storybook": "7.0.18"
   },
   "dependencies": {
-    "clsx": "^1.2.1"
+    "clsx": "^1.2.1",
+    "react-icons": "^4.9.0"
   }
 }

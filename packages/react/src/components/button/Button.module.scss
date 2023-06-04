@@ -198,6 +198,31 @@
 }
 
 /* Others */
+.Button__spinner {
+  display: none;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: calc(50% - 7px);
+  left: calc(50% - 7px);
+  background: transparent;
+  box-sizing: border-box;
+  border-top: 2px solid var(--button-text-color);
+  border-left: 2px solid var(--button-text-color);
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: 100%;
+  animation: rotateSpinner 0.7s linear infinite;
+}
+.Button__isLoading {
+  .Button__spinner {
+    display: block;
+  }
+  .Button__contentContainer {
+    visibility: hidden;
+  }
+}
+
 .Button__isFullWidth {
   width: 100%;
 }
@@ -219,5 +244,11 @@
     &.Button__noSpacing {
       height: auto;
     }
+  }
+}
+
+@keyframes rotateSpinner {
+  100% {
+    transform: rotate(360deg);
   }
 }
