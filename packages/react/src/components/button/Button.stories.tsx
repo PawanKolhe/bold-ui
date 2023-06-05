@@ -170,7 +170,7 @@ export const Round: Story = {
 // Others
 export const Loading: Story = {
   args: {
-    isLoading: true,
+    loading: true,
   },
   render: (args) => (
     <Container>
@@ -292,7 +292,7 @@ export const FullWidth: Story = {
   args: {
     children: "Full Width",
     kind: ButtonKind.PRIMARY,
-    isFullWidth: true,
+    fullWidth: true,
   },
 };
 
@@ -328,7 +328,7 @@ export const Danger: Story = {
   args: {
     children: "Delete",
     kind: ButtonKind.PRIMARY,
-    isDanger: true,
+    danger: true,
   },
   render: (args) => (
     <Container>
@@ -345,7 +345,7 @@ export const Success: Story = {
   args: {
     children: "Finish",
     kind: ButtonKind.PRIMARY,
-    isSuccess: true,
+    success: true,
   },
   render: (args) => (
     <Container>
@@ -360,7 +360,7 @@ export const Success: Story = {
 
 export const Icons: Story = {
   args: {
-    isIconOnly: true,
+    iconOnly: true,
   },
   render: (args) => {
     const ICON_1 = {

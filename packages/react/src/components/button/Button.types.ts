@@ -9,15 +9,15 @@ export type ButtonProps = {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   borderWidth?: string;
-  isLoading?: boolean;
+  loading?: boolean;
   /**
    * Set to true if button only contains an icon.
    */
-  isIconOnly?: boolean;
+  iconOnly?: boolean;
   /**
    * Makes the button a full width button.
    */
-  isFullWidth?: boolean;
+  fullWidth?: boolean;
   /**
    * Removes the padding inside the button.
    * Supported kinds: 'ButtonKind.LINK'
@@ -31,11 +31,11 @@ export type ButtonProps = {
   /**
    * Sets button color to red.
    */
-  isDanger?: boolean;
+  danger?: boolean;
   /**
    * Sets button color to green.
    */
-  isSuccess?: boolean;
+  success?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export enum ButtonSize {

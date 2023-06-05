@@ -12,6 +12,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const {
       children,
+      className,
+      style = {},
       kind = ButtonKind.DEFAULT,
       size = ButtonSize.DEFAULT,
       shape = ButtonShape.DEFAULT,
@@ -19,28 +21,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       leftIcon,
       rightIcon,
       borderWidth,
-      isIconOnly = false,
-      isFullWidth = false,
+      iconOnly = false,
+      fullWidth = false,
       noSpacing = false,
       hasDepth = false,
-      isLoading = false,
-      isDanger = false,
-      isSuccess = false,
+      loading = false,
+      danger = false,
+      success = false,
       type = "button",
-      className,
-      style = {},
       ...restProps
     } = props;
 
     const computedColor: string = useMemo(() => {
-      if (isDanger) {
+      if (danger) {
         return "var(--color-danger)";
-      } else if (isSuccess) {
+      } else if (success) {
         return "var(--color-success)";
       } else {
         return color;
       }
-    }, [color, isDanger, isSuccess]);
+    }, [color, danger, success]);
 
     return (
       <button
@@ -63,9 +63,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             [styles.Button__shapeRound]: shape === ButtonShape.ROUND,
             [styles.Button__shapeCircle]: shape === ButtonShape.CIRCLE,
             // Others
-            [styles.Button__isLoading]: isLoading,
-            [styles.Button__isIconOnly]: isIconOnly,
-            [styles.Button__isFullWidth]: isFullWidth,
+            [styles.Button__loading]: loading,
+            [styles.Button__iconOnly]: iconOnly,
+            [styles.Button__fullWidth]: fullWidth,
             [styles.Button__noSpacing]: noSpacing && kind === ButtonKind.LINK,
             [styles.Button__hasDepth]: hasDepth && kind === ButtonKind.OUTLINE,
           },

@@ -11,8 +11,7 @@
   "sideEffects": false,
   "scripts": {
     "dev": "run-p start storybook",
-    "prestart": "pnpm run clean-build",
-    "start": "run-p -lcr rollup:watch gulp:watch",
+    "start": "run-s build && run-p -lcr rollup:watch gulp:watch",
     "build": "run-s -nlc clean-build rollup gulp",
     "rollup": "rollup --config",
     "rollup:watch": "rollup --config --watch",
@@ -61,9 +60,6 @@
     }
   },
   "devDependencies": {
-    "@linaria/core": "^4.2.10",
-    "@linaria/react": "^4.3.8",
-    "@linaria/rollup": "^4.3.8",
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-terser": "^0.4.3",

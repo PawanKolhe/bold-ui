@@ -6,6 +6,7 @@ export type StackProps = {
   direction?: StackDirectionValues;
   alignItems?: StackAlignItemsValues;
   justifyContent?: StackJustifyContentValues;
+  fullWidth?: boolean;
 } & ButtonHTMLAttributes<HTMLDivElement>;
 
 export enum StackDirection {

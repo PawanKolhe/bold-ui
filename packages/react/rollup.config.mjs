@@ -54,11 +54,6 @@ const config = {
       packageJsonPath: "./package.json",
     }),
     ...bundleCss(),
-    // postcss({
-    //   extract: path.resolve("./dist/css/index.css"),
-    //   minimize: isProduction,
-    //   use: ["sass"],
-    // }),
     resolve(),
     commonjs(),
     typescript({ tsconfig: "./tsconfig.json", sourceMap: !isProduction }),

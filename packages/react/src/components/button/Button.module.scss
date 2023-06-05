@@ -87,7 +87,7 @@
   --button-font-size: 0.875rem;
   --button-line-height: 1.25rem;
 
-  &.Button__isIconOnly {
+  &.Button__iconOnly {
     --button-padding-left-right: 0.375rem;
   }
 }
@@ -98,7 +98,7 @@
   --button-font-size: 0.75rem;
   --button-line-height: 1rem;
 
-  &.Button__isIconOnly {
+  &.Button__iconOnly {
     --button-padding-left-right: 0.25rem;
   }
 }
@@ -109,7 +109,7 @@
   --button-font-size: 1rem;
   --button-line-height: 1.5rem;
 
-  &.Button__isIconOnly {
+  &.Button__iconOnly {
     --button-padding-left-right: 0.5rem;
   }
 }
@@ -220,7 +220,7 @@
   border-radius: 100%;
   animation: rotateSpinner 0.7s linear infinite;
 }
-.Button__isLoading {
+.Button__loading {
   pointer-events: none;
   transform: none;
 
@@ -233,7 +233,7 @@
   }
 }
 
-.Button__isFullWidth {
+.Button__fullWidth {
   width: 100%;
 }
 

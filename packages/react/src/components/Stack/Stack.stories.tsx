@@ -42,3 +42,31 @@ export const Default: Story = {
     ),
   },
 };
+
+export const DirectionRow: Story = {
+  args: {
+    direction: "row",
+    children: (
+      <>
+        <Content>Box 1</Content>
+        <Content>Box 2</Content>
+        <Content>Box 3</Content>
+        <Content>Box 4</Content>
+      </>
+    ),
+  },
+};
+
+export const DirectionColumn: Story = {
+  args: {
+    direction: "column",
+    children: (
+      <>
+        <Content>Box 1</Content>
+        <Content>Box 2</Content>
+        <Content>Box 3</Content>
+        <Content>Box 4</Content>
+      </>
+    ),
+  },
+};
