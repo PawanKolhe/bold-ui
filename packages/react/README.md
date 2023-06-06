@@ -19,23 +19,22 @@ yarn add @bold-ui/react
 pnpm add @bold-ui/react
 ```
 
+## Usage
+
+```javascript
+import { Button } from "@bold-ui/react";
+import "@bold-ui/react/dist/css/Button.css"; // Imports styles for Button component only
+
+const MyComponent = () => {
+  return (
+    <div>
+      <Button kind="fill">Bold UI</Button>
+    </div>
+  );
+};
+```
+
 ## Components
 
 - **Button**
-
-  ```javascript
-  children?: ReactNode;
-  size?: "default" | "small" | "large";
-  kind?: "default" | "outline" | "primary" | "text" | "link";
-  shape?: "default" | "sharp" | "round" | "circle";
-  color?: string;
-  leftIcon?: ReactNode;
-  rightIcon?: ReactNode;
-  borderWidth?: string;
-  isIconOnly?: boolean;
-  isFullWidth?: boolean;
-  noSpacing?: boolean;
-  hasDepth?: boolean;
-  isDanger?: boolean;
-  isSuccess?: boolean;
-  ```
+- **Stack**
