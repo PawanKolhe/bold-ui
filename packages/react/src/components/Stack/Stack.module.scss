@@ -1,8 +1,17 @@
 .Stack {
+  --stack-spacing: 0;
   --stack-direction: row;
+  --stack-align-items: stretch;
+  --stack-justify-content: flex-start;
+  --stack-base-spacing-unit: 0.25rem;
+  --stack-wrap: nowrap;
 
   display: flex;
+  align-items: var(--stack-align-items);
+  justify-content: var(--stack-justify-content);
   flex-direction: var(--stack-direction);
+  gap: var(--stack-spacing);
+  flex-wrap: var(--stack-wrap);
 }
 
 .Button__fullWidth {

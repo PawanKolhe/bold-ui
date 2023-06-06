@@ -7,6 +7,7 @@ import {
   ButtonKind,
   ButtonShape,
 } from "./Button.types";
+import { Stack } from "../Stack";
 
 const meta: Meta<ButtonProps> = {
   component: Button,
@@ -29,9 +30,13 @@ const Container = ({
   children: React.ReactNode;
   direction?: "row" | "column";
 }) => (
-  <div style={{ display: "flex", gap: "1rem", flexDirection: direction }}>
+  <Stack
+    spacing={4}
+    direction={direction}
+    style={{ display: "flex", gap: "1rem", flexDirection: direction }}
+  >
     {children}
-  </div>
+  </Stack>
 );
 
 export const Default: Story = {
