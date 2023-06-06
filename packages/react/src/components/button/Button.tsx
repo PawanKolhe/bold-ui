@@ -14,6 +14,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       className,
       style = {},
+      type = "button",
       kind = ButtonKind.DEFAULT,
       size = ButtonSize.DEFAULT,
       shape = ButtonShape.DEFAULT,
@@ -28,7 +29,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       danger = false,
       success = false,
-      type = "button",
+      compact = false,
+      uppercase = false,
       ...restProps
     } = props;
 
@@ -51,11 +53,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             [styles.Button__sizeDefault]: size === ButtonSize.DEFAULT,
             [styles.Button__sizeSmall]: size === ButtonSize.SMALL,
             [styles.Button__sizeLarge]: size === ButtonSize.LARGE,
+            [styles.Button__sizeXLarge]: size === ButtonSize.X_LARGE,
             // Kind
             [styles.Button__kindDefault]: kind === ButtonKind.DEFAULT,
-            [styles.Button__kindPrimary]: kind === ButtonKind.PRIMARY,
             [styles.Button__kindOutline]: kind === ButtonKind.OUTLINE,
-            [styles.Button__kindText]: kind === ButtonKind.TEXT,
+            [styles.Button__kindLight]: kind === ButtonKind.LIGHT,
+            [styles.Button__kindFill]: kind === ButtonKind.FILL,
+            [styles.Button__kindSubtle]: kind === ButtonKind.SUBTLE,
             [styles.Button__kindLink]: kind === ButtonKind.LINK,
             // Shape
             [styles.Button__shapeDefault]: shape === ButtonShape.DEFAULT,
@@ -68,6 +72,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             [styles.Button__fullWidth]: fullWidth,
             [styles.Button__noSpacing]: noSpacing && kind === ButtonKind.LINK,
             [styles.Button__hasDepth]: hasDepth && kind === ButtonKind.OUTLINE,
+            [styles.Button__compact]: compact,
+            [styles.Button__uppercase]: uppercase,
           },
           className
         )}

@@ -36,20 +36,30 @@ export type ButtonProps = {
    * Sets button color to green.
    */
   success?: boolean;
+  /**
+   * Reduced padding for buttons in tight spaces.
+   */
+  compact?: boolean;
+  /**
+   * Sets button text to uppercase.
+   */
+  uppercase?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export enum ButtonSize {
   DEFAULT = "default",
   SMALL = "small",
   LARGE = "large",
+  X_LARGE = "x-large",
 }
 type ButtonSizeValues = `${ButtonSize}`;
 
 export enum ButtonKind {
   DEFAULT = "default",
   OUTLINE = "outline",
-  PRIMARY = "primary",
-  TEXT = "text",
+  LIGHT = "light",
+  FILL = "fill",
+  SUBTLE = "subtle",
   LINK = "link",
 }
 type ButtonKindValues = `${ButtonKind}`;

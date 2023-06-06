@@ -1,4 +1,8 @@
+@use "../../common" as *;
+
 .Stack {
+  @include common;
+
   --stack-spacing: 0;
   --stack-direction: row;
   --stack-align-items: stretch;

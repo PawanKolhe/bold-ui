@@ -39,6 +39,17 @@ const Container = ({
   </Stack>
 );
 
+const MultipleButton = ({ ...args }: ButtonProps) => (
+  <Container>
+    <Button kind={ButtonKind.DEFAULT} children="Default" {...args} />
+    <Button kind={ButtonKind.OUTLINE} children="Outline" {...args} />
+    <Button kind={ButtonKind.LIGHT} children="Light" {...args} />
+    <Button kind={ButtonKind.FILL} children="Fill" {...args} />
+    <Button kind={ButtonKind.SUBTLE} children="Subtle" {...args} />
+    <Button kind={ButtonKind.LINK} children="Link" {...args} />
+  </Container>
+);
+
 export const Default: Story = {
   args: {
     children: "Default",
@@ -46,77 +57,44 @@ export const Default: Story = {
 };
 
 // Sizes
-export const SizeDefault: Story = {
-  args: {
-    size: ButtonSize.DEFAULT,
-  },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT}>
-        Default
-      </Button>
-      <Button {...args} kind={ButtonKind.PRIMARY}>
-        Primary
-      </Button>
-      <Button {...args} kind={ButtonKind.OUTLINE}>
-        Outline
-      </Button>
-      <Button {...args} kind={ButtonKind.TEXT}>
-        Text
-      </Button>
-      <Button {...args} kind={ButtonKind.LINK}>
-        Link
-      </Button>
-    </Container>
-  ),
-};
-
 export const SizeSmall: Story = {
   args: {
     size: ButtonSize.SMALL,
   },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT}>
-        Default
-      </Button>
-      <Button {...args} kind={ButtonKind.PRIMARY}>
-        Primary
-      </Button>
-      <Button {...args} kind={ButtonKind.OUTLINE}>
-        Outline
-      </Button>
-      <Button {...args} kind={ButtonKind.TEXT}>
-        Text
-      </Button>
-      <Button {...args} kind={ButtonKind.LINK}>
-        Link
-      </Button>
-    </Container>
-  ),
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const SizeDefault: Story = {
+  args: {
+    size: ButtonSize.DEFAULT,
+  },
+  render: (args) => <MultipleButton {...args} />,
 };
 
 export const SizeLarge: Story = {
   args: {
     size: ButtonSize.LARGE,
   },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const SizeXLarge: Story = {
+  args: {
+    size: ButtonSize.X_LARGE,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Compact: Story = {
+  args: {
+    compact: true,
+  },
   render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT}>
-        Default
-      </Button>
-      <Button {...args} kind={ButtonKind.PRIMARY}>
-        Primary
-      </Button>
-      <Button {...args} kind={ButtonKind.OUTLINE}>
-        Outline
-      </Button>
-      <Button {...args} kind={ButtonKind.TEXT}>
-        Text
-      </Button>
-      <Button {...args} kind={ButtonKind.LINK}>
-        Link
-      </Button>
+    <Container direction="column">
+      <MultipleButton {...args} size="small" />
+      <MultipleButton {...args} size="default" />
+      <MultipleButton {...args} size="large" />
+      <MultipleButton {...args} size="x-large" />
     </Container>
   ),
 };
@@ -126,50 +104,14 @@ export const Sharp: Story = {
   args: {
     shape: ButtonShape.SHARP,
   },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT}>
-        Default
-      </Button>
-      <Button {...args} kind={ButtonKind.PRIMARY}>
-        Primary
-      </Button>
-      <Button {...args} kind={ButtonKind.OUTLINE}>
-        Outline
-      </Button>
-      <Button {...args} kind={ButtonKind.TEXT}>
-        Text
-      </Button>
-      <Button {...args} kind={ButtonKind.LINK}>
-        Link
-      </Button>
-    </Container>
-  ),
+  render: (args) => <MultipleButton {...args} />,
 };
 
 export const Round: Story = {
   args: {
     shape: ButtonShape.ROUND,
   },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT}>
-        Default
-      </Button>
-      <Button {...args} kind={ButtonKind.PRIMARY}>
-        Primary
-      </Button>
-      <Button {...args} kind={ButtonKind.OUTLINE}>
-        Outline
-      </Button>
-      <Button {...args} kind={ButtonKind.TEXT}>
-        Text
-      </Button>
-      <Button {...args} kind={ButtonKind.LINK}>
-        Link
-      </Button>
-    </Container>
-  ),
+  render: (args) => <MultipleButton {...args} />,
 };
 
 // Others
@@ -177,50 +119,14 @@ export const Loading: Story = {
   args: {
     loading: true,
   },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT}>
-        Default
-      </Button>
-      <Button {...args} kind={ButtonKind.PRIMARY}>
-        Primary
-      </Button>
-      <Button {...args} kind={ButtonKind.OUTLINE}>
-        Outline
-      </Button>
-      <Button {...args} kind={ButtonKind.TEXT}>
-        Text
-      </Button>
-      <Button {...args} kind={ButtonKind.LINK}>
-        Link
-      </Button>
-    </Container>
-  ),
+  render: (args) => <MultipleButton {...args} />,
 };
 
 export const Disabled: Story = {
   args: {
     disabled: true,
   },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT}>
-        Default
-      </Button>
-      <Button {...args} kind={ButtonKind.PRIMARY}>
-        Primary
-      </Button>
-      <Button {...args} kind={ButtonKind.OUTLINE}>
-        Outline
-      </Button>
-      <Button {...args} kind={ButtonKind.TEXT}>
-        Text
-      </Button>
-      <Button {...args} kind={ButtonKind.LINK}>
-        Link
-      </Button>
-    </Container>
-  ),
+  render: (args) => <MultipleButton {...args} />,
 };
 
 export const Color: Story = {
@@ -231,38 +137,10 @@ export const Color: Story = {
     return (
       <Container direction="column">
         <Container>
-          <Button {...args} kind={ButtonKind.DEFAULT} color={COLOR_1}>
-            Default
-          </Button>
-          <Button {...args} kind={ButtonKind.PRIMARY} color={COLOR_1}>
-            Primary
-          </Button>
-          <Button {...args} kind={ButtonKind.OUTLINE} color={COLOR_1}>
-            Outline
-          </Button>
-          <Button {...args} kind={ButtonKind.TEXT} color={COLOR_1}>
-            Text
-          </Button>
-          <Button {...args} kind={ButtonKind.LINK} color={COLOR_1}>
-            Link
-          </Button>
+          <MultipleButton {...args} color={COLOR_1} />
         </Container>
         <Container>
-          <Button {...args} kind={ButtonKind.DEFAULT} color={COLOR_2}>
-            Default
-          </Button>
-          <Button {...args} kind={ButtonKind.PRIMARY} color={COLOR_2}>
-            Primary
-          </Button>
-          <Button {...args} kind={ButtonKind.OUTLINE} color={COLOR_2}>
-            Outline
-          </Button>
-          <Button {...args} kind={ButtonKind.TEXT} color={COLOR_2}>
-            Text
-          </Button>
-          <Button {...args} kind={ButtonKind.LINK} color={COLOR_2}>
-            Link
-          </Button>
+          <MultipleButton {...args} color={COLOR_2} />
         </Container>
       </Container>
     );
@@ -296,7 +174,7 @@ export const BorderWidth: Story = {
 export const FullWidth: Story = {
   args: {
     children: "Full Width",
-    kind: ButtonKind.PRIMARY,
+    kind: ButtonKind.FILL,
     fullWidth: true,
   },
 };
@@ -317,6 +195,9 @@ export const Depth: Story = {
       <Button {...args} size={ButtonSize.LARGE}>
         Large
       </Button>
+      <Button {...args} size={ButtonSize.X_LARGE}>
+        X-Large
+      </Button>
     </Container>
   ),
 };
@@ -332,35 +213,25 @@ export const NoSpacing: Story = {
 export const Danger: Story = {
   args: {
     children: "Delete",
-    kind: ButtonKind.PRIMARY,
     danger: true,
   },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT} />
-      <Button {...args} kind={ButtonKind.PRIMARY} />
-      <Button {...args} kind={ButtonKind.OUTLINE} />
-      <Button {...args} kind={ButtonKind.TEXT} />
-      <Button {...args} kind={ButtonKind.LINK} />
-    </Container>
-  ),
+  render: (args) => <MultipleButton {...args} />,
 };
 
 export const Success: Story = {
   args: {
     children: "Finish",
-    kind: ButtonKind.PRIMARY,
     success: true,
   },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT} />
-      <Button {...args} kind={ButtonKind.PRIMARY} />
-      <Button {...args} kind={ButtonKind.OUTLINE} />
-      <Button {...args} kind={ButtonKind.TEXT} />
-      <Button {...args} kind={ButtonKind.LINK} />
-    </Container>
-  ),
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Uppercase: Story = {
+  args: {
+    children: "Upper",
+    uppercase: true,
+  },
+  render: (args) => <MultipleButton {...args} />,
 };
 
 export const Icons: Story = {
@@ -391,171 +262,31 @@ export const Icons: Story = {
     };
     return (
       <Container direction="column">
-        <Container>
-          <Button
-            {...args}
-            kind={ButtonKind.DEFAULT}
-            color={ICON_1.color}
-            size={ICON_1.size}
-          >
-            {ICON_1.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.PRIMARY}
-            color={ICON_1.color}
-            size={ICON_1.size}
-          >
-            {ICON_1.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.OUTLINE}
-            color={ICON_1.color}
-            size={ICON_1.size}
-          >
-            {ICON_1.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.TEXT}
-            color={ICON_1.color}
-            size={ICON_1.size}
-          >
-            {ICON_1.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.LINK}
-            color={ICON_1.color}
-            size={ICON_1.size}
-          >
-            {ICON_1.icon}
-          </Button>
-        </Container>
-        <Container>
-          <Button
-            {...args}
-            kind={ButtonKind.DEFAULT}
-            color={ICON_2.color}
-            size={ICON_2.size}
-          >
-            {ICON_2.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.PRIMARY}
-            color={ICON_2.color}
-            size={ICON_2.size}
-          >
-            {ICON_2.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.OUTLINE}
-            color={ICON_2.color}
-            size={ICON_2.size}
-          >
-            {ICON_2.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.TEXT}
-            color={ICON_2.color}
-            size={ICON_2.size}
-          >
-            {ICON_2.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.LINK}
-            color={ICON_2.color}
-            size={ICON_2.size}
-          >
-            {ICON_2.icon}
-          </Button>
-        </Container>
-        <Container>
-          <Button
-            {...args}
-            kind={ButtonKind.DEFAULT}
-            color={ICON_3.color}
-            size={ICON_3.size}
-          >
-            {ICON_3.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.OUTLINE}
-            color={ICON_3.color}
-            size={ICON_3.size}
-          >
-            {ICON_3.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.TEXT}
-            color={ICON_3.color}
-            size={ICON_3.size}
-          >
-            {ICON_3.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.LINK}
-            color={ICON_3.color}
-            size={ICON_3.size}
-          >
-            {ICON_3.icon}
-          </Button>
-        </Container>
-        <Container>
-          <Button
-            {...args}
-            kind={ButtonKind.DEFAULT}
-            color={ICON_4.color}
-            size={ICON_4.size}
-            shape={ICON_4.shape}
-          >
-            {ICON_4.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.PRIMARY}
-            color={ICON_4.color}
-            size={ICON_4.size}
-            shape={ICON_4.shape}
-          >
-            {ICON_4.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.OUTLINE}
-            color={ICON_4.color}
-            size={ICON_4.size}
-            shape={ICON_4.shape}
-          >
-            {ICON_4.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.TEXT}
-            color={ICON_4.color}
-            size={ICON_4.size}
-            shape={ICON_4.shape}
-          >
-            {ICON_4.icon}
-          </Button>
-          <Button
-            {...args}
-            kind={ButtonKind.LINK}
-            color={ICON_4.color}
-            size={ICON_4.size}
-            shape={ICON_4.shape}
-          >
-            {ICON_4.icon}
-          </Button>
-        </Container>
+        <MultipleButton
+          {...args}
+          color={ICON_1.color}
+          size={ICON_1.size}
+          children={ICON_1.icon}
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_2.color}
+          size={ICON_2.size}
+          children={ICON_2.icon}
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_3.color}
+          size={ICON_3.size}
+          children={ICON_3.icon}
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_4.color}
+          size={ICON_4.size}
+          shape={ICON_4.shape}
+          children={ICON_4.icon}
+        />
       </Container>
     );
   },
@@ -571,23 +302,5 @@ export const DarkBackground: Story = {
       default: "grey-100",
     },
   },
-  render: (args) => (
-    <Container>
-      <Button {...args} kind={ButtonKind.DEFAULT}>
-        Default
-      </Button>
-      <Button {...args} kind={ButtonKind.PRIMARY}>
-        Primary
-      </Button>
-      <Button {...args} kind={ButtonKind.OUTLINE}>
-        Outline
-      </Button>
-      <Button {...args} kind={ButtonKind.TEXT}>
-        Text
-      </Button>
-      <Button {...args} kind={ButtonKind.LINK}>
-        Link
-      </Button>
-    </Container>
-  ),
+  render: (args) => <MultipleButton {...args} />,
 };
