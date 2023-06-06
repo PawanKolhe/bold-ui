@@ -1,0 +1,306 @@
+import * as React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./Button";
+import {
+  ButtonSize,
+  type ButtonProps,
+  ButtonKind,
+  ButtonShape,
+} from "./Button.types";
+import { Stack } from "../Stack";
+
+const meta: Meta<ButtonProps> = {
+  component: Button,
+  title: "Components/Button",
+  tags: ["autodocs"],
+  argTypes: {
+    onClick: { action: "clicked" },
+    color: { control: "color" },
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<ButtonProps>;
+
+const Container = ({
+  children,
+  direction = "row",
+}: {
+  children: React.ReactNode;
+  direction?: "row" | "column";
+}) => (
+  <Stack
+    spacing={4}
+    direction={direction}
+    style={{ display: "flex", gap: "1rem", flexDirection: direction }}
+  >
+    {children}
+  </Stack>
+);
+
+const MultipleButton = ({ ...args }: ButtonProps) => (
+  <Container>
+    <Button kind={ButtonKind.DEFAULT} children="Default" {...args} />
+    <Button kind={ButtonKind.OUTLINE} children="Outline" {...args} />
+    <Button kind={ButtonKind.LIGHT} children="Light" {...args} />
+    <Button kind={ButtonKind.FILL} children="Fill" {...args} />
+    <Button kind={ButtonKind.SUBTLE} children="Subtle" {...args} />
+    <Button kind={ButtonKind.LINK} children="Link" {...args} />
+  </Container>
+);
+
+export const Default: Story = {
+  args: {
+    children: "Default",
+  },
+};
+
+// Sizes
+export const SizeSmall: Story = {
+  args: {
+    size: ButtonSize.SMALL,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const SizeDefault: Story = {
+  args: {
+    size: ButtonSize.DEFAULT,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const SizeLarge: Story = {
+  args: {
+    size: ButtonSize.LARGE,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const SizeXLarge: Story = {
+  args: {
+    size: ButtonSize.X_LARGE,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Compact: Story = {
+  args: {
+    compact: true,
+  },
+  render: (args) => (
+    <Container direction="column">
+      <MultipleButton {...args} size="small" />
+      <MultipleButton {...args} size="default" />
+      <MultipleButton {...args} size="large" />
+      <MultipleButton {...args} size="x-large" />
+    </Container>
+  ),
+};
+
+// Shapes
+export const Sharp: Story = {
+  args: {
+    shape: ButtonShape.SHARP,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Round: Story = {
+  args: {
+    shape: ButtonShape.ROUND,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+// Others
+export const Loading: Story = {
+  args: {
+    loading: true,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Color: Story = {
+  args: {},
+  render: (args) => {
+    const COLOR_1 = "#1f60cc";
+    const COLOR_2 = "#5341ae";
+    return (
+      <Container direction="column">
+        <Container>
+          <MultipleButton {...args} color={COLOR_1} />
+        </Container>
+        <Container>
+          <MultipleButton {...args} color={COLOR_2} />
+        </Container>
+      </Container>
+    );
+  },
+};
+
+export const LeftIcon: Story = {
+  args: {
+    children: "No Entry",
+    leftIcon: "⛔️",
+    kind: ButtonKind.OUTLINE,
+    color: "#f13422",
+  },
+};
+
+export const RightIcon: Story = {
+  args: {
+    children: "Next Step",
+    rightIcon: "➡️",
+  },
+};
+
+export const BorderWidth: Story = {
+  args: {
+    children: "Border Width",
+    kind: ButtonKind.OUTLINE,
+    borderWidth: "1px",
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    children: "Full Width",
+    kind: ButtonKind.FILL,
+    fullWidth: true,
+  },
+};
+
+export const Depth: Story = {
+  args: {
+    kind: ButtonKind.OUTLINE,
+    hasDepth: true,
+  },
+  render: (args) => (
+    <Container>
+      <Button {...args} size={ButtonSize.SMALL}>
+        Small
+      </Button>
+      <Button {...args} size={ButtonSize.DEFAULT}>
+        Default
+      </Button>
+      <Button {...args} size={ButtonSize.LARGE}>
+        Large
+      </Button>
+      <Button {...args} size={ButtonSize.X_LARGE}>
+        X-Large
+      </Button>
+    </Container>
+  ),
+};
+
+export const NoSpacing: Story = {
+  args: {
+    children: "No Spacing",
+    kind: ButtonKind.LINK,
+    noSpacing: true,
+  },
+};
+
+export const Danger: Story = {
+  args: {
+    children: "Delete",
+    danger: true,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Success: Story = {
+  args: {
+    children: "Finish",
+    success: true,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Uppercase: Story = {
+  args: {
+    children: "Upper",
+    uppercase: true,
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
+
+export const Icons: Story = {
+  args: {
+    iconOnly: true,
+  },
+  render: (args) => {
+    const ICON_1 = {
+      icon: "🌎",
+      color: "black",
+      size: ButtonSize.SMALL,
+    };
+    const ICON_2 = {
+      icon: "🐼",
+      color: "#f98306",
+      size: ButtonSize.DEFAULT,
+    };
+    const ICON_3 = {
+      icon: "⭐️",
+      color: "#f9d509",
+      size: ButtonSize.LARGE,
+    };
+    const ICON_4 = {
+      icon: "🎅🏼",
+      color: "#e81c35",
+      size: ButtonSize.DEFAULT,
+      shape: ButtonShape.CIRCLE,
+    };
+    return (
+      <Container direction="column">
+        <MultipleButton
+          {...args}
+          color={ICON_1.color}
+          size={ICON_1.size}
+          children={ICON_1.icon}
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_2.color}
+          size={ICON_2.size}
+          children={ICON_2.icon}
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_3.color}
+          size={ICON_3.size}
+          children={ICON_3.icon}
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_4.color}
+          size={ICON_4.size}
+          shape={ICON_4.shape}
+          children={ICON_4.icon}
+        />
+      </Container>
+    );
+  },
+};
+
+export const DarkBackground: Story = {
+  args: {
+    children: "DarkBackground",
+    color: "#ea80fc",
+  },
+  parameters: {
+    backgrounds: {
+      default: "grey-100",
+    },
+  },
+  render: (args) => <MultipleButton {...args} />,
+};
