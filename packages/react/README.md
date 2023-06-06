@@ -2,11 +2,21 @@
 
 ⚡ Modern, fast, and accessible React component library
 
-## Demo
+## 🚀 Features
+
+- 🧩 Modular
+- 🌲 Tree-shakeable - include only the components you use
+- ✨ Prebuild CSS - no dependency on any CSS library (Emotion, styled-components, etc).
+- 🏎 Fast & Small - light-weight components
+- ♿ Accessible - follows Web Accessibility Initiative (WAI) standards
+
+> Note: Your project module bundler (e.g. webpack, Vite, etc) will need a CSS loader to load the prebuilt CSS
+
+## 💻 Demo
 
 - [Storybook](https://main--64797a8b450504bdbcae2912.chromatic.com)
 
-## Installation
+## 📦 Installation
 
 ```
 # npm
@@ -19,7 +29,7 @@ yarn add @bold-ui/react
 pnpm add @bold-ui/react
 ```
 
-## Usage
+## 🔨 Usage
 
 ```javascript
 import { Button } from "@bold-ui/react";
@@ -34,7 +44,11 @@ const MyComponent = () => {
 };
 ```
 
-## Components
+## 🗂 Components
 
-- **Button**
-- **Stack**
+- [**Button**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/button/Button.types.ts)
+- [**Stack**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Stack/Stack.types.ts)
+
+## License
+
+This software is open source, licensed under the [MIT License](https://github.com/PawanKolhe/bold-ui/blob/main/LICENSE).
