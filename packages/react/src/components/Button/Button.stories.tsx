@@ -45,6 +45,7 @@ const MultipleButton = ({ ...args }: ButtonProps) => (
     <Button kind={ButtonKind.OUTLINE} children="Outline" {...args} />
     <Button kind={ButtonKind.LIGHT} children="Light" {...args} />
     <Button kind={ButtonKind.FILL} children="Fill" {...args} />
+    <Button kind={ButtonKind.WHITE} children="White" {...args} />
     <Button kind={ButtonKind.SUBTLE} children="Subtle" {...args} />
     <Button kind={ButtonKind.LINK} children="Link" {...args} />
   </Container>

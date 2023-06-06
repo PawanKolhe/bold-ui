@@ -176,7 +176,7 @@
 .Button__kindLight {
   --button-text-color: var(--button-primary-color);
   --button-background-color: transparent;
-  --button-border-color: white;
+  --button-border-color: transparent;
 
   /* Background color */
   &:before {
@@ -205,6 +205,18 @@
   &:not(:disabled):hover .Button__overlay {
     display: block;
     background-color: white;
+    --button-overlay-opacity: 10%;
+  }
+}
+
+.Button__kindWhite {
+  --button-text-color: var(--button-primary-color);
+  --button-background-color: white;
+  --button-border-color: white;
+
+  &:not(:disabled):hover .Button__overlay {
+    display: block;
+    background-color: var(--button-primary-color);
     --button-overlay-opacity: 10%;
   }
 }

@@ -59,6 +59,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             [styles.Button__kindOutline]: kind === ButtonKind.OUTLINE,
             [styles.Button__kindLight]: kind === ButtonKind.LIGHT,
             [styles.Button__kindFill]: kind === ButtonKind.FILL,
+            [styles.Button__kindWhite]: kind === ButtonKind.WHITE,
             [styles.Button__kindSubtle]: kind === ButtonKind.SUBTLE,
             [styles.Button__kindLink]: kind === ButtonKind.LINK,
             // Shape

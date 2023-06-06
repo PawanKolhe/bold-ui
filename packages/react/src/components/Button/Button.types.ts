@@ -59,6 +59,7 @@ export enum ButtonKind {
   OUTLINE = "outline",
   LIGHT = "light",
   FILL = "fill",
+  WHITE = "white",
   SUBTLE = "subtle",
   LINK = "link",
 }
