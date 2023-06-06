@@ -46,7 +46,7 @@ const MyComponent = () => {
 
 ## 🗂 Components
 
-- [**Button**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/button/Button.types.ts)
+- [**Button**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Button/Button.types.ts)
 - [**Stack**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Stack/Stack.types.ts)
 
 ## License
