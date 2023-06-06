@@ -5,8 +5,17 @@ export type ButtonProps = {
   size?: ButtonSizeValues;
   kind?: ButtonKindValues;
   shape?: ButtonShapeValues;
+  /**
+   * Primary color of the button.
+   */
   color?: string;
+  /**
+   * Icon to be rendered on the left side of the button.
+   */
   leftIcon?: ReactNode;
+  /**
+   * Icon to be rendered on the right side of the button.
+   */
   rightIcon?: ReactNode;
   borderWidth?: string;
   loading?: boolean;

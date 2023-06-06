@@ -157,7 +157,7 @@
   &:not(:disabled):hover .Button__overlay {
     display: block;
     background-color: var(--color-grey-100);
-    --button-overlay-opacity: 10%;
+    --button-overlay-opacity: 5%;
   }
 }
 
