@@ -1,0 +1,35 @@
+import { forwardRef } from "react";
+import { clsx } from "clsx";
+import { type {{name}}Props } from "./{{name}}.types";
+import styles from "./{{name}}.module.scss";
+
+export const {{name}} = forwardRef<HTMLDivElement, {{name}}Props>(
+  (
+    {
+      children,
+      className,
+      style = {},
+      ...restProps
+    },
+    ref
+  ) => {
+    return (
+      <div
+        className={clsx(
+          styles.{{name}},
+          {},
+          className
+        )}
+        style=\{{
+          ...style,
+        }}
+        ref={ref}
+        {...restProps}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+{{name}}.displayName = "{{name}}";

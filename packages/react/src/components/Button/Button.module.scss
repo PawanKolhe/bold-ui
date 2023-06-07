@@ -39,6 +39,7 @@
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
+  display: inline-block;
 
   .Button__contentContainer {
     display: flex;

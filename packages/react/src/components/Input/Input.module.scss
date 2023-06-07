@@ -1,0 +1,5 @@
+@use "../../common" as *;
+
+.Input {
+  @include common;
+}

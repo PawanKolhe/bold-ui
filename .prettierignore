@@ -13,3 +13,6 @@ pnpm-lock.yaml
 
 # Configs
 tsconfig.base.json
+
+# Handlebar templates
+*.hbs
