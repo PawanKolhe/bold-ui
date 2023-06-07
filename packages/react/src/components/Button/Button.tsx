@@ -9,19 +9,20 @@ import {
 import styles from "./Button.module.scss";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-    const {
+  (
+    {
       children,
       className,
       style = {},
       type = "button",
-      kind = ButtonKind.DEFAULT,
-      size = ButtonSize.DEFAULT,
-      shape = ButtonShape.DEFAULT,
+      kind = "default",
+      size = "default",
+      shape = "default",
       color = "var(--color-grey-100)",
       leftIcon,
       rightIcon,
       borderWidth,
+      borderRadius,
       iconOnly = false,
       fullWidth = false,
       noSpacing = false,
@@ -32,8 +33,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       compact = false,
       uppercase = false,
       ...restProps
-    } = props;
-
+    },
+    ref
+  ) => {
     const computedColor: string = useMemo(() => {
       if (danger) {
         return "var(--color-danger)";
@@ -82,6 +84,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ["--button-primary-color" as string]: computedColor,
           ...(borderWidth
             ? { ["--button-border-width" as string]: borderWidth }
+            : {}),
+          ...(borderRadius
+            ? { ["--button-border-radius" as string]: borderRadius }
             : {}),
           ...style,
         }}

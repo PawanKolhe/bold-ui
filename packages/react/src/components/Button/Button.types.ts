@@ -2,30 +2,24 @@ import { type ButtonHTMLAttributes, type ReactNode } from "react";
 
 export type ButtonProps = {
   children?: ReactNode;
+  /** Size of the button. */
   size?: ButtonSizeValues;
+  /** Style of the button. */
   kind?: ButtonKindValues;
+  /** Shape of the button. */
   shape?: ButtonShapeValues;
-  /**
-   * Primary color of the button.
-   */
+  /** Primary color of the button. */
   color?: string;
-  /**
-   * Icon to be rendered on the left side of the button.
-   */
+  /** Icon to be rendered on the left side of the button. */
   leftIcon?: ReactNode;
-  /**
-   * Icon to be rendered on the right side of the button.
-   */
+  /** Icon to be rendered on the right side of the button. */
   rightIcon?: ReactNode;
   borderWidth?: string;
+  borderRadius?: string;
   loading?: boolean;
-  /**
-   * Set to true if button only contains an icon.
-   */
+  /** Set to true if button only contains an icon. */
   iconOnly?: boolean;
-  /**
-   * Makes the button a full width button.
-   */
+  /** Makes the button a full width button. */
   fullWidth?: boolean;
   /**
    * Removes the padding inside the button.
@@ -37,21 +31,13 @@ export type ButtonProps = {
    * Supported kinds: 'ButtonKind.OUTLINE'
    */
   hasDepth?: boolean;
-  /**
-   * Sets button color to red.
-   */
+  /** Sets button color to red. */
   danger?: boolean;
-  /**
-   * Sets button color to green.
-   */
+  /** Sets button color to green. */
   success?: boolean;
-  /**
-   * Reduced padding for buttons in tight spaces.
-   */
+  /** Reduced padding for buttons in tight spaces. */
   compact?: boolean;
-  /**
-   * Sets button text to uppercase.
-   */
+  /** Sets button text to uppercase. */
   uppercase?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 

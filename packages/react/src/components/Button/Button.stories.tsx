@@ -3,13 +3,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 import {
   ButtonSize,
-  type ButtonProps,
   ButtonKind,
   ButtonShape,
+  type ButtonProps,
 } from "./Button.types";
 import { Stack } from "../Stack";
 
-const meta: Meta<ButtonProps> = {
+const meta: Meta<typeof Button> = {
   component: Button,
   title: "Components/Button",
   tags: ["autodocs"],
@@ -21,7 +21,7 @@ const meta: Meta<ButtonProps> = {
 
 export default meta;
 
-type Story = StoryObj<ButtonProps>;
+type Story = StoryObj<typeof Button>;
 
 const Container = ({
   children,
@@ -57,7 +57,7 @@ export const Default: Story = {
   },
 };
 
-// Sizes
+// Sizes and Spacing
 export const SizeSmall: Story = {
   args: {
     size: ButtonSize.SMALL,
@@ -98,6 +98,14 @@ export const Compact: Story = {
       <MultipleButton {...args} size="x-large" />
     </Container>
   ),
+};
+
+export const NoSpacing: Story = {
+  args: {
+    children: "No Spacing",
+    kind: ButtonKind.LINK,
+    noSpacing: true,
+  },
 };
 
 // Shapes
@@ -172,6 +180,14 @@ export const BorderWidth: Story = {
   },
 };
 
+export const BorderRadius: Story = {
+  args: {
+    children: "Border Radius",
+    kind: ButtonKind.OUTLINE,
+    borderRadius: "12px",
+  },
+};
+
 export const FullWidth: Story = {
   args: {
     children: "Full Width",
@@ -201,14 +217,6 @@ export const Depth: Story = {
       </Button>
     </Container>
   ),
-};
-
-export const NoSpacing: Story = {
-  args: {
-    children: "No Spacing",
-    kind: ButtonKind.LINK,
-    noSpacing: true,
-  },
 };
 
 export const Danger: Story = {
