@@ -1,4 +1,4 @@
-import { type ButtonHTMLAttributes, type ReactNode } from "react";
+import { type HTMLAttributes, type ReactNode } from "react";
 
 export type StackProps = {
   children?: ReactNode;
@@ -15,7 +15,7 @@ export type StackProps = {
   wrap?: StackWrapValues;
   /** Whether Stack should occupy available width */
   fullWidth?: boolean;
-} & ButtonHTMLAttributes<HTMLDivElement>;
+} & HTMLAttributes<HTMLDivElement>;
 
 export enum StackDirection {
   ROW = "row",

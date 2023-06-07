@@ -3,10 +3,10 @@ import { clsx } from "clsx";
 import { type InputProps } from "./Input.types";
 import styles from "./Input.module.scss";
 
-export const Input = forwardRef<HTMLDivElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ children, className, style = {}, ...restProps }, ref) => {
     return (
-      <div
+      <input
         className={clsx(styles.Input, {}, className)}
         style={{
           ...style,
@@ -15,7 +15,7 @@ export const Input = forwardRef<HTMLDivElement, InputProps>(
         {...restProps}
       >
         {children}
-      </div>
+      </input>
     );
   }
 );
