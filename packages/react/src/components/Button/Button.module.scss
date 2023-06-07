@@ -38,6 +38,7 @@
   isolation: isolate;
   appearance: none;
   -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 
   .Button__contentContainer {
     display: flex;
@@ -136,13 +137,14 @@
 
 .Button__iconOnly {
   --button-width: var(--button-height);
+  --button-padding-left-right: 0;
 }
 
 /* Kind */
 .Button__kindDefault {
   --button-text-color: var(--color-grey-100);
   --button-background-color: transparent;
-  --button-border-color: var(--color-grey-20);
+  --button-border-color: var(--color-grey-10);
 
   &:not(:disabled):hover .Button__overlay {
     display: block;

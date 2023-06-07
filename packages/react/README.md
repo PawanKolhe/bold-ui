@@ -5,10 +5,10 @@
 ## 🚀 Features
 
 - 🧩 Modular
-- 🌲 Tree-shakeable - include only the components you use
-- ✨ Prebuild CSS - no dependency on any CSS library (Emotion, styled-components, etc).
-- 🏎 Fast & Small - light-weight components
-- ♿ Accessible - follows Web Accessibility Initiative (WAI) standards
+- 🌲 Tree-shakeable - Include only the components you use
+- ✨ Prebuild CSS - No dependency on any CSS library (Emotion, styled-components, etc).
+- 🏎 Fast & Small - Light-weight components. Check [bundle size](https://bundlephobia.com/package/@bold-ui/react).
+- ♿ Accessible - Follows Web Accessibility Initiative (WAI) standards
 
 > Note: Your project module bundler (e.g. webpack, Vite, etc) will need a CSS loader to load the prebuilt CSS
 
