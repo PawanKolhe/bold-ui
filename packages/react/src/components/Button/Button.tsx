@@ -7,6 +7,7 @@ import {
   ButtonShape,
 } from "./Button.types";
 import styles from "./Button.module.scss";
+// import { useTheme } from "../../context";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -36,6 +37,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    // const { theme } = useTheme();
+
     const computedColor: string = useMemo(() => {
       if (danger) {
         return "var(--color-danger)";
