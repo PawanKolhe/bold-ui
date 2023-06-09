@@ -26,6 +26,9 @@ const bundleCss = () => {
         use: ["sass"],
         minimize: isProduction,
         sourcemap: !isProduction,
+        modules: {
+          generateScopedName: "css-[hash:base64:7]",
+        },
       })
     );
   });

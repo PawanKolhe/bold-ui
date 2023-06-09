@@ -10,12 +10,21 @@
   --color-grey-20: #b0bec5;
   --color-grey-10: #cfd8dc;
   --color-grey-5: #eceff1;
-  --color-danger: #c62828;
-  --color-success: #2e7d32;
+  --boldui-color-danger: #c62828;
+  --boldui-color-success: #2e7d32;
+}
+
+@mixin typography {
+  --boldui-font-family: sans-serif;
 }
 
 @mixin common {
   @include colors;
+  @include typography;
+
+  /* Defaults */
+  --boldui-primary-color: var(--color-grey-100);
+  --boldui-focus-outline-color: black;
 
   &,
   &::before,
@@ -26,5 +35,5 @@
     box-sizing: border-box;
   }
 
-  font-family: sans-serif;
+  font-family: var(--boldui-font-family);
 }

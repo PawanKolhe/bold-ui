@@ -7,7 +7,8 @@ import {
   ButtonShape,
 } from "./Button.types";
 import styles from "./Button.module.scss";
-// import { useTheme } from "../../context";
+import { useTheme } from "../../context";
+import { cx, loadStyle } from "../../utils/styles.utils";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -19,7 +20,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       kind = "default",
       size = "default",
       shape = "default",
-      color = "var(--color-grey-100)",
+      color,
       leftIcon,
       rightIcon,
       borderWidth,
@@ -37,13 +38,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    // const { theme } = useTheme();
+    const { theme, themeStyles } = useTheme();
+    console.log("theme", theme);
 
-    const computedColor: string = useMemo(() => {
+    const computedColor = useMemo(() => {
       if (danger) {
-        return "var(--color-danger)";
+        return "var(--boldui-color-danger)";
       } else if (success) {
-        return "var(--color-success)";
+        return "var(--boldui-color-success)";
       } else {
         return color;
       }
@@ -52,6 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={clsx(
+          cx("button"),
           styles.Button,
           {
             // Size
@@ -84,26 +87,38 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         style={{
-          ["--button-primary-color" as string]: computedColor,
-          ...(borderWidth
-            ? { ["--button-border-width" as string]: borderWidth }
-            : {}),
-          ...(borderRadius
-            ? { ["--button-border-radius" as string]: borderRadius }
-            : {}),
+          ...themeStyles,
+          ...loadStyle("--boldui-primary-color", computedColor),
+          ...loadStyle("--button-border-width", borderWidth),
+          ...loadStyle("--button-border-radius", borderRadius),
           ...style,
         }}
         type={type}
         ref={ref}
         {...restProps}
       >
-        <div className={styles.Button__overlay} />
-        <div className={styles.Button__spinner} />
-        <div className={styles.Button__contentContainer}>
-          {leftIcon && <span className={styles.Button__icon}>{leftIcon}</span>}
-          <span className={styles.Button__text}>{children}</span>
+        <div className={clsx(cx("button-overlay"), styles.Button__overlay)} />
+        <div className={clsx(cx("button-spinner"), styles.Button__spinner)} />
+        <div
+          className={clsx(
+            cx("button-content-container"),
+            styles.Button__contentContainer
+          )}
+        >
+          {leftIcon && (
+            <span className={clsx(cx("button-icon-left"), styles.Button__icon)}>
+              {leftIcon}
+            </span>
+          )}
+          <span className={clsx(cx("button-text"), styles.Button__text)}>
+            {children}
+          </span>
           {rightIcon && (
-            <span className={styles.Button__icon}>{rightIcon}</span>
+            <span
+              className={clsx(cx("button-icon-right"), styles.Button__icon)}
+            >
+              {rightIcon}
+            </span>
           )}
         </div>
       </button>

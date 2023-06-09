@@ -3,7 +3,6 @@
 .Button {
   @include common;
 
-  --button-primary-color: black;
   --button-text-color: transparent;
   --button-background-color: transparent;
   --button-border-color: transparent;
@@ -11,7 +10,6 @@
   --button-border-radius: 0.25rem;
   --button-font-size: 0.875rem;
   --button-line-height: 1.25rem;
-  --button-focus-border-color: black;
   --button-width: auto;
   --button-height: 2rem;
   --button-padding-left-right: 0.75rem;
@@ -76,7 +74,7 @@
   }
 
   &:focus-visible {
-    outline: 0.125rem solid var(--button-focus-border-color);
+    outline: 0.125rem solid var(--boldui-focus-outline-color);
     outline-offset: 0.125rem;
   }
 
@@ -155,19 +153,19 @@
 }
 
 .Button__kindOutline {
-  --button-text-color: var(--button-primary-color);
+  --button-text-color: var(--boldui-primary-color);
   --button-background-color: transparent;
-  --button-border-color: var(--button-primary-color);
+  --button-border-color: var(--boldui-primary-color);
 
   &:not(:disabled):hover .Button__overlay {
     display: block;
-    background-color: var(--button-primary-color);
+    background-color: var(--boldui-primary-color);
     --button-overlay-opacity: 10%;
   }
 }
 
 .Button__kindLight {
-  --button-text-color: var(--button-primary-color);
+  --button-text-color: var(--boldui-primary-color);
   --button-background-color: transparent;
   --button-border-color: transparent;
 
@@ -179,21 +177,21 @@
     position: absolute;
     inset: calc(-1 * var(--button-border-width));
     border-radius: var(--button-border-radius);
-    background-color: var(--button-primary-color);
+    background-color: var(--boldui-primary-color);
     opacity: 10%;
   }
 
   &:not(:disabled):hover .Button__overlay {
     display: block;
-    background-color: var(--button-primary-color);
+    background-color: var(--boldui-primary-color);
     --button-overlay-opacity: 10%;
   }
 }
 
 .Button__kindFill {
   --button-text-color: white;
-  --button-background-color: var(--button-primary-color);
-  --button-border-color: var(--button-primary-color);
+  --button-background-color: var(--boldui-primary-color);
+  --button-border-color: var(--boldui-primary-color);
 
   &:not(:disabled):hover .Button__overlay {
     display: block;
@@ -203,31 +201,31 @@
 }
 
 .Button__kindWhite {
-  --button-text-color: var(--button-primary-color);
+  --button-text-color: var(--boldui-primary-color);
   --button-background-color: white;
   --button-border-color: white;
 
   &:not(:disabled):hover .Button__overlay {
     display: block;
-    background-color: var(--button-primary-color);
+    background-color: var(--boldui-primary-color);
     --button-overlay-opacity: 10%;
   }
 }
 
 .Button__kindSubtle {
-  --button-text-color: var(--button-primary-color);
+  --button-text-color: var(--boldui-primary-color);
   --button-background-color: transparent;
   --button-border-color: transparent;
 
   &:not(:disabled):hover .Button__overlay {
     display: block;
-    background-color: var(--button-primary-color);
+    background-color: var(--boldui-primary-color);
     --button-overlay-opacity: 10%;
   }
 }
 
 .Button__kindLink {
-  --button-text-color: var(--button-primary-color);
+  --button-text-color: var(--boldui-primary-color);
   --button-background-color: transparent;
   --button-border-color: transparent;
 }
