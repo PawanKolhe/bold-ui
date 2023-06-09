@@ -141,13 +141,13 @@
 
 /* Kind */
 .Button__kindDefault {
-  --button-text-color: var(--color-grey-100);
+  --button-text-color: var(--boldui-color-grey-100);
   --button-background-color: transparent;
-  --button-border-color: var(--color-grey-10);
+  --button-border-color: var(--boldui-color-grey-10);
 
   &:not(:disabled):hover .Button__overlay {
     display: block;
-    background-color: var(--color-grey-100);
+    background-color: var(--boldui-color-grey-100);
     --button-overlay-opacity: 5%;
   }
 }

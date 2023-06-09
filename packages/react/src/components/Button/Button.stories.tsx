@@ -8,6 +8,7 @@ import {
   type ButtonProps,
 } from "./Button.types";
 import { Stack } from "../Stack";
+import { ThemeProvider } from "../../context";
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -311,5 +312,9 @@ export const DarkBackground: Story = {
       default: "grey-100",
     },
   },
-  render: (args) => <MultipleButton {...args} />,
+  render: (args) => (
+    <ThemeProvider value={{ colorMode: "dark" }}>
+      <MultipleButton {...args} />
+    </ThemeProvider>
+  ),
 };

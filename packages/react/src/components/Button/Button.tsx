@@ -38,7 +38,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const { themeStyles } = useTheme();
+    const { theme, themeStyles } = useTheme();
+    console.log("theme", theme);
 
     const computedColor = useMemo(() => {
       if (danger) {

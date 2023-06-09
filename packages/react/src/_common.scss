@@ -1,15 +1,15 @@
 @mixin colors {
-  --color-grey-100: #162130;
-  --color-grey-90: #263238;
-  --color-grey-80: #37474f;
-  --color-grey-70: #455a64;
-  --color-grey-60: #546e7a;
-  --color-grey-50: #607d8b;
-  --color-grey-40: #78909c;
-  --color-grey-30: #90a4ae;
-  --color-grey-20: #b0bec5;
-  --color-grey-10: #cfd8dc;
-  --color-grey-5: #eceff1;
+  --boldui-color-grey-100: #162130;
+  --boldui-color-grey-90: #263238;
+  --boldui-color-grey-80: #37474f;
+  --boldui-color-grey-70: #455a64;
+  --boldui-color-grey-60: #546e7a;
+  --boldui-color-grey-50: #607d8b;
+  --boldui-color-grey-40: #78909c;
+  --boldui-color-grey-30: #90a4ae;
+  --boldui-color-grey-20: #b0bec5;
+  --boldui-color-grey-10: #cfd8dc;
+  --boldui-color-grey-5: #eceff1;
   --boldui-color-danger: #c62828;
   --boldui-color-success: #2e7d32;
 }
@@ -23,7 +23,7 @@
   @include typography;
 
   /* Defaults */
-  --boldui-primary-color: var(--color-grey-100);
+  --boldui-primary-color: var(--boldui-color-grey-100);
   --boldui-focus-outline-color: black;
 
   &,
