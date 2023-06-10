@@ -42,7 +42,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const computedColor = useMemo(() => {
       if (danger) {
-        return "var(--boldui-color-danger)";
+        return "var(--boldui-color-error)";
       } else if (success) {
         return "var(--boldui-color-success)";
       } else {

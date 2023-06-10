@@ -12,15 +12,13 @@
   --button-line-height: 1.25rem;
   --button-width: auto;
   --button-height: 2rem;
-  --button-padding-left-right: 0.75rem;
+  --button-padding-left-right: 1rem;
   --button-overlay-opacity: 0%;
 
   width: var(--button-width);
   height: var(--button-height);
   padding: 0 var(--button-padding-left-right);
-  border-width: var(--button-border-width);
-  border-style: solid;
-  border-color: var(--button-border-color);
+  border: var(--button-border-width) solid var(--button-border-color);
   color: var(--button-text-color);
   background-color: var(--button-background-color);
   border-radius: var(--button-border-radius);
@@ -140,6 +138,10 @@
   --button-text-color: var(--boldui-color-grey-900);
   --button-background-color: transparent;
   --button-border-color: var(--boldui-color-grey-200);
+
+  &:not(:disabled):hover {
+    --button-border-color: var(--boldui-color-grey-300);
+  }
 
   &:not(:disabled):hover .Button__overlay {
     display: block;
