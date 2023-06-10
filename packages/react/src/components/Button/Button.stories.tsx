@@ -9,6 +9,7 @@ import {
 } from "./Button.types";
 import { Stack } from "../Stack";
 import { ThemeProvider } from "../../context";
+import { MdFavorite, MdEmail } from "react-icons/md";
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -87,6 +88,20 @@ export const SizeXLarge: Story = {
   render: (args) => <MultipleButton {...args} />,
 };
 
+export const WithIcon: Story = {
+  args: {
+    leftIcon: <MdFavorite />,
+  },
+  render: (args) => (
+    <Container direction="column">
+      <MultipleButton {...args} size="small" />
+      <MultipleButton {...args} size="default" />
+      <MultipleButton {...args} size="large" />
+      <MultipleButton {...args} size="x-large" />
+    </Container>
+  ),
+};
+
 export const Compact: Story = {
   args: {
     compact: true,
@@ -121,7 +136,12 @@ export const Round: Story = {
   args: {
     shape: ButtonShape.ROUND,
   },
-  render: (args) => <MultipleButton {...args} />,
+  render: (args) => (
+    <Container direction="column">
+      <MultipleButton {...args} />
+      <MultipleButton {...args} leftIcon={<MdEmail />} />
+    </Container>
+  ),
 };
 
 // Others
@@ -142,16 +162,14 @@ export const Disabled: Story = {
 export const Color: Story = {
   args: {},
   render: (args) => {
-    const COLOR_1 = "#1f60cc";
+    const COLOR_1 = "#EC4A0A";
     const COLOR_2 = "#5341ae";
+    const COLOR_3 = "#047481";
     return (
       <Container direction="column">
-        <Container>
-          <MultipleButton {...args} color={COLOR_1} />
-        </Container>
-        <Container>
-          <MultipleButton {...args} color={COLOR_2} />
-        </Container>
+        <MultipleButton {...args} color={COLOR_1} />
+        <MultipleButton {...args} color={COLOR_2} />
+        <MultipleButton {...args} color={COLOR_3} />
       </Container>
     );
   },
@@ -244,7 +262,7 @@ export const Uppercase: Story = {
   render: (args) => <MultipleButton {...args} />,
 };
 
-export const Icons: Story = {
+export const IconOnly: Story = {
   args: {
     iconOnly: true,
   },

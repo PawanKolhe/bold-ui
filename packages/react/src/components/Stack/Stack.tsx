@@ -1,5 +1,6 @@
 import { forwardRef, useMemo } from "react";
 import { clsx } from "clsx";
+import { cx } from "../../utils/styles.utils";
 import { type StackProps } from "./Stack.types";
 import styles from "./Stack.module.scss";
 
@@ -13,7 +14,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       direction = "row",
       alignItems = "stretch",
       justifyContent = "flex-start",
-      wrap,
+      wrap = "nowrap",
       fullWidth,
       ...restProps
     },
@@ -29,6 +30,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
     return (
       <div
         className={clsx(
+          cx("Stack"),
           styles.Stack,
           {
             [styles.Stack__fullWidth]: fullWidth,

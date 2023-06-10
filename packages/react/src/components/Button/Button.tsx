@@ -1,5 +1,6 @@
 import { forwardRef, useMemo } from "react";
 import { clsx } from "clsx";
+import { cx, loadStyle } from "../../utils/styles.utils";
 import {
   ButtonSize,
   type ButtonProps,
@@ -7,8 +8,7 @@ import {
   ButtonShape,
 } from "./Button.types";
 import styles from "./Button.module.scss";
-import { useTheme } from "../../context";
-import { cx, loadStyle } from "../../utils/styles.utils";
+import { useTheme } from "../../context/ThemeContext";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -38,8 +38,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const { theme, themeStyles } = useTheme();
-    console.log("theme", theme);
+    const { themeStyles, themeClasses } = useTheme();
 
     const computedColor = useMemo(() => {
       if (danger) {
@@ -57,6 +56,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           cx("button"),
           styles.Button,
           {
+            ...themeClasses,
             // Size
             [styles.Button__sizeDefault]: size === ButtonSize.DEFAULT,
             [styles.Button__sizeSmall]: size === ButtonSize.SMALL,
@@ -88,7 +88,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         style={{
           ...themeStyles,
-          ...loadStyle("--boldui-primary-color", computedColor),
+          ...loadStyle("--boldui-color-primary", computedColor),
           ...loadStyle("--button-border-width", borderWidth),
           ...loadStyle("--button-border-radius", borderRadius),
           ...style,

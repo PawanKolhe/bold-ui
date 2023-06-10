@@ -1,7 +1,9 @@
 import { forwardRef } from "react";
 import { clsx } from "clsx";
+import { cx } from "../../utils/styles.utils";
 import { type {{name}}Props } from "./{{name}}.types";
 import styles from "./{{name}}.module.scss";
+import { useTheme } from "../../context/ThemeContext";
 
 export const {{name}} = forwardRef<HTMLDivElement, {{name}}Props>(
   (
@@ -13,14 +15,19 @@ export const {{name}} = forwardRef<HTMLDivElement, {{name}}Props>(
     },
     ref
   ) => {
+    const { themeStyles, themeClasses } = useTheme();
     return (
       <div
         className={clsx(
+          cx("{{name}}"),
           styles.{{name}},
-          {},
+          {
+            ...themeClasses
+          },
           className
         )}
         style=\{{
+          ...themeStyles,
           ...style,
         }}
         ref={ref}

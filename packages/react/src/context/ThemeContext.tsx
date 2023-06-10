@@ -17,5 +17,11 @@ export const useTheme = () => {
     };
   }, [theme]);
 
-  return { theme, themeStyles };
+  const themeClasses = useMemo(() => {
+    return {
+      "boldui-theme-dark": theme.colorMode === "dark",
+    };
+  }, [theme]);
+
+  return { theme, themeStyles, themeClasses };
 };
