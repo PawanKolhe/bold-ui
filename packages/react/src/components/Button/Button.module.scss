@@ -1,7 +1,7 @@
-@use "../../common" as *;
+@use "../../common";
 
 .Button {
-  @include common;
+  @include common.all;
 
   --button-text-color: transparent;
   --button-background-color: transparent;
@@ -32,6 +32,8 @@
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
   display: inline-block;
+  transition-property: border-color;
+  transition-duration: var(--boldui-transition-duration-normal);
 
   .Button__contentContainer {
     display: flex;
@@ -56,11 +58,14 @@
 
   /* Creates a lighter version of the primary color to act as an overlay */
   .Button__overlay {
+    opacity: 0;
     pointer-events: none;
     position: absolute;
     inset: calc(-1 * var(--button-border-width));
     border-radius: var(--button-border-radius);
     opacity: var(--button-overlay-opacity);
+    transition-property: opacity, background-color;
+    transition-duration: var(--boldui-transition-duration-normal);
   }
 
   &:active {
@@ -144,7 +149,6 @@
   }
 
   &:not(:disabled):hover .Button__overlay {
-    display: block;
     background-color: var(--boldui-color-grey-900);
     --button-overlay-opacity: 5%;
   }
@@ -156,7 +160,6 @@
   --button-border-color: var(--boldui-color-primary);
 
   &:not(:disabled):hover .Button__overlay {
-    display: block;
     background-color: var(--boldui-color-primary);
     --button-overlay-opacity: 10%;
   }
@@ -180,7 +183,6 @@
   }
 
   &:not(:disabled):hover .Button__overlay {
-    display: block;
     background-color: var(--boldui-color-primary);
     --button-overlay-opacity: 10%;
   }
@@ -192,7 +194,6 @@
   --button-border-color: var(--boldui-color-primary);
 
   &:not(:disabled):hover .Button__overlay {
-    display: block;
     background-color: white;
     --button-overlay-opacity: 10%;
   }
@@ -204,7 +205,6 @@
   --button-border-color: white;
 
   &:not(:disabled):hover .Button__overlay {
-    display: block;
     background-color: var(--boldui-color-primary);
     --button-overlay-opacity: 10%;
   }
@@ -216,7 +216,6 @@
   --button-border-color: transparent;
 
   &:not(:disabled):hover .Button__overlay {
-    display: block;
     background-color: var(--boldui-color-primary);
     --button-overlay-opacity: 10%;
   }

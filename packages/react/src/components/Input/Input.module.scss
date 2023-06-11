@@ -1,7 +1,7 @@
-@use "../../common" as *;
+@use "../../common";
 
 .Input__wrapper {
-  @include common;
+  @include common.all;
 
   --input-height: 2.25rem;
   --input-border-color: var(--boldui-color-grey-200);
@@ -23,14 +23,18 @@
   font-weight: 500;
   color: var(--boldui-color-grey-900);
   appearance: none;
+  outline: none;
+  box-shadow: 0 0 0 1px transparent;
+  transition-property: box-shadow, border-color;
+  transition-duration: var(--boldui-transition-duration-normal);
 
   &:not(:disabled):hover {
     --input-border-color: var(--boldui-color-grey-300);
   }
 
-  &:focus-visible {
-    outline: 0.125rem solid var(--boldui-color-primary);
-    outline-offset: -0.063rem;
+  &:focus-visible:focus-visible {
+    --input-border-color: var(--boldui-color-primary);
+    box-shadow: 0 0 0 1px var(--boldui-color-primary);
   }
 
   &:disabled {
