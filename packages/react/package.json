@@ -37,7 +37,9 @@
     "react",
     "react-components",
     "design-system",
-    "ui"
+    "ui",
+    "accessible",
+    "boldui"
   ],
   "author": "Pawan Kolhe <pawanashishkolhe@gmail.com> (https://pawankolhe.com/)",
   "license": "MIT",

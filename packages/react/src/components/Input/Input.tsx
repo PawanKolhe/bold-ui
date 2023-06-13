@@ -1,9 +1,10 @@
-import { forwardRef, useMemo } from "react";
+import { forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import { clsx } from "clsx";
 import { cx, loadStyle } from "../../utils/styles.utils";
-import { InputSize, type InputProps } from "./Input.types";
+import { InputSize, type InputProps, InputKind } from "./Input.types";
 import styles from "./Input.module.scss";
 import { useTheme } from "../../context/ThemeContext";
+import { mergeRefs } from "../../utils/refs.utils";
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -12,6 +13,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       style = {},
       size = "default",
+      kind = "default",
       color,
       compact = false,
       borderWidth,
@@ -19,11 +21,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       error,
       success,
       icon,
+      clearable = false,
+      onClear,
+      clearedValue = "",
+      onChange,
+      disabled,
+      value,
+      defaultValue,
       ...restProps
     },
     ref
   ) => {
     const { themeStyles, themeClasses } = useTheme();
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const [hasValue, setHasValue] = useState(!!(value ?? defaultValue));
 
     const computedColor = useMemo(() => {
       if (error) {
@@ -34,6 +47,33 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         return color;
       }
     }, [color, error, success]);
+
+    const handleOnClear = useCallback(
+      (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        onChange?.(clearedValue);
+        // In case the input is uncontrolled, we need to clear the input value
+        if (value === undefined && inputRef.current)
+          inputRef.current.value = "";
+        inputRef.current?.focus();
+        onClear?.();
+        setHasValue(false);
+      },
+      [clearedValue, onChange, onClear, value]
+    );
+
+    const handleOnChange: React.ChangeEventHandler<HTMLInputElement> =
+      useCallback(
+        (event) => {
+          onChange?.(event.target.value);
+          if (event.target.value) {
+            setHasValue(true);
+          } else {
+            setHasValue(false);
+          }
+        },
+        [onChange]
+      );
 
     return (
       <div
@@ -47,14 +87,28 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             [styles.Input__sizeSmall]: size === InputSize.SMALL,
             [styles.Input__sizeLarge]: size === InputSize.LARGE,
             [styles.Input__sizeXLarge]: size === InputSize.X_LARGE,
+            // Kind
+            [styles.Input__kindDefault]: kind === InputKind.DEFAULT,
+            [styles.Input__kindFilled]: kind === InputKind.FILLED,
+            [styles.Input__kindUnstyled]: kind === InputKind.UNSTYLED,
             // Others
+            [styles.Input__disabled]: disabled,
             [styles.Input__compact]: compact,
             [styles.Input__hasIcon]: !!icon,
             [styles.Input__error]: error,
             [styles.Input__success]: success,
+            [styles.Input__clearable]: clearable,
+            [styles.Input__hasValue]: hasValue,
           },
           className
         )}
+        style={{
+          ...themeStyles,
+          ...loadStyle("--boldui-color-primary", computedColor),
+          ...loadStyle("--button-border-width", borderWidth),
+          ...loadStyle("--button-border-radius", borderRadius),
+          ...style,
+        }}
       >
         {icon && (
           <div className={clsx(cx("input-icon"), styles.Input__icon)}>
@@ -63,16 +117,38 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         <input
           className={clsx(cx("input"), styles.Input)}
-          style={{
-            ...themeStyles,
-            ...loadStyle("--boldui-color-primary", computedColor),
-            ...loadStyle("--button-border-width", borderWidth),
-            ...loadStyle("--button-border-radius", borderRadius),
-            ...style,
-          }}
-          ref={ref}
+          onChange={handleOnChange}
+          value={value}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          ref={mergeRefs(ref, inputRef)}
           {...restProps}
         />
+        {clearable && hasValue && (
+          <div
+            className={clsx(
+              cx("input-clearable-wrapper"),
+              styles.Input__clearableWrapper
+            )}
+          >
+            <button
+              className={clsx(
+                cx("input-clearable-button"),
+                styles.Input__clearableButton
+              )}
+              onClick={(e) => {
+                handleOnClear(e);
+              }}
+            >
+              <div
+                className={clsx(
+                  cx("input-clearable-button-icon"),
+                  styles.Input__clearableButtonIcon
+                )}
+              />
+            </button>
+          </div>
+        )}
       </div>
     );
   }

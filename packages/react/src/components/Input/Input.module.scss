@@ -4,10 +4,14 @@
   @include common.all;
 
   --input-height: 2.25rem;
+  --input-text-color: var(--boldui-color-grey-900);
+  --input-placeholder-text-color: var(--boldui-color-grey-400);
+  --input-background-color: white;
   --input-border-color: var(--boldui-color-grey-200);
   --input-border-width: 0.063rem;
   --input-border-radius: 0.25rem;
   --input-padding-left-right: 1rem;
+  --input-outline-color: transparent;
 
   position: relative;
 }
@@ -16,30 +20,27 @@
   width: 100%;
   height: var(--input-height);
   padding: 0 var(--input-padding-left-right);
+  color: var(--input-text-color);
+  background-color: var(--input-background-color);
   border: var(--input-border-width) solid var(--input-border-color);
   border-radius: var(--input-border-radius);
   font-size: var(--input-font-size);
   line-height: calc(var(--input-height) - 0.125rem);
   font-weight: 500;
-  color: var(--boldui-color-grey-900);
   appearance: none;
   outline: none;
-  box-shadow: 0 0 0 1px transparent;
-  transition-property: box-shadow, border-color;
-  transition-duration: var(--boldui-transition-duration-normal);
+  box-shadow: 0 0 0 1px var(--input-outline-color);
+  transition-property: box-shadow, border-color, background-color;
+  transition-duration: var(--boldui-transition-duration-fast);
 
-  &:not(:disabled):hover {
-    --input-border-color: var(--boldui-color-grey-300);
+  &::placeholder {
+    color: var(--input-placeholder-text-color);
   }
+}
 
-  &:focus-visible:focus-visible {
-    --input-border-color: var(--boldui-color-primary);
-    box-shadow: 0 0 0 1px var(--boldui-color-primary);
-  }
-
-  &:disabled {
-    color: var(--boldui-color-grey-400);
-  }
+.Input__disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .Input__icon {
@@ -47,7 +48,7 @@
   height: var(--input-height);
   font-size: var(--input-font-size);
   line-height: calc(var(--input-height) - 0.125rem);
-  color: var(--boldui-color-grey-300);
+  color: var(--input-placeholder-text-color);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -56,12 +57,17 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  transition-property: color;
+  transition-duration: var(--boldui-transition-duration-fast);
+}
+.Input__hasIcon.Input__compact .Input__icon {
+  font-size: calc(var(--input-font-size) - 0.125rem);
 }
 
 /* Size */
 .Input__sizeSmall {
   --input-height: 1.75rem;
-  --input-padding-left-right: 0.625rem;
+  --input-padding-left-right: 0.625rem !important;
   --input-font-size: 0.75rem;
   --input-line-height: 1rem;
 
@@ -107,21 +113,156 @@
   }
 }
 
-// Others
-.Input__hasIcon .Input {
-  padding-left: var(--input-height);
-}
+// Kind
+.Input__kindDefault .Input {
+  --input-border-color: var(--boldui-color-grey-200);
 
-.Input__error .Input {
-  --input-border-color: var(--boldui-color-error);
   &:not(:disabled):hover {
-    --input-border-color: var(--boldui-color-error);
+    --input-border-color: var(--boldui-color-grey-300);
+  }
+
+  &:focus-visible:focus-visible {
+    --input-border-color: var(--boldui-color-primary);
+    --input-outline-color: var(--boldui-color-primary);
+    --input-background-color: white;
   }
 }
 
-.Input__success .Input {
-  --input-border-color: var(--boldui-color-success);
+.Input__kindFilled .Input {
+  --input-border-color: var(--boldui-color-grey-200);
+  --input-background-color: var(--boldui-color-grey-50);
+
   &:not(:disabled):hover {
+    --input-border-color: var(--boldui-color-grey-300);
+  }
+
+  &:focus-visible:focus-visible {
+    --input-border-color: var(--boldui-color-primary);
+    --input-outline-color: var(--boldui-color-primary);
+    --input-background-color: white;
+  }
+}
+
+.Input__kindUnstyled {
+  .Input {
+    --input-border-color: transparent;
+    --input-background-color: transparent;
+
+    &:not(:disabled):hover {
+      --input-border-color: transparent;
+    }
+
+    &:focus-visible:focus-visible:focus-visible {
+      --input-border-color: transparent;
+      --input-outline-color: transparent;
+      --input-background-color: white;
+    }
+  }
+}
+
+// Others
+.Input__success:not(.Input__kindUnstyled) {
+  .Input {
     --input-border-color: var(--boldui-color-success);
+    --input-background-color: var(--boldui-color-success-25);
+
+    &:not(:disabled):hover {
+      --input-border-color: var(--boldui-color-success);
+    }
+  }
+}
+.Input__success.Input__hasIcon {
+  &.Input__hasValue .Input__icon {
+    color: var(--boldui-color-success);
+  }
+}
+
+.Input__error:not(.Input__kindUnstyled) {
+  .Input {
+    --input-border-color: var(--boldui-color-error);
+    --input-background-color: var(--boldui-color-error-25);
+
+    &:not(:disabled):hover {
+      --input-border-color: var(--boldui-color-error);
+    }
+  }
+}
+.Input__error.Input__hasIcon {
+  &.Input__hasValue .Input__icon {
+    color: var(--boldui-color-error);
+  }
+}
+
+.Input__hasIcon .Input {
+  padding-left: var(--input-height);
+}
+.Input__hasIcon.Input__hasValue .Input__icon {
+  color: var(--input-text-color);
+}
+
+// Clear button
+.Input__clearableWrapper {
+  height: 100%;
+  position: absolute;
+  right: calc(var(--input-padding-left-right) - 0.25rem);
+  top: 0;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  .Input__clearableButton {
+    padding: 2px;
+    border: none;
+    border-radius: 2px;
+    color: var(--boldui-color-grey-400);
+    background-color: transparent;
+    cursor: pointer;
+    user-select: none;
+    pointer-events: all;
+    overflow: hidden;
+
+    .Input__clearableButtonIcon {
+      width: var(--input-font-size);
+      height: var(--input-font-size);
+      position: relative;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: var(--input-font-size);
+        top: 50%;
+        left: 0;
+        background: var(--boldui-color-grey-300);
+        border-radius: 2px;
+      }
+      &::before {
+        transform: rotate(45deg);
+      }
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+
+    &:hover {
+      background: var(--boldui-color-grey-50);
+
+      .Input__clearableButtonIcon {
+        &::before,
+        &::after {
+          background: var(--boldui-color-grey-400);
+        }
+      }
+    }
+  }
+}
+.Input__clearable {
+  .Input {
+    padding-right: calc(
+      var(--input-padding-left-right) + var(--input-font-size) + 0.25rem
+    );
   }
 }

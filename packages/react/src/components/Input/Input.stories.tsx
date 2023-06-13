@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Stack } from "../Stack";
 import { Input } from "./Input";
-import { InputSize } from "./Input.types";
+import { InputKind, type InputProps, InputSize } from "./Input.types";
 import { FaUserAlt } from "react-icons/fa";
 
 const meta: Meta<typeof Input> = {
@@ -16,9 +16,26 @@ export default meta;
 
 type Story = StoryObj<typeof Input>;
 
+const MultipleInputKinds = ({ ...args }: InputProps) => (
+  <Stack spacing={4} direction="column">
+    <Input kind={InputKind.DEFAULT} placeholder="Default" {...args} />
+    <Input kind={InputKind.FILLED} placeholder="Filled" {...args} />
+    <Input kind={InputKind.UNSTYLED} placeholder="Unstyled" {...args} />
+  </Stack>
+);
+
+const MultipleInputSizes = ({ ...args }: InputProps) => (
+  <Stack spacing={4} direction="column">
+    <Input size={InputSize.SMALL} placeholder="Small" {...args} />
+    <Input size={InputSize.DEFAULT} placeholder="Default" {...args} />
+    <Input size={InputSize.LARGE} placeholder="Large" {...args} />
+    <Input size={InputSize.X_LARGE} placeholder="X-Large" {...args} />
+  </Stack>
+);
+
 export const Default: Story = {
   args: {
-    defaultValue: "Default",
+    placeholder: "Type something...",
   },
 };
 
@@ -27,37 +44,66 @@ export const Sizes: Story = {
   args: {},
   render: (args) => (
     <Stack direction="column" spacing={4}>
-      <Input {...args} size={InputSize.SMALL} />
-      <Input {...args} size={InputSize.DEFAULT} />
-      <Input {...args} size={InputSize.LARGE} />
-      <Input {...args} size={InputSize.X_LARGE} />
+      <MultipleInputKinds {...args} />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} />
+    </Stack>
+  ),
+};
+
+export const Compact: Story = {
+  args: {
+    compact: true,
+  },
+  render: (args) => (
+    <Stack direction="column" spacing={4}>
+      <MultipleInputKinds {...args} />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} />
+    </Stack>
+  ),
+};
+
+// Kinds
+export const Kinds: Story = {
+  args: {},
+  render: (args) => (
+    <Stack direction="column" spacing={4}>
+      <MultipleInputKinds {...args} />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} />
     </Stack>
   ),
 };
 
 // Icons
 export const Icons: Story = {
-  args: {},
-  render: (args) => (
-    <Stack direction="column" spacing={4}>
-      <Input {...args} size={InputSize.SMALL} icon={<FaUserAlt />} />
-      <Input {...args} size={InputSize.DEFAULT} icon={<FaUserAlt />} />
-      <Input {...args} size={InputSize.LARGE} icon={<FaUserAlt />} />
-      <Input {...args} size={InputSize.X_LARGE} icon={<FaUserAlt />} />
-    </Stack>
-  ),
+  args: {
+    icon: <FaUserAlt />,
+  },
+  render: (args) => <MultipleInputSizes {...args} />,
 };
 
 // Others
 export const Disabled: Story = {
   args: {
     disabled: true,
-    value: "Disabled",
   },
   render: (args) => (
     <Stack direction="column" spacing={4}>
-      <Input {...args} />
-      <Input {...args} icon={<FaUserAlt />} />
+      <MultipleInputKinds {...args} />
+      <MultipleInputKinds {...args} defaultValue="Some value" />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} />
+    </Stack>
+  ),
+};
+
+export const Clearable: Story = {
+  args: {
+    clearable: true,
+    placeholder: "Clearable",
+  },
+  render: (args) => (
+    <Stack direction="column" spacing={4}>
+      <MultipleInputKinds {...args} />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} />
     </Stack>
   ),
 };
@@ -68,8 +114,9 @@ export const Error: Story = {
   },
   render: (args) => (
     <Stack direction="column" spacing={4}>
-      <Input {...args} />
-      <Input {...args} icon={<FaUserAlt />} />
+      <MultipleInputKinds {...args} />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} disabled />
     </Stack>
   ),
 };
@@ -80,8 +127,33 @@ export const Success: Story = {
   },
   render: (args) => (
     <Stack direction="column" spacing={4}>
-      <Input {...args} />
-      <Input {...args} icon={<FaUserAlt />} />
+      <MultipleInputKinds {...args} />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} />
+      <MultipleInputKinds {...args} icon={<FaUserAlt />} disabled />
     </Stack>
   ),
+};
+
+const ControlledInput = (args: InputProps) => {
+  const [value, setValue] = useState<string>("");
+  return (
+    <Stack direction="column" spacing={4}>
+      <Input
+        {...args}
+        value={value}
+        onChange={(value) => {
+          setValue(value);
+        }}
+      />
+    </Stack>
+  );
+};
+
+export const Controlled: Story = {
+  args: {
+    placeholder: "Type something...",
+    clearable: true,
+    icon: <FaUserAlt />,
+  },
+  render: ControlledInput,
 };

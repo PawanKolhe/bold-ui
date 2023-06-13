@@ -33,7 +33,7 @@
   flex-shrink: 0;
   display: inline-block;
   transition-property: border-color;
-  transition-duration: var(--boldui-transition-duration-normal);
+  transition-duration: var(--boldui-transition-duration-fast);
 
   .Button__contentContainer {
     display: flex;
@@ -65,7 +65,7 @@
     border-radius: var(--button-border-radius);
     opacity: var(--button-overlay-opacity);
     transition-property: opacity, background-color;
-    transition-duration: var(--boldui-transition-duration-normal);
+    transition-duration: var(--boldui-transition-duration-fast);
   }
 
   &:active {
@@ -78,7 +78,7 @@
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
     transform: none;
   }
