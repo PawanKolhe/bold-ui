@@ -15,6 +15,7 @@ export type StackProps = {
   wrap?: StackWrapValues;
   /** Whether Stack should occupy available width */
   fullWidth?: boolean;
+  width?: string;
 } & HTMLAttributes<HTMLDivElement>;
 
 export enum StackDirection {

@@ -1,7 +1,7 @@
-@use "../../common";
+@use "../../styles/common";
 
 .Input__wrapper {
-  @include common.all;
+  @include common.common;
 
   --input-height: 2.25rem;
   --input-text-color: var(--boldui-color-grey-900);
@@ -265,4 +265,12 @@
       var(--input-padding-left-right) + var(--input-font-size) + 0.25rem
     );
   }
+}
+
+// Remove default browser styling
+.Input[type="search"]::-webkit-search-decoration,
+.Input[type="search"]::-webkit-search-cancel-button,
+.Input[type="search"]::-webkit-search-results-button,
+.Input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
 }

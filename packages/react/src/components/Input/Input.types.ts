@@ -15,10 +15,9 @@ export type InputProps = {
   success?: boolean;
   /** Adds icon on the left side of input */
   icon?: ReactNode;
-  /** Right section of input, similar to icon but on the right */
-  rightSection?: ReactNode;
   /** Show a button to clear the input value */
   clearable?: boolean;
+  /** Value of input after clicking clear button */
   clearedValue?: string;
   onClear?: () => void;
   onChange?: (value: string) => void;

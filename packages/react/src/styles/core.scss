@@ -1,24 +1,3 @@
-@mixin all {
-  @include colors;
-  @include typography;
-  @include transition;
-  @include zIndex;
-
-  /* Defaults */
-  --boldui-focus-outline-color: black;
-
-  &,
-  &::before,
-  &::after,
-  & *,
-  & *::before,
-  & *::after {
-    box-sizing: border-box;
-  }
-
-  font-family: var(--boldui-font-family);
-}
-
 @mixin colors {
   --boldui-color-grey-900: #101828;
   --boldui-color-grey-800: #1d2939;
@@ -57,17 +36,24 @@
 }
 
 @mixin zIndex {
-  --chakra-zIndices-hide: -1;
-  --chakra-zIndices-auto: auto;
-  --chakra-zIndices-base: 0;
-  --chakra-zIndices-docked: 10;
-  --chakra-zIndices-dropdown: 1000;
-  --chakra-zIndices-sticky: 1100;
-  --chakra-zIndices-banner: 1200;
-  --chakra-zIndices-overlay: 1300;
-  --chakra-zIndices-modal: 1400;
-  --chakra-zIndices-popover: 1500;
-  --chakra-zIndices-skipLink: 1600;
-  --chakra-zIndices-toast: 1700;
-  --chakra-zIndices-tooltip: 1800;
+  --boldui-zIndices-hide: -1;
+  --boldui-zIndices-auto: auto;
+  --boldui-zIndices-base: 0;
+  --boldui-zIndices-docked: 10;
+  --boldui-zIndices-dropdown: 1000;
+  --boldui-zIndices-sticky: 1100;
+  --boldui-zIndices-banner: 1200;
+  --boldui-zIndices-overlay: 1300;
+  --boldui-zIndices-modal: 1400;
+  --boldui-zIndices-popover: 1500;
+  --boldui-zIndices-skipLink: 1600;
+  --boldui-zIndices-toast: 1700;
+  --boldui-zIndices-tooltip: 1800;
+}
+
+:root {
+  @include colors;
+  @include typography;
+  @include transition;
+  @include zIndex;
 }

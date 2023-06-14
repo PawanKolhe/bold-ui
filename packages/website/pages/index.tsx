@@ -1,5 +1,8 @@
-import { Button } from "@bold-ui/react";
-import "@bold-ui/react/dist/css/index.css";
+import { Button, Input, Stack } from "@bold-ui/react";
+import "@bold-ui/react/dist/css/core.css";
+import "@bold-ui/react/dist/css/Button.css";
+import "@bold-ui/react/dist/css/Input.css";
+import "@bold-ui/react/dist/css/Stack.css";
 
 const HomePage = () => {
   return (
@@ -13,7 +16,15 @@ const HomePage = () => {
       >
         Bold UI
       </h1>
-      <Button hasDepth>Button Test</Button>
+      <Stack
+        spacing={4}
+        direction="column"
+        width="300px"
+        justifyContent="flex-start"
+      >
+        <Button hasDepth>Button Test</Button>
+        <Input placeholder="Type something..." clearable />
+      </Stack>
     </>
   );
 };

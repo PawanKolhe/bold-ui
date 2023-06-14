@@ -1,0 +1,12 @@
+@mixin common {
+  &,
+  &::before,
+  &::after,
+  & *,
+  & *::before,
+  & *::after {
+    box-sizing: border-box;
+  }
+
+  font-family: var(--boldui-font-family);
+}

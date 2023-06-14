@@ -44,12 +44,25 @@ pnpm add @bold-ui/react
 
 ## 🔨 Usage
 
-1. Import React component
-1. Import CSS for that component
+Some initial setup is required to use the library.
+
+1. Import core CSS (`core.css`) and component CSS (`<component-name>.css`) in your project root file (`App.js`).
+1. Import React component where you need to use it
 
 ```javascript
+// App.js
+import "@bold-ui/react/dist/css/core.css"; // Imports CSS Variables required by the library
+
+import "@bold-ui/react/dist/css/Button.css"; // Imports styles for Button component
+import "@bold-ui/react/dist/css/Input.css"; // Imports styles for Input component
+import "@bold-ui/react/dist/css/Stack.css"; // Imports styles for Stack component
+
+...
+```
+
+```javascript
+// MyComponent.jsx
 import { Button } from "@bold-ui/react";
-import "@bold-ui/react/dist/css/Button.css"; // Imports styles for Button component only
 
 const MyComponent = () => {
   return (

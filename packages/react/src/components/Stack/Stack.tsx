@@ -16,6 +16,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       justifyContent = "flex-start",
       wrap = "nowrap",
       fullWidth,
+      width,
       ...restProps
     },
     ref
@@ -43,6 +44,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
           ["--stack-justify-content" as string]: justifyContent,
           ["--stack-spacing" as string]: computedSpacing,
           ["--stack-wrap" as string]: wrap,
+          ["--stack-width" as string]: width,
           ...style,
         }}
         ref={ref}
