@@ -3,7 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import postcssPresetEnv from "postcss-preset-env";
-import { glob } from "glob";
+// import { glob } from "glob";
 
 /** Issue with using "assert": https://github.com/eslint/eslint/discussions/15305 */
 // import packageJson from "./package.json" assert { type: "json" };
@@ -13,27 +13,6 @@ import { libStylePlugin, onwarn } from "./rollup-plugin/index.mjs";
 const packageJson = JSON.parse(readFileSync("./package.json"));
 
 const isProduction = !process.env.ROLLUP_WATCH;
-
-/** Creates separate CSS file for each component */
-const bundleCss = () => {
-  const config = [];
-  const files = glob.globSync("./src/**/*.scss");
-  files.forEach((file) => {
-    config.push(
-      libStylePlugin({
-        include: file,
-        plugins: [postcssPresetEnv()],
-        use: ["sass"],
-        minimize: isProduction,
-        sourcemap: !isProduction,
-        modules: {
-          generateScopedName: "css-[hash:base64:7]",
-        },
-      })
-    );
-  });
-  return config;
-};
 
 /** @type {import('rollup').RollupOptions} */
 const config = {
@@ -58,7 +37,15 @@ const config = {
     peerDepsExternal({
       packageJsonPath: "./package.json",
     }),
-    bundleCss(),
+    libStylePlugin({
+      plugins: [postcssPresetEnv()],
+      use: ["sass"],
+      minimize: isProduction,
+      sourcemap: !isProduction,
+      modules: {
+        generateScopedName: "css-[hash:base64:7]",
+      },
+    }),
     resolve(),
     commonjs(),
     typescript({ tsconfig: "./tsconfig.json", sourceMap: !isProduction }),
