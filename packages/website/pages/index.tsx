@@ -1,8 +1,7 @@
 import { Button, Input, Stack } from "@bold-ui/react";
 import "@bold-ui/react/dist/css/core.css";
-import "@bold-ui/react/dist/css/Button.css";
-import "@bold-ui/react/dist/css/Input.css";
-import "@bold-ui/react/dist/css/Stack.css";
+import styles from "./index.module.scss";
+import Page2 from "./page2";
 
 const HomePage = () => {
   return (
@@ -11,7 +10,7 @@ const HomePage = () => {
         style={{
           fontFamily: "sans-serif",
           fontSize: "2rem",
-          fontWeight: 700,
+          fontWeight: 600,
         }}
       >
         Bold UI
@@ -23,7 +22,12 @@ const HomePage = () => {
         justifyContent="flex-start"
       >
         <Button hasDepth>Button Test</Button>
-        <Input placeholder="Type something..." clearable />
+        <Input
+          className={styles.InputCustom}
+          placeholder="Type something..."
+          clearable
+        />
+        <Page2 />
       </Stack>
     </>
   );

@@ -1,27 +1,27 @@
-import path from "path";
-import { glob } from "glob";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-import postcss from "rollup-plugin-postcss";
 import postcssPresetEnv from "postcss-preset-env";
-import packageJson from "./package.json" assert { type: "json" };
+import { glob } from "glob";
+
+/** Issue with using "assert": https://github.com/eslint/eslint/discussions/15305 */
+// import packageJson from "./package.json" assert { type: "json" };
+/** Workaround for above issue */
+import { readFileSync } from "fs";
+import { libStylePlugin, onwarn } from "./rollup-plugin/index.mjs";
+const packageJson = JSON.parse(readFileSync("./package.json"));
 
 const isProduction = !process.env.ROLLUP_WATCH;
 
+/** Creates separate CSS file for each component */
 const bundleCss = () => {
   const config = [];
   const files = glob.globSync("./src/**/*.scss");
   files.forEach((file) => {
-    const filename = path.basename(
-      file,
-      file.includes(".module.scss") ? ".module.scss" : path.extname(file)
-    );
     config.push(
-      postcss({
+      libStylePlugin({
         include: file,
-        extract: path.resolve(`./dist/css/${filename}.css`),
         plugins: [postcssPresetEnv()],
         use: ["sass"],
         minimize: isProduction,
@@ -45,23 +45,26 @@ const config = {
       sourcemap: !isProduction,
     },
     {
-      file: packageJson.module,
+      dir: "dist",
       format: "esm",
+      preserveModules: true,
+      preserveModulesRoot: "./src/",
       sourcemap: !isProduction,
     },
   ],
   external: ["react", "react-dom", "react/jsx-runtime"],
   plugins: [
-    //@ts-expect-error
+    // @ts-expect-error
     peerDepsExternal({
       packageJsonPath: "./package.json",
     }),
-    ...bundleCss(),
+    bundleCss(),
     resolve(),
     commonjs(),
     typescript({ tsconfig: "./tsconfig.json", sourceMap: !isProduction }),
     isProduction && (await import("@rollup/plugin-terser")).default(),
   ],
+  onwarn,
 };
 
 export default config;

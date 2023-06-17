@@ -7,5 +7,6 @@
     "react": {
       "version": "18.2"
     }
-  }
+  },
+  "ignorePatterns": ["!.storybook"]
 }

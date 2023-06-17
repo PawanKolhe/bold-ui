@@ -44,36 +44,33 @@ pnpm add @bold-ui/react
 
 ## 🔨 Usage
 
-Some initial setup is required to use the library.
+Just one step required before you can use this library:
 
-1. Import core CSS (`core.css`) and component CSS (`<component-name>.css`) in your project root file (`App.js`).
-1. Import React component where you need to use it
+1. Import core CSS (`core.css`) in your project root file (`App.js` or `index.js`). This css file contains CSS Variables required by the library.
 
-```javascript
-// App.js
-import "@bold-ui/react/dist/css/core.css"; // Imports CSS Variables required by the library
+   ```javascript
+   // App.js
+   import "@bold-ui/react/dist/css/core.css"; // Imports CSS Variables required by the library
+   ...
+   ```
 
-import "@bold-ui/react/dist/css/Button.css"; // Imports styles for Button component
-import "@bold-ui/react/dist/css/Input.css"; // Imports styles for Input component
-import "@bold-ui/react/dist/css/Stack.css"; // Imports styles for Stack component
+1. Ready to use components 🎉
 
-...
-```
+   ```javascript
+   // MyComponent.jsx
+   import { Button, Input } from "@bold-ui/react";
 
-```javascript
-// MyComponent.jsx
-import { Button } from "@bold-ui/react";
+   const MyComponent = () => {
+     return (
+       <div>
+         <Input kind="outline" />
+         <Button kind="fill">Bold UI</Button>
+       </div>
+     );
+   };
+   ```
 
-const MyComponent = () => {
-  return (
-    <div>
-      <Button kind="fill">Bold UI</Button>
-    </div>
-  );
-};
-```
-
-> **Note:** In order to load the styles, you'll need a CSS loader in your module bundler (e.g. webpack, Vite, etc). If you use [create-react-app](https://create-react-app.dev/), it already comes with a CSS loader. Alternatively you can import CSS directly in your HTML file via `<link>` tag.
+> **Note:** You'll need a CSS loader in your module bundler for styles to load. If you use [Vite](https://vitejs.dev/guide/features.html#css) or [create-react-app](https://create-react-app.dev/), it already comes with a CSS loader.
 
 ## 🗂 Components
 

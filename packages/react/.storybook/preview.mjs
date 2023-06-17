@@ -1,7 +1,7 @@
-import { Preview } from "@storybook/react";
-import "../src/styles/core.scss";
+import "../dist/css/core.css";
 
-const preview: Preview = {
+/** @type {import('@storybook/react').Preview} */
+const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
