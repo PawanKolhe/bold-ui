@@ -3,7 +3,6 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import postcssPresetEnv from "postcss-preset-env";
-// import { glob } from "glob";
 
 /** Issue with using "assert": https://github.com/eslint/eslint/discussions/15305 */
 // import packageJson from "./package.json" assert { type: "json" };
