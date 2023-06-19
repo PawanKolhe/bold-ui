@@ -7,6 +7,11 @@ const meta: Meta<typeof Grid> = {
   component: Grid,
   title: "Components/Grid",
   tags: ["autodocs"],
+  argTypes: {
+    children: {
+      control: false,
+    },
+  },
 };
 
 export default meta;
@@ -63,6 +68,22 @@ export const Default: Story = {
   },
 };
 
+export const DirectionHorizontal: Story = {
+  args: {
+    direction: "horizontal",
+    columns: 5,
+    children: <Children />,
+  },
+};
+
+export const DirectionVertical: Story = {
+  args: {
+    rows: 5,
+    direction: "vertical",
+    children: <Children />,
+  },
+};
+
 export const Spacing: Story = {
   args: {
     spacing: 8,
@@ -75,5 +96,51 @@ export const MinItemWidth: Story = {
     spacing: 2,
     itemMinWidth: "350px",
     children: <Children />,
+  },
+};
+
+export const ColumnSpan: Story = {
+  args: {
+    columns: 2,
+    rows: 2,
+    children: (
+      <>
+        <Grid.Item>
+          <Content>Item 1</Content>
+        </Grid.Item>
+        <Grid.Item spanColumns={2}>
+          <Content>Item 2</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 3</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 4</Content>
+        </Grid.Item>
+      </>
+    ),
+  },
+};
+
+export const RowSpan: Story = {
+  args: {
+    columns: 2,
+    rows: 2,
+    children: (
+      <>
+        <Grid.Item>
+          <Content>Item 1</Content>
+        </Grid.Item>
+        <Grid.Item spanRows={2}>
+          <Content>Item 2</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 3</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 4</Content>
+        </Grid.Item>
+      </>
+    ),
   },
 };

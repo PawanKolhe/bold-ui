@@ -1,8 +1,12 @@
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 import { clsx } from "clsx";
-import { cx } from "../../utils/styles.utils";
+import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import { computeSpacing } from "../../utils/layout.utils";
-import { type GridProps } from "./Grid.types";
+import {
+  GridDirection,
+  type GridItemProps,
+  type GridProps,
+} from "./Grid.types";
 import styles from "./Grid.module.scss";
 
 /**
@@ -10,34 +14,61 @@ import styles from "./Grid.module.scss";
  * a grid of items with fluid width columns that break into more or
  * less columns as space is available.
  */
-export const Grid = forwardRef<HTMLDivElement, GridProps>(
+const GridComponent = forwardRef<HTMLDivElement, GridProps>(
   (
     {
       children,
       className,
       style = {},
+      direction = "row",
       spacing = 0,
+      columns,
+      rows,
+      itemWidth,
+      itemHeight,
       itemMinWidth,
       itemMaxWidth,
-      fullWidth,
+      auto = true,
+      dense = false,
+      inline,
       ...restProps
     },
     ref
   ) => {
+    const computedDirection = useMemo(() => {
+      if (direction === GridDirection.HORIZONTAL) {
+        return `row${dense ? " dense" : ""}`;
+      } else if (direction === GridDirection.VERTICAL) {
+        return `column${dense ? " dense" : ""}`;
+      } else {
+        return direction;
+      }
+    }, [dense, direction]);
+
     return (
       <div
         className={clsx(
-          cx("Grid"),
+          classPrefix("Grid"),
           styles.Grid,
           {
-            [styles.Grid__fullWidth]: fullWidth,
+            [styles.Grid__auto]: auto,
+            [styles.Grid__inline]: inline,
+            [styles.Grid__hasColumns]: columns,
+            [styles.Grid__hasRows]: rows,
           },
           className
         )}
         style={{
+          ["--grid-direction" as string]: computedDirection,
           ["--grid-spacing" as string]: computeSpacing(spacing),
-          ["--grid-min-width" as string]: itemMinWidth,
-          ["--grid-max-width" as string]: itemMaxWidth,
+          ...loadStyles({
+            "--grid-columns": columns,
+            "--grid-rows": rows,
+            "--grid-item-width": itemWidth,
+            "--grid-item-height": itemHeight,
+            "--grid-min-width": itemMinWidth,
+            "--grid-max-width": itemMaxWidth,
+          }),
           ...style,
         }}
         ref={ref}
@@ -49,4 +80,37 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
   }
 );
 
-Grid.displayName = "Grid";
+GridComponent.displayName = "Grid";
+
+export const GridItem = forwardRef<HTMLDivElement, GridItemProps>(
+  (
+    { children, className, style = {}, spanColumns, spanRows, ...restProps },
+    ref
+  ) => {
+    return (
+      <div
+        className={clsx(
+          classPrefix("GridItem"),
+          styles.GridItem,
+          {},
+          className
+        )}
+        style={{
+          ["--grid-column-span" as string]: spanColumns,
+          ["--grid-row-span" as string]: spanRows,
+          ...style,
+        }}
+        ref={ref}
+        {...restProps}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+export const Grid = GridComponent as typeof GridComponent & {
+  Item: typeof GridItem;
+};
+Grid.Item = GridItem;
+GridItem.displayName = "GridItem";

@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { clsx } from "clsx";
-import { cx } from "../../utils/styles.utils";
+import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import { type {{name}}Props } from "./{{name}}.types";
 import styles from "./{{name}}.module.scss";
 import { useTheme } from "../../context/ThemeContext";
@@ -19,7 +19,7 @@ export const {{name}} = forwardRef<HTMLDivElement, {{name}}Props>(
     return (
       <div
         className={clsx(
-          cx("{{name}}"),
+          classPrefix("{{name}}"),
           styles.{{name}},
           {
             ...themeClasses
@@ -28,6 +28,7 @@ export const {{name}} = forwardRef<HTMLDivElement, {{name}}Props>(
         )}
         style=\{{
           ...themeStyles,
+          ...loadStyles({}),
           ...style,
         }}
         ref={ref}

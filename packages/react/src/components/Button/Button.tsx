@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from "react";
 import { clsx } from "clsx";
-import { cx, loadStyle } from "../../utils/styles.utils";
+import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import {
   ButtonSize,
   type ButtonProps,
@@ -53,7 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={clsx(
-          cx("button"),
+          classPrefix("button"),
           styles.Button,
           {
             ...themeClasses,
@@ -88,34 +88,56 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         style={{
           ...themeStyles,
-          ...loadStyle("--boldui-color-primary", computedColor),
-          ...loadStyle("--button-border-width", borderWidth),
-          ...loadStyle("--button-border-radius", borderRadius),
+          ...loadStyles({
+            "--boldui-color-primary": computedColor,
+            "--button-border-width": borderWidth,
+            "--button-border-radius": borderRadius,
+          }),
           ...style,
         }}
         type={type}
         ref={ref}
         {...restProps}
       >
-        <div className={clsx(cx("button-overlay"), styles.Button__overlay)} />
-        <div className={clsx(cx("button-spinner"), styles.Button__spinner)} />
         <div
           className={clsx(
-            cx("button-content-container"),
+            classPrefix("button-overlay"),
+            styles.Button__overlay
+          )}
+        />
+        <div
+          className={clsx(
+            classPrefix("button-spinner"),
+            styles.Button__spinner
+          )}
+        />
+        <div
+          className={clsx(
+            classPrefix("button-content-container"),
             styles.Button__contentContainer
           )}
         >
           {leftIcon && (
-            <span className={clsx(cx("button-icon-left"), styles.Button__icon)}>
+            <span
+              className={clsx(
+                classPrefix("button-icon-left"),
+                styles.Button__icon
+              )}
+            >
               {leftIcon}
             </span>
           )}
-          <span className={clsx(cx("button-text"), styles.Button__text)}>
+          <span
+            className={clsx(classPrefix("button-text"), styles.Button__text)}
+          >
             {children}
           </span>
           {rightIcon && (
             <span
-              className={clsx(cx("button-icon-right"), styles.Button__icon)}
+              className={clsx(
+                classPrefix("button-icon-right"),
+                styles.Button__icon
+              )}
             >
               {rightIcon}
             </span>

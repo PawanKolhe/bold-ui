@@ -1,6 +1,6 @@
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import { clsx } from "clsx";
-import { cx, loadStyle } from "../../utils/styles.utils";
+import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import { InputSize, type InputProps, InputKind } from "./Input.types";
 import styles from "./Input.module.scss";
 import { useTheme } from "../../context/ThemeContext";
@@ -78,7 +78,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={clsx(
-          cx("input-wrapper"),
+          classPrefix("input-wrapper"),
           styles.Input__wrapper,
           {
             ...themeClasses,
@@ -104,19 +104,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         style={{
           ...themeStyles,
-          ...loadStyle("--boldui-color-primary", computedColor),
-          ...loadStyle("--button-border-width", borderWidth),
-          ...loadStyle("--button-border-radius", borderRadius),
+          ...loadStyles({
+            "--boldui-color-primary": computedColor,
+            "--button-border-width": borderWidth,
+            "--button-border-radius": borderRadius,
+          }),
           ...style,
         }}
       >
         {icon && (
-          <div className={clsx(cx("input-icon"), styles.Input__icon)}>
+          <div className={clsx(classPrefix("input-icon"), styles.Input__icon)}>
             {icon}
           </div>
         )}
         <input
-          className={clsx(cx("input"), styles.Input)}
+          className={clsx(classPrefix("input"), styles.Input)}
           onChange={handleOnChange}
           value={value}
           defaultValue={defaultValue}
@@ -127,13 +129,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {clearable && hasValue && (
           <div
             className={clsx(
-              cx("input-clearable-wrapper"),
+              classPrefix("input-clearable-wrapper"),
               styles.Input__clearableWrapper
             )}
           >
             <button
               className={clsx(
-                cx("input-clearable-button"),
+                classPrefix("input-clearable-button"),
                 styles.Input__clearableButton
               )}
               onClick={(e) => {
@@ -142,7 +144,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             >
               <div
                 className={clsx(
-                  cx("input-clearable-button-icon"),
+                  classPrefix("input-clearable-button-icon"),
                   styles.Input__clearableButtonIcon
                 )}
               />

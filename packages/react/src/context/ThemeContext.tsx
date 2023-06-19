@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import { type ThemeContextType } from "./ThemeContext.types";
-import { cs, loadStyle } from "../utils/styles.utils";
+import { cssvarPrefix, loadStyles } from "../utils/styles.utils";
 
 const ThemeContext = createContext<ThemeContextType>({ colorMode: "light" });
 
@@ -11,9 +11,11 @@ export const useTheme = () => {
 
   const themeStyles = useMemo(() => {
     return {
-      ...loadStyle(cs("primary-color"), theme.primaryColor),
-      ...loadStyle(cs("font-family"), theme.fontFamily),
-      ...loadStyle(cs("focus-outline-color"), theme.focusOutlineColor),
+      ...loadStyles({
+        [cssvarPrefix("primary-color")]: theme.primaryColor,
+        [cssvarPrefix("font-family")]: theme.fontFamily,
+        [cssvarPrefix("focus-outline-color")]: theme.focusOutlineColor,
+      }),
     };
   }, [theme]);
 

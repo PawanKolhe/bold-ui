@@ -8,7 +8,9 @@ const meta: Meta<StackProps> = {
   title: "Components/Stack",
   tags: ["autodocs"],
   argTypes: {
-    onClick: { action: "clicked" },
+    children: {
+      control: false,
+    },
   },
 };
 
@@ -62,30 +64,30 @@ export const Default: Story = {
 };
 
 // Direction
-export const DirectionRow: Story = {
+export const DirectionHorizontal: Story = {
   args: {
-    direction: "row",
+    direction: "horizontal",
     children: <Children />,
   },
 };
 
-export const DirectionColumn: Story = {
+export const DirectionVertical: Story = {
   args: {
-    direction: "column",
+    direction: "vertical",
     children: <Children />,
   },
 };
 
-export const DirectionRowReverse: Story = {
+export const DirectionHorizontalReverse: Story = {
   args: {
-    direction: "row-reverse",
+    direction: "horizontal-reverse",
     children: <Children />,
   },
 };
 
-export const DirectionColumnReverse: Story = {
+export const DirectionVerticalReverse: Story = {
   args: {
-    direction: "column-reverse",
+    direction: "vertical-reverse",
     children: <Children />,
   },
 };

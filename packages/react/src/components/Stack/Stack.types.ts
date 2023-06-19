@@ -2,27 +2,28 @@ import { type HTMLAttributes, type ReactNode } from "react";
 
 export type StackProps = {
   children?: ReactNode;
+  /** Direction of flow */
+  direction?: StackDirectionValues;
   /**
    * Spacing between children nodes.
    * - If a number is provided, it will be multiplied by the base spacing unit (4px).
    * - A string value can be any valid CSS length value, e.g. `20px`.
    */
   spacing?: string | number;
-  /** Direction of flow */
-  direction?: StackDirectionValues;
   alignItems?: StackAlignItemsValues;
   justifyContent?: StackJustifyContentValues;
   wrap?: StackWrapValues;
   /** Whether Stack should occupy available width */
   fullWidth?: boolean;
   width?: string;
+  inline?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 
 export enum StackDirection {
-  ROW = "row",
-  ROW_REVERSE = "row-reverse",
-  COLUMN = "column",
-  COLUMN_REVERSE = "column-reverse",
+  HORIZONTAL = "horizontal",
+  HORIZONTAL_REVERSE = "horizontal-reverse",
+  VERTICAL = "vertical",
+  VERTICAL_REVERSE = "vertical-reverse",
 }
 type StackDirectionValues = `${StackDirection}`;
 

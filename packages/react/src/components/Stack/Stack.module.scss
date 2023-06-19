@@ -19,6 +19,10 @@
   width: var(--stack-width);
 }
 
+.Stack__inline {
+  display: inline-flex;
+}
+
 .Stack__fullWidth {
   --stack-width: 100%;
 }
