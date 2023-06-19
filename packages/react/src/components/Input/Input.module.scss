@@ -1,7 +1,7 @@
 @use "../../styles/common";
 
 .Input__wrapper {
-  @include common.common;
+  @include common.base;
 
   --input-height: 2.25rem;
   --input-text-color: var(--boldui-color-grey-900);

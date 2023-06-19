@@ -1,7 +1,7 @@
 @use "../../styles/common";
 
 .Button {
-  @include common.common;
+  @include common.base;
 
   --button-text-color: transparent;
   --button-background-color: transparent;

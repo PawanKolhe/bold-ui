@@ -22,6 +22,10 @@
   --boldui-font-family: sans-serif;
 }
 
+@mixin layout {
+  --boldui-spacing-base-unit: 0.25rem;
+}
+
 @mixin transition {
   --boldui-transition-duration-ultra-fast: 50ms;
   --boldui-transition-duration-faster: 100ms;
@@ -54,6 +58,7 @@
 :root {
   @include colors;
   @include typography;
+  @include layout;
   @include transition;
   @include zIndex;
 }

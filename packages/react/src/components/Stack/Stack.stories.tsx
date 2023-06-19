@@ -35,9 +35,10 @@ const Content = ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "lightblue",
+      backgroundColor: "#ccebfe",
       boxSizing: "border-box",
       border: "1px solid black",
+      borderRadius: "8px",
       ...style,
     }}
   >
@@ -90,14 +91,14 @@ export const DirectionColumnReverse: Story = {
 };
 
 // Gap
-export const GapNumber: Story = {
+export const SpacingNumber: Story = {
   args: {
     spacing: 4,
     children: <Children />,
   },
 };
 
-export const GapString: Story = {
+export const SpacingString: Story = {
   args: {
     spacing: "48px",
     children: <Children />,

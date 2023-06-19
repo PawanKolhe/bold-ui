@@ -1,13 +1,12 @@
 @use "../../styles/common";
 
 .Stack {
-  @include common.common;
+  @include common.base;
 
   --stack-spacing: 0;
   --stack-direction: row;
   --stack-align-items: stretch;
   --stack-justify-content: flex-start;
-  --stack-base-spacing-unit: 0.25rem;
   --stack-wrap: nowrap;
   --stack-width: auto;
 
@@ -21,5 +20,5 @@
 }
 
 .Stack__fullWidth {
-  width: 100%;
+  --stack-width: 100%;
 }

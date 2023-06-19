@@ -1,0 +1,22 @@
+@use "../../styles/common";
+
+.Grid {
+  @include common.base;
+
+  --grid-spacing: 0;
+  --grid-min-width: 200px;
+  --grid-max-width: 1fr;
+  --grid-width: auto;
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--grid-min-width), var(--grid-max-width))
+  );
+  gap: var(--grid-spacing);
+  width: var(--grid-width);
+}
+
+.Grid__fullWidth {
+  --grid-width: 100%;
+}
