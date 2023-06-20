@@ -40,19 +40,19 @@
 }
 
 @mixin zIndex {
-  --boldui-zIndices-hide: -1;
-  --boldui-zIndices-auto: auto;
-  --boldui-zIndices-base: 0;
-  --boldui-zIndices-docked: 10;
-  --boldui-zIndices-dropdown: 1000;
-  --boldui-zIndices-sticky: 1100;
-  --boldui-zIndices-banner: 1200;
-  --boldui-zIndices-overlay: 1300;
-  --boldui-zIndices-modal: 1400;
-  --boldui-zIndices-popover: 1500;
-  --boldui-zIndices-skipLink: 1600;
-  --boldui-zIndices-toast: 1700;
-  --boldui-zIndices-tooltip: 1800;
+  --boldui-zindex-hide: -1;
+  --boldui-zindex-auto: auto;
+  --boldui-zindex-base: 0;
+  --boldui-zindex-docked: 10;
+  --boldui-zindex-dropdown: 1000;
+  --boldui-zindex-sticky: 1100;
+  --boldui-zindex-banner: 1200;
+  --boldui-zindex-overlay: 1300;
+  --boldui-zindex-modal: 1400;
+  --boldui-zindex-popover: 1500;
+  --boldui-zindex-skipLink: 1600;
+  --boldui-zindex-toast: 1700;
+  --boldui-zindex-tooltip: 1800;
 }
 
 :root {
