@@ -40,7 +40,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
     return (
       <div
         className={clsx(
-          classPrefix("stack"),
+          classPrefix("Stack"),
           styles.Stack,
           {
             [styles.Stack__fullWidth]: fullWidth,

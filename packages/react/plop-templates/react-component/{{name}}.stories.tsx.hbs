@@ -10,7 +10,7 @@ const meta: Meta<typeof {{name}}> = {
 
 export default meta;
 
-type Story = StoryObj<typeof {{name}}>;
+type Story = StoryObj<{{name}}Props>;
 
 export const Default: Story = {
   args: {

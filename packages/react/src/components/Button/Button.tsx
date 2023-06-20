@@ -53,7 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={clsx(
-          classPrefix("button"),
+          classPrefix("Button"),
           styles.Button,
           {
             ...themeClasses,
@@ -101,26 +101,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <div
           className={clsx(
-            classPrefix("button-overlay"),
+            classPrefix("Button-overlay"),
             styles.Button__overlay
           )}
         />
         <div
           className={clsx(
-            classPrefix("button-spinner"),
+            classPrefix("Button-spinner"),
             styles.Button__spinner
           )}
         />
         <div
           className={clsx(
-            classPrefix("button-content-container"),
+            classPrefix("Button-content-container"),
             styles.Button__contentContainer
           )}
         >
           {leftIcon && (
             <span
               className={clsx(
-                classPrefix("button-icon-left"),
+                classPrefix("Button-icon-left"),
                 styles.Button__icon
               )}
             >
@@ -128,14 +128,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             </span>
           )}
           <span
-            className={clsx(classPrefix("button-text"), styles.Button__text)}
+            className={clsx(classPrefix("Button-text"), styles.Button__text)}
           >
             {children}
           </span>
           {rightIcon && (
             <span
               className={clsx(
-                classPrefix("button-icon-right"),
+                classPrefix("Button-icon-right"),
                 styles.Button__icon
               )}
             >

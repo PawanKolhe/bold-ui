@@ -78,7 +78,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={clsx(
-          classPrefix("input-wrapper"),
+          classPrefix("Input-wrapper"),
           styles.Input__wrapper,
           {
             ...themeClasses,
@@ -113,12 +113,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         }}
       >
         {icon && (
-          <div className={clsx(classPrefix("input-icon"), styles.Input__icon)}>
+          <div className={clsx(classPrefix("Input-icon"), styles.Input__icon)}>
             {icon}
           </div>
         )}
         <input
-          className={clsx(classPrefix("input"), styles.Input)}
+          className={clsx(classPrefix("Input"), styles.Input)}
           onChange={handleOnChange}
           value={value}
           defaultValue={defaultValue}
@@ -129,13 +129,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {clearable && hasValue && (
           <div
             className={clsx(
-              classPrefix("input-clearable-wrapper"),
+              classPrefix("Input-clearable-wrapper"),
               styles.Input__clearableWrapper
             )}
           >
             <button
               className={clsx(
-                classPrefix("input-clearable-button"),
+                classPrefix("Input-clearable-button"),
                 styles.Input__clearableButton
               )}
               onClick={(e) => {
@@ -144,7 +144,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             >
               <div
                 className={clsx(
-                  classPrefix("input-clearable-button-icon"),
+                  classPrefix("Input-clearable-button-icon"),
                   styles.Input__clearableButtonIcon
                 )}
               />

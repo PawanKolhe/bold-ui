@@ -229,7 +229,7 @@
 
 /* Shape */
 .Button__shapeDefault {
-  --button-border-radius: 0.25rem;
+  --button-border-radius: var(--boldui-border-radius-small);
 }
 
 .Button__shapeSharp {
@@ -237,11 +237,11 @@
 }
 
 .Button__shapeRound {
-  --button-border-radius: 10rem;
+  --button-border-radius: var(--boldui-border-radius-pill);
 }
 
 .Button__shapeCircle {
-  --button-border-radius: 50%;
+  --button-border-radius: var(--boldui-border-radius-circle);
   width: var(--button-height);
   display: flex;
   justify-content: center;

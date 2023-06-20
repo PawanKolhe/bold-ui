@@ -34,6 +34,7 @@
   --boldui-transition-duration-slow: 300ms;
   --boldui-transition-duration-slower: 400ms;
   --boldui-transition-duration-ultra-slow: 500ms;
+  --boldui-transition-easing-ease: ease;
   --boldui-transition-easing-ease-in: cubic-bezier(0.4, 0, 1, 1);
   --boldui-transition-easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --boldui-transition-easing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -55,10 +56,32 @@
   --boldui-zindex-tooltip: 1800;
 }
 
+@mixin misc {
+  --boldui-removed-body-scroll-bar-size: 17px;
+  --boldui-border-radius-small: 0.25rem;
+  --boldui-border-radius-normal: 0.375rem;
+  --boldui-border-radius-large: 0.5rem;
+  --boldui-border-radius-pill: 9999px;
+  --boldui-border-radius-circle: 50%;
+}
+
 :root {
   @include colors;
   @include typography;
   @include layout;
   @include transition;
   @include zIndex;
+  @include misc;
+}
+
+.body-modal-open {
+  overflow: hidden !important;
+  overscroll-behavior: contain;
+  position: relative !important;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  margin-left: 0;
+  margin-top: 0;
+  margin-right: var(--boldui-removed-body-scroll-bar-size) !important;
 }

@@ -1,0 +1,116 @@
+@use "../../styles/common";
+
+.Modal {
+  @include common.base;
+}
+
+.Modal__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 0rem;
+  z-index: var(--boldui-zindex-overlay);
+
+  transition-property: opacity;
+  transition-duration: var(--boldui-transition-duration-normal);
+  transition-timing-function: var(--boldui-transition-easing-ease);
+  opacity: 0;
+}
+
+.Modal__inner {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  bottom: 0px;
+  max-height: 100%;
+  z-index: var(--boldui-zindex-modal);
+  pointer-events: none;
+  padding: 5vh 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.Modal__centered {
+  .Modal__inner {
+    align-items: center;
+  }
+}
+
+.Modal__content {
+  position: relative;
+  background-color: white;
+  border-radius: var(--boldui-border-radius-small);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0.0625rem 0.1875rem,
+    rgba(0, 0, 0, 0.05) 0px 2.25rem 1.75rem -0.4375rem,
+    rgba(0, 0, 0, 0.04) 0px 1.0625rem 1.0625rem -0.4375rem;
+  pointer-events: all;
+  flex: 0 0 28.5rem;
+  max-width: 100%;
+  max-height: calc(90vh);
+  overflow-y: auto;
+  border: 1px solid var(--boldui-color-grey-100);
+
+  transition-property: transform, opacity;
+  transition-duration: var(--boldui-transition-duration-normal);
+  transition-timing-function: var(--boldui-transition-easing-ease);
+  transform-origin: center center;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.Modal__header {
+  position: relative;
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--boldui-color-primary);
+  display: flex;
+  align-items: center;
+}
+
+.Modal__headerLeftSection {
+  flex: 1;
+}
+
+.Modal__header .Modal__headerCloseButton {
+  font-size: 1rem;
+}
+
+.Modal__showCloseButton {
+  .Modal__header {
+    padding-right: 0.75rem;
+  }
+}
+
+.Modal__body {
+  position: relative;
+  padding: 1rem;
+}
+
+.Modal__hasHeader {
+  .Modal__body {
+    padding-top: 0;
+  }
+}
+
+.Modal__opened {
+  .Modal__overlay {
+    opacity: 1;
+  }
+  .Modal__content {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.Modal__noScroll {
+  overflow: hidden !important;
+  overscroll-behavior: contain;
+  position: relative !important;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  margin-left: 0;
+  margin-top: 0;
+  margin-right: var(--boldui-removed-body-scroll-bar-size) !important;
+}

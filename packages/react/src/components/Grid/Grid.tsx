@@ -69,7 +69,7 @@ export const GridItem = forwardRef<HTMLDivElement, GridItemProps>(
     return (
       <div
         className={clsx(
-          classPrefix("GridItem"),
+          classPrefix("Grid-item"),
           styles.GridItem,
           {},
           className
