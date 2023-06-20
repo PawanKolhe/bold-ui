@@ -5,7 +5,7 @@ import { type StackProps } from "./Stack.types";
 
 const meta: Meta<StackProps> = {
   component: Stack,
-  title: "Components/Stack",
+  title: "Layout/Stack",
   tags: ["autodocs"],
   argTypes: {
     children: {

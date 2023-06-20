@@ -13,7 +13,7 @@ import { MdFavorite, MdEmail } from "react-icons/md";
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: "Components/Button",
+  title: "Inputs/Button",
   tags: ["autodocs"],
   argTypes: {
     onClick: { action: "clicked" },
@@ -27,16 +27,12 @@ type Story = StoryObj<typeof Button>;
 
 const Container = ({
   children,
-  direction = "row",
+  direction = "horizontal",
 }: {
   children: React.ReactNode;
-  direction?: "row" | "column";
+  direction?: "horizontal" | "vertical";
 }) => (
-  <Stack
-    spacing={4}
-    direction={direction}
-    style={{ display: "flex", gap: "1rem", flexDirection: direction }}
-  >
+  <Stack direction={direction} spacing={4}>
     {children}
   </Stack>
 );
@@ -93,7 +89,7 @@ export const WithIcon: Story = {
     leftIcon: <MdFavorite />,
   },
   render: (args) => (
-    <Container direction="column">
+    <Container direction="vertical">
       <MultipleButton {...args} size="small" />
       <MultipleButton {...args} size="default" />
       <MultipleButton {...args} size="large" />
@@ -107,7 +103,7 @@ export const Compact: Story = {
     compact: true,
   },
   render: (args) => (
-    <Container direction="column">
+    <Container direction="vertical">
       <MultipleButton {...args} size="small" />
       <MultipleButton {...args} size="default" />
       <MultipleButton {...args} size="large" />
@@ -137,7 +133,7 @@ export const Round: Story = {
     shape: ButtonShape.ROUND,
   },
   render: (args) => (
-    <Container direction="column">
+    <Container direction="vertical">
       <MultipleButton {...args} />
       <MultipleButton {...args} leftIcon={<MdEmail />} />
     </Container>
@@ -166,7 +162,7 @@ export const Color: Story = {
     const COLOR_2 = "#5341ae";
     const COLOR_3 = "#047481";
     return (
-      <Container direction="column">
+      <Container direction="vertical">
         <MultipleButton {...args} color={COLOR_1} />
         <MultipleButton {...args} color={COLOR_2} />
         <MultipleButton {...args} color={COLOR_3} />
@@ -289,7 +285,7 @@ export const IconOnly: Story = {
       shape: ButtonShape.CIRCLE,
     };
     return (
-      <Container direction="column">
+      <Container direction="vertical">
         <MultipleButton
           {...args}
           color={ICON_1.color}

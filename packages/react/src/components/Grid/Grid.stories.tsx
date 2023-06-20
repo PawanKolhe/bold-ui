@@ -5,12 +5,56 @@ import { type GridProps } from "./Grid.types";
 
 const meta: Meta<typeof Grid> = {
   component: Grid,
-  title: "Components/Grid",
+  title: "Layout/Grid",
   tags: ["autodocs"],
   argTypes: {
+    // @ts-expect-error Props from 'Grid.Item' showing in table - spanColumns, spanRows
+    spanColumns: {
+      table: {
+        disable: true,
+      },
+    },
+    spanRows: {
+      table: {
+        disable: true,
+      },
+    },
     children: {
       control: false,
     },
+    spacing: {
+      control: "number",
+      defaultValue: 0,
+      description: "Spacing between children nodes.",
+    },
+    columns: {
+      control: "number",
+      defaultValue: 0,
+      type: "number",
+      description: "Number of columns in grid",
+    },
+    rows: {
+      control: "number",
+      defaultValue: 0,
+      description: "Number of rows in grid",
+    },
+    itemMinWidth: {
+      control: "text",
+      defaultValue: "200px",
+      description: "Minimum width of each item in the grid",
+    },
+    auto: {
+      control: "boolean",
+      defaultValue: true,
+      description:
+        "Automatically determine column or rows according to space required by items and available space. Passing rows or columns props will override this option.",
+    },
+    dense: {
+      control: "boolean",
+      description:
+        'When true, "dense" packing algorithm is used to attempt to fill in holes earlier in the grid. When false, "sparse" algorithm is used, where the placement algorithm only ever moves "forward" in the grid when placing items, never backtracking to fill holes.',
+    },
+    inline: { control: "boolean" },
   },
 };
 
@@ -32,7 +76,7 @@ const Content = ({
   <div
     style={{
       width,
-      height,
+      height: height ?? "100%",
       padding: "16px",
       display: "flex",
       alignItems: "center",
@@ -68,22 +112,6 @@ export const Default: Story = {
   },
 };
 
-export const DirectionHorizontal: Story = {
-  args: {
-    direction: "horizontal",
-    columns: 5,
-    children: <Children />,
-  },
-};
-
-export const DirectionVertical: Story = {
-  args: {
-    rows: 5,
-    direction: "vertical",
-    children: <Children />,
-  },
-};
-
 export const Spacing: Story = {
   args: {
     spacing: 8,
@@ -101,21 +129,27 @@ export const MinItemWidth: Story = {
 
 export const ColumnSpan: Story = {
   args: {
-    columns: 2,
+    columns: 3,
     rows: 2,
     children: (
       <>
         <Grid.Item>
           <Content>Item 1</Content>
         </Grid.Item>
-        <Grid.Item spanColumns={2}>
+        <Grid.Item>
           <Content>Item 2</Content>
         </Grid.Item>
-        <Grid.Item>
+        <Grid.Item spanColumns={2}>
           <Content>Item 3</Content>
         </Grid.Item>
         <Grid.Item>
           <Content>Item 4</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 5</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 6</Content>
         </Grid.Item>
       </>
     ),
@@ -124,21 +158,87 @@ export const ColumnSpan: Story = {
 
 export const RowSpan: Story = {
   args: {
-    columns: 2,
+    columns: 3,
     rows: 2,
     children: (
       <>
         <Grid.Item>
           <Content>Item 1</Content>
         </Grid.Item>
+        <Grid.Item>
+          <Content>Item 2</Content>
+        </Grid.Item>
         <Grid.Item spanRows={2}>
+          <Content>Item 3</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 4</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 5</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 6</Content>
+        </Grid.Item>
+      </>
+    ),
+  },
+};
+
+export const Dense: Story = {
+  args: {
+    columns: 2,
+    rows: 2,
+    dense: true,
+    children: (
+      <>
+        <Grid.Item>
+          <Content>Item 1</Content>
+        </Grid.Item>
+        <Grid.Item>
           <Content>Item 2</Content>
         </Grid.Item>
         <Grid.Item>
           <Content>Item 3</Content>
         </Grid.Item>
-        <Grid.Item>
+        <Grid.Item spanColumns={2}>
           <Content>Item 4</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 5</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 6</Content>
+        </Grid.Item>
+      </>
+    ),
+  },
+};
+
+export const Inline: Story = {
+  args: {
+    columns: 2,
+    rows: 2,
+    inline: true,
+    children: (
+      <>
+        <Grid.Item>
+          <Content>Item 1</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 2</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 3</Content>
+        </Grid.Item>
+        <Grid.Item spanColumns={2}>
+          <Content>Item 4</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 5</Content>
+        </Grid.Item>
+        <Grid.Item>
+          <Content>Item 6</Content>
         </Grid.Item>
       </>
     ),

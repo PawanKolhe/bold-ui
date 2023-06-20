@@ -2,8 +2,6 @@ import { type HTMLAttributes, type ReactNode } from "react";
 
 export type GridProps = {
   children?: ReactNode;
-  /** Direction of flow */
-  direction?: GridDirectionValues;
   /**
    * Spacing between children nodes.
    * - If a number is provided, it will be multiplied by the base spacing unit (4px).
@@ -14,15 +12,12 @@ export type GridProps = {
   columns?: number;
   /** Number of rows in grid */
   rows?: number;
-  /** Width of each item in the grid */
-  itemWidth?: string;
-  /** Height of each item in the grid */
-  itemHeight?: string;
   /** Minimum width of each item in the grid */
   itemMinWidth?: string;
-  /** Maximum width of each item in the grid */
-  itemMaxWidth?: string;
-  /** Automatically determine column or rows according to space required by items and available space */
+  /**
+   * Automatically determine column or rows according to space required by items and available space.
+   * Passing rows or columns props will override this option.
+   */
   auto?: boolean;
   /**
    * When true, "dense" packing algorithm is used to attempt to fill in holes earlier in the grid.
@@ -40,9 +35,3 @@ export type GridItemProps = {
   /** Expand Item to specific number to rows */
   spanRows?: number;
 } & HTMLAttributes<HTMLDivElement>;
-
-export enum GridDirection {
-  HORIZONTAL = "horizontal",
-  VERTICAL = "vertical",
-}
-type GridDirectionValues = `${GridDirection}`;

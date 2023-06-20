@@ -1,12 +1,8 @@
-import { forwardRef, useMemo } from "react";
+import { forwardRef } from "react";
 import { clsx } from "clsx";
 import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import { computeSpacing } from "../../utils/layout.utils";
-import {
-  GridDirection,
-  type GridItemProps,
-  type GridProps,
-} from "./Grid.types";
+import { type GridItemProps, type GridProps } from "./Grid.types";
 import styles from "./Grid.module.scss";
 
 /**
@@ -20,14 +16,10 @@ const GridComponent = forwardRef<HTMLDivElement, GridProps>(
       children,
       className,
       style = {},
-      direction = "row",
       spacing = 0,
       columns,
       rows,
-      itemWidth,
-      itemHeight,
       itemMinWidth,
-      itemMaxWidth,
       auto = true,
       dense = false,
       inline,
@@ -35,16 +27,6 @@ const GridComponent = forwardRef<HTMLDivElement, GridProps>(
     },
     ref
   ) => {
-    const computedDirection = useMemo(() => {
-      if (direction === GridDirection.HORIZONTAL) {
-        return `row${dense ? " dense" : ""}`;
-      } else if (direction === GridDirection.VERTICAL) {
-        return `column${dense ? " dense" : ""}`;
-      } else {
-        return direction;
-      }
-    }, [dense, direction]);
-
     return (
       <div
         className={clsx(
@@ -55,19 +37,16 @@ const GridComponent = forwardRef<HTMLDivElement, GridProps>(
             [styles.Grid__inline]: inline,
             [styles.Grid__hasColumns]: columns,
             [styles.Grid__hasRows]: rows,
+            [styles.Grid__dense]: dense,
           },
           className
         )}
         style={{
-          ["--grid-direction" as string]: computedDirection,
           ["--grid-spacing" as string]: computeSpacing(spacing),
           ...loadStyles({
             "--grid-columns": columns,
             "--grid-rows": rows,
-            "--grid-item-width": itemWidth,
-            "--grid-item-height": itemHeight,
             "--grid-min-width": itemMinWidth,
-            "--grid-max-width": itemMaxWidth,
           }),
           ...style,
         }}

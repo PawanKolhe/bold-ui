@@ -4,41 +4,31 @@
   @include common.base;
 
   --grid-spacing: 0;
-  --grid-direction: row;
   --grid-min-width: 200px;
-  --grid-max-width: 1fr;
-  --grid-width: auto;
-  --grid-height: auto;
-  --grid-item-width: 1fr;
-  --grid-item-height: 1fr;
 
   display: grid;
-  grid-auto-flow: var(--grid-direction);
-  grid-auto-columns: 1fr;
+  grid-auto-columns: var(--grid-item-width);
   gap: var(--grid-spacing);
-  width: var(--grid-width);
-  height: var(--grid-height);
-  align-items: stretch;
-  justify-content: inherit;
 }
 
 .Grid__inline {
   display: inline-grid;
 }
 
+.Grid__dense {
+  grid-auto-flow: dense;
+}
+
 .Grid__hasColumns {
-  grid-template-columns: repeat(var(--grid-columns), var(--grid-item-width));
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
 }
 
 .Grid__hasRows {
-  grid-template-rows: repeat(var(--grid-rows), var(--grid-item-height));
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
 }
 
 .Grid__auto:not(.Grid__hasColumns, .Grid__hasRows) {
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(var(--grid-min-width), var(--grid-max-width))
-  );
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min-width), 1fr));
 }
 
 .GridItem {
