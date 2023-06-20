@@ -25,8 +25,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       title,
       showCloseButton = true,
       showOverlay = true,
-      centered,
-      fullScreen,
+      centered = false,
+      fullScreen = false,
       closeOnEscape = true,
       closeOnClickOutside = true,
       ...restProps
@@ -67,6 +67,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 [styles.Modal__centered]: centered,
                 [styles.Modal__hasHeader]: hasHeader,
                 [styles.Modal__showCloseButton]: showCloseButton,
+                [styles.Modal__fullscreen]: fullScreen,
                 ...themeClasses,
               },
               className

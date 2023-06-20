@@ -106,3 +106,12 @@ export const NoOverlay: Story = {
   },
   render: ModalExample,
 };
+
+export const Fullscreen: Story = {
+  args: {
+    title: "Example Title",
+    children: "Content",
+    fullScreen: true,
+  },
+  render: ModalExample,
+};
