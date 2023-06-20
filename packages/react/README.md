@@ -74,17 +74,19 @@ Just one step required before you can use this library:
 
 ## 🗂 Components
 
-### Primitives
+### Inputs
 
 - [**Button**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Button/Button.types.ts)
+- [**Input**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Input/Input.types.ts)
 
 ### Layout
 
 - [**Stack**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Stack/Stack.types.ts)
+- [**Grid**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Grid/Grid.types.ts)
 
-### Form
+### Overlays
 
-- [**Input**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Input/Input.types.ts)
+- [**Modal**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Modal/Modal.types.ts)
 
 _Feel free to request a new component by [opening an issue](https://github.com/PawanKolhe/bold-ui/issues)._
 
@@ -95,6 +97,10 @@ _Feel free to request a new component by [opening an issue](https://github.com/P
   - all browser versions with > 0.5% of the audience worldwide
   - last 2 versions of each browser
   - exclude dead browser versions
+
+## 💙 Credits
+
+Bold UI is inspired by [Mantine](https://mantine.dev/).
 
 ## 📜 License
 
