@@ -38,6 +38,8 @@ export type ModalProps = {
   transitionDuration?: number;
   /** z-index of modal */
   zIndex?: number;
+  /** Whether to block scrolling on mount */
+  blockScrollOnMount?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 
 export type ModalBackdropProps = HTMLAttributes<HTMLDivElement>;

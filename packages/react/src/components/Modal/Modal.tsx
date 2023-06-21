@@ -42,6 +42,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       bodyClassName,
       transitionDuration,
       zIndex,
+      blockScrollOnMount = true,
       ...restProps
     },
     ref
@@ -69,12 +70,14 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     // Disable browser scrolling when modal is opened
     useEffect(() => {
-      const modals = document.body.getElementsByClassName("boldui--Modal");
-      if (isContentVisible && modals.length === 1)
-        document.body.classList.add(styles.Modal__noScroll);
-      else if (modals.length === 0)
-        document.body.classList.remove(styles.Modal__noScroll);
-    }, [isContentVisible]);
+      if (blockScrollOnMount) {
+        const modals = document.body.getElementsByClassName("boldui--Modal");
+        if (isContentVisible && modals.length === 1)
+          document.body.classList.add(styles.Modal__noScroll);
+        else if (modals.length === 0)
+          document.body.classList.remove(styles.Modal__noScroll);
+      }
+    }, [blockScrollOnMount, isContentVisible]);
 
     return isContentVisible
       ? createPortal(
