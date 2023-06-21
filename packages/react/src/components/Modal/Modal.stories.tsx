@@ -61,8 +61,9 @@ const Children = () => {
         onClose={() => {
           setIsOpen(false);
         }}
+        title="Nested Modal"
       >
-        Nested Modal
+        Nested Modal Content
       </Modal>
     </div>
   );
@@ -71,14 +72,15 @@ const Children = () => {
 export const Default: Story = {
   args: {
     title: "Example Title",
-    children: <Children />,
+    children: "Content",
   },
   render: ModalExample,
 };
 
 export const Nested: Story = {
   args: {
-    children: "Content",
+    title: "Example Title",
+    children: <Children />,
   },
   render: ModalExample,
 };

@@ -260,6 +260,7 @@ const ModalCloseButton = ({
         onClick={() => {
           onClose();
         }}
+        aria-label="Close"
         {...closeButtonProps}
       >
         <MdClose />
