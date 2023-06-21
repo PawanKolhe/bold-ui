@@ -5,6 +5,8 @@
 
   --modal-transition-duration: var(--boldui-transition-duration-normal);
   --modal-z-index: var(--boldui-zindex-modal);
+  --modal-width: 28.5rem;
+  --modal-padding: 1rem;
 
   position: relative;
   z-index: var(--modal-z-index);
@@ -28,8 +30,7 @@
 .Modal__inner {
   position: fixed;
   width: 100%;
-  top: 0px;
-  bottom: 0px;
+  inset: 0;
   max-height: 100%;
   z-index: 20;
   pointer-events: none;
@@ -54,7 +55,7 @@
     rgba(0, 0, 0, 0.04) 0px 1.0625rem 1.0625rem -0.4375rem;
   border: 1px solid var(--boldui-color-grey-200);
   pointer-events: none;
-  flex: 0 0 28.5rem;
+  flex: 0 0 var(--modal-width);
   max-width: 100%;
   max-height: calc(90vh);
   overflow-y: auto;
@@ -83,22 +84,25 @@
 
 .Modal__header {
   position: sticky;
-  padding: 1rem;
+  top: 0;
+  padding: var(--modal-padding);
   font-weight: 600;
   color: var(--boldui-color-primary);
+  background-color: white;
   display: flex;
   align-items: center;
   font-size: 1.125rem;
+  z-index: 30;
 }
 
 .Modal__body {
   position: relative;
-  padding: 1rem;
+  padding: var(--modal-padding);
 }
 
 .Modal__hasHeader {
   .Modal__body {
-    padding-top: 0;
+    padding-top: 0.25rem;
   }
 }
 
@@ -110,7 +114,7 @@
   color: var(--boldui-color-grey-500);
   cursor: pointer;
   transition: color 0.2s ease-in-out;
-  z-index: 1;
+  z-index: 30;
 
   button {
     font-size: 1.125rem;

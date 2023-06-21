@@ -88,6 +88,33 @@ export const Nested: Story = {
   render: ModalExample,
 };
 
+export const Width: Story = {
+  args: {
+    title: "Example Title",
+    children: "Content",
+    width: "900px",
+  },
+  render: ModalExample,
+};
+
+export const LongContent: Story = {
+  args: {
+    title: "Example Title",
+    children: (
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+        voluptatum, quibusdam, voluptates, quia voluptate quod quos dolorum
+        voluptatem quae quidem quas. Quisquam voluptatum, quibusdam, voluptates,
+        quia voluptate quod quos dolorum voluptatem quae quidem quas.
+        {Array.from({ length: 20 }).map((_, index) => (
+          <p key={index}>Item {index + 1}</p>
+        ))}
+      </div>
+    ),
+  },
+  render: ModalExample,
+};
+
 export const NoTitle: Story = {
   args: {
     children: "Content",
@@ -157,3 +184,12 @@ export const NoTransition: Story = {
   },
   render: ModalExample,
 };
+
+// export const KeepMounted: Story = {
+//   args: {
+//     title: "Example Title",
+//     children: "Content",
+//     keepMounted: true,
+//   },
+//   render: ModalExample,
+// };

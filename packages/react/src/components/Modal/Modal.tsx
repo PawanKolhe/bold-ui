@@ -1,5 +1,7 @@
 import { forwardRef, useCallback, useEffect, useMemo, useRef } from "react";
+import { createPortal } from "react-dom";
 import { clsx } from "clsx";
+import { MdClose } from "react-icons/md";
 import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import {
   type ModalHeaderProps,
@@ -12,12 +14,12 @@ import {
 } from "./Modal.types";
 import styles from "./Modal.module.scss";
 import { useTheme } from "../../context/ThemeContext";
-import { createPortal } from "react-dom";
-import { MdClose } from "react-icons/md";
-import { Button } from "..";
+import { Button } from "../Button/Button";
 import { useMountTransition } from "../../hooks/useMountTransition.hook";
 import { useKeyboardShortcut } from "../../hooks/useKeyboardShortcut.hook";
 import { FocusLock } from "../../utils/FocusLock";
+import { mergeRefs } from "../../utils/refs.utils";
+import { getOverlayElements } from "../../utils/dom.utils";
 
 const TRANSITION_DURATION = 200;
 
@@ -30,6 +32,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       isOpen,
       onClose,
       title,
+      width,
+      padding,
       showCloseButton = true,
       closeButtonProps,
       showBackdrop = true,
@@ -44,9 +48,12 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       bodyClassName,
       transitionDuration,
       zIndex,
-      blockScrollOnMount = true,
+      lockScroll = true,
       trapFocus = true,
       autoFocus = true,
+      returnFocus = true,
+      onBackdropClick,
+      target,
       ...restProps
     },
     ref
@@ -56,13 +63,19 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       isOpen,
       TRANSITION_DURATION
     );
+
+    const modalRef = useRef<HTMLDivElement>(null);
     const modalContentRef = useRef<HTMLDivElement>(null);
 
     const hasHeader = !!title;
 
     // Handle keyboard shortcuts
     const onEscape = useCallback(() => {
-      if (closeOnEsc) onClose();
+      if (closeOnEsc) {
+        const modals = getOverlayElements("Modal");
+        const lastModal = modals[modals.length - 1];
+        if (lastModal && lastModal === modalRef.current) onClose();
+      }
     }, [closeOnEsc, onClose]);
 
     const keyListenersMap = useMemo(
@@ -75,18 +88,22 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     // Disable browser scrolling when modal is opened
     useEffect(() => {
-      if (blockScrollOnMount) {
-        const modals = document.body.getElementsByClassName("boldui--Modal");
+      if (lockScroll) {
+        const modals = getOverlayElements("Modal");
         if (isContentVisible && modals.length === 1)
           document.body.classList.add(styles.Modal__noScroll);
         else if (modals.length === 0)
           document.body.classList.remove(styles.Modal__noScroll);
       }
-    }, [blockScrollOnMount, isContentVisible]);
+    }, [lockScroll, isContentVisible]);
 
     return isContentVisible
       ? createPortal(
-          <FocusLock isLocked={trapFocus} autoFocusOnMount={autoFocus}>
+          <FocusLock
+            isLocked={trapFocus}
+            autoFocusOnMount={autoFocus}
+            returnFocusOnClose={returnFocus}
+          >
             <div
               className={clsx(
                 classPrefix("Modal"),
@@ -108,16 +125,19 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                     transitionDuration ?? TRANSITION_DURATION
                   }ms`,
                   "--modal-z-index": zIndex,
+                  "--modal-width": width,
+                  "--modal-padding": padding,
                 }),
                 ...style,
               }}
               role="dialog"
-              ref={ref}
+              ref={mergeRefs(ref, modalRef)}
               {...restProps}
             >
               {showBackdrop && (
                 <ModalBackdrop
                   onClick={() => {
+                    onBackdropClick?.();
                     if (closeOnClickOutside) onClose();
                   }}
                   aria-hidden="true"
@@ -135,9 +155,15 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   {hasHeader && (
                     <ModalHeader className={headerClassName}>
                       {title}
+                      {showCloseButton && (
+                        <ModalCloseButton
+                          onClose={onClose}
+                          closeButtonProps={closeButtonProps}
+                        />
+                      )}
                     </ModalHeader>
                   )}
-                  {showCloseButton && (
+                  {!hasHeader && showCloseButton && (
                     <ModalCloseButton
                       onClose={onClose}
                       closeButtonProps={closeButtonProps}
@@ -148,8 +174,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
               </ModalInner>
             </div>
           </FocusLock>,
-          document.body,
-          "boldui-modal"
+          target ?? document.body
         )
       : null;
   }

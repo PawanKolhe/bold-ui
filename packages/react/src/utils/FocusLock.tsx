@@ -1,21 +1,26 @@
 import { type ReactNode, useEffect, useRef, type HTMLAttributes } from "react";
 import { FOCUSABLE_ELEMENTS } from "../constants/focusableElements.constants";
+import { classPrefix } from "./styles.utils";
 
 type FocusLockProps = {
   children: ReactNode;
   isLocked?: boolean;
   autoFocusOnMount?: boolean;
+  returnFocusOnClose?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 
 export const FocusLock = ({
   children,
   isLocked = true,
   autoFocusOnMount,
+  returnFocusOnClose,
   ...restProps
 }: FocusLockProps) => {
   const rootNode = useRef<HTMLDivElement | null>(null);
   const focusableItems = useRef<NodeListOf<HTMLDivElement>>();
+  const prevFocusedNode = useRef<HTMLElement | null>(null);
 
+  // Find focusable items
   useEffect(() => {
     const updateFocusableItems = () => {
       if (rootNode.current) {
@@ -30,15 +35,26 @@ export const FocusLock = ({
       updateFocusableItems();
     });
     updateFocusableItems();
-    if (autoFocusOnMount) focusableItems.current?.[0]?.focus();
 
     if (rootNode.current)
       observer.observe(rootNode.current, { childList: true });
     return () => {
       observer.disconnect();
     };
-  }, [autoFocusOnMount]);
+  }, []);
 
+  // Handle Autofocus and
+  useEffect(() => {
+    if (autoFocusOnMount) {
+      prevFocusedNode.current = document.activeElement as HTMLElement;
+      focusableItems.current?.[0]?.focus();
+    }
+    return () => {
+      if (returnFocusOnClose) prevFocusedNode.current?.focus();
+    };
+  }, [autoFocusOnMount, returnFocusOnClose]);
+
+  // Handle Keyboard shortcut 'Tab'
   useEffect(() => {
     const handleKeyPress = (event: globalThis.KeyboardEvent) => {
       if (!focusableItems.current) return;
@@ -79,7 +95,7 @@ export const FocusLock = ({
   }, [isLocked, focusableItems]);
 
   return (
-    <div {...restProps} ref={rootNode}>
+    <div {...restProps} className={classPrefix("FocusLock")} ref={rootNode}>
       {children}
     </div>
   );

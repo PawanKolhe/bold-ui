@@ -10,6 +10,10 @@ export type ModalProps = {
   children?: ReactNode;
   /** Modal title */
   title?: React.ReactNode;
+  /** Width of modal */
+  width?: string;
+  /** Padding inside of modal */
+  padding?: string;
   /** Whether the modal should be centered vertically, false by default */
   centered?: boolean;
   /** Whether the modal should take the entire screen */
@@ -18,6 +22,8 @@ export type ModalProps = {
   closeOnEsc?: boolean;
   /** Close modal on clicking outside */
   closeOnClickOutside?: boolean;
+  /** Called when modal backdrop is clicked */
+  onBackdropClick?: () => void;
   /** Whether backdrop should be rendered, true by default */
   showBackdrop?: boolean;
   /** Whether close button should be rendered, true by default */
@@ -39,11 +45,15 @@ export type ModalProps = {
   /** z-index of modal */
   zIndex?: number;
   /** Whether to block scrolling on mount */
-  blockScrollOnMount?: boolean;
+  lockScroll?: boolean;
   /** Whether first interactive element should be autofocused within modal */
   autoFocus?: boolean;
   /** Whether to lock the focus within modal */
   trapFocus?: boolean;
+  /** Whether the modal will return focus to the element that triggered it when it closes. */
+  returnFocus?: boolean;
+  /** Target element where Portal should be rendered, by default new element is created and appended to the document.body */
+  target?: HTMLElement;
 } & HTMLAttributes<HTMLDivElement>;
 
 export type ModalBackdropProps = HTMLAttributes<HTMLDivElement>;
