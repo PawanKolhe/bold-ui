@@ -46,7 +46,40 @@ const ModalExample = (args: ModalProps) => {
   );
 };
 
-const Children = () => {
+const ModalExample2 = (args: ModalProps) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const buttonRef = React.useRef(null);
+  return (
+    <>
+      <Button
+        kind="fill"
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      >
+        Open
+      </Button>
+      <Modal
+        {...args}
+        isOpen={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+        initialFocusRef={buttonRef}
+      >
+        <Stack direction="vertical" spacing={4} alignItems="flex-start">
+          Some sample test
+          <Input />
+          <Button kind="outline" ref={buttonRef}>
+            Inital Focused Button
+          </Button>
+        </Stack>
+      </Modal>
+    </>
+  );
+};
+
+const ChildrenNested = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <Stack direction="vertical" spacing={4} alignItems="flex-start">
@@ -83,7 +116,7 @@ export const Default: Story = {
 export const Nested: Story = {
   args: {
     title: "Example Title",
-    children: <Children />,
+    children: <ChildrenNested />,
   },
   render: ModalExample,
 };
@@ -185,11 +218,10 @@ export const NoTransition: Story = {
   render: ModalExample,
 };
 
-// export const KeepMounted: Story = {
-//   args: {
-//     title: "Example Title",
-//     children: "Content",
-//     keepMounted: true,
-//   },
-//   render: ModalExample,
-// };
+export const InitialFocusRef: Story = {
+  args: {
+    title: "Example Title",
+    children: "Content",
+  },
+  render: ModalExample2,
+};

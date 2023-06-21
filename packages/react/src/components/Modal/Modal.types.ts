@@ -1,5 +1,6 @@
 import { type HTMLAttributes, type ReactNode } from "react";
 import { type ButtonProps } from "../Button/Button.types";
+import { type FocusableElement } from "../../types/dom.types";
 
 export type ModalProps = {
   /** Whether modal is opened */
@@ -54,6 +55,10 @@ export type ModalProps = {
   returnFocus?: boolean;
   /** Target element where Portal should be rendered, by default new element is created and appended to the document.body */
   target?: HTMLElement;
+  /** The ref of element to receive focus when the modal opens */
+  initialFocusRef?: React.RefObject<FocusableElement>;
+  /** The ref of element to receive focus when the modal closes */
+  finalFocusRef?: React.RefObject<FocusableElement>;
 } & HTMLAttributes<HTMLDivElement>;
 
 export type ModalBackdropProps = HTMLAttributes<HTMLDivElement>;

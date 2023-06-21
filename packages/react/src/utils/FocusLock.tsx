@@ -1,12 +1,15 @@
 import { type ReactNode, useEffect, useRef, type HTMLAttributes } from "react";
 import { FOCUSABLE_ELEMENTS } from "../constants/focusableElements.constants";
 import { classPrefix } from "./styles.utils";
+import { type FocusableElement } from "../types/dom.types";
 
 type FocusLockProps = {
   children: ReactNode;
   isLocked?: boolean;
   autoFocusOnMount?: boolean;
   returnFocusOnClose?: boolean;
+  initialFocusRef?: React.RefObject<FocusableElement>;
+  finalFocusRef?: React.RefObject<FocusableElement>;
 } & HTMLAttributes<HTMLDivElement>;
 
 export const FocusLock = ({
@@ -14,11 +17,13 @@ export const FocusLock = ({
   isLocked = true,
   autoFocusOnMount,
   returnFocusOnClose,
+  initialFocusRef,
+  finalFocusRef,
   ...restProps
 }: FocusLockProps) => {
   const rootNode = useRef<HTMLDivElement | null>(null);
-  const focusableItems = useRef<NodeListOf<HTMLDivElement>>();
-  const prevFocusedNode = useRef<HTMLElement | null>(null);
+  const focusableItems = useRef<NodeListOf<HTMLElement>>();
+  const returnFocusNode = useRef<HTMLElement | null>(null);
 
   // Find focusable items
   useEffect(() => {
@@ -43,16 +48,22 @@ export const FocusLock = ({
     };
   }, []);
 
-  // Handle Autofocus and
+  // Handle autofocus and return focus
   useEffect(() => {
     if (autoFocusOnMount) {
-      prevFocusedNode.current = document.activeElement as HTMLElement;
-      focusableItems.current?.[0]?.focus();
+      returnFocusNode.current =
+        (finalFocusRef?.current as HTMLElement) ??
+        (document.activeElement as HTMLElement);
+      if (initialFocusRef) {
+        initialFocusRef.current?.focus();
+      } else {
+        focusableItems.current?.[0]?.focus();
+      }
     }
     return () => {
-      if (returnFocusOnClose) prevFocusedNode.current?.focus();
+      if (returnFocusOnClose) returnFocusNode.current?.focus();
     };
-  }, [autoFocusOnMount, returnFocusOnClose]);
+  }, [autoFocusOnMount, finalFocusRef, initialFocusRef, returnFocusOnClose]);
 
   // Handle Keyboard shortcut 'Tab'
   useEffect(() => {

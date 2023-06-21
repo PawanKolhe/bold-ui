@@ -54,6 +54,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       returnFocus = true,
       onBackdropClick,
       target,
+      initialFocusRef,
+      finalFocusRef,
       ...restProps
     },
     ref
@@ -103,6 +105,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
             isLocked={trapFocus}
             autoFocusOnMount={autoFocus}
             returnFocusOnClose={returnFocus}
+            initialFocusRef={initialFocusRef}
+            finalFocusRef={finalFocusRef}
           >
             <div
               className={clsx(
