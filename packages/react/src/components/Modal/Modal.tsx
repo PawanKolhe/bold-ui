@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from "react";
+import { forwardRef, useCallback, useEffect, useMemo, useRef } from "react";
 import { clsx } from "clsx";
 import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import {
@@ -16,6 +16,8 @@ import { createPortal } from "react-dom";
 import { MdClose } from "react-icons/md";
 import { Button } from "..";
 import { useMountTransition } from "../../hooks/useMountTransition.hook";
+import { useKeyboardShortcut } from "../../hooks/useKeyboardShortcut.hook";
+import { FocusLock } from "../../utils/FocusLock";
 
 const TRANSITION_DURATION = 200;
 
@@ -43,6 +45,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       transitionDuration,
       zIndex,
       blockScrollOnMount = true,
+      trapFocus = true,
+      autoFocus = true,
       ...restProps
     },
     ref
@@ -52,21 +56,22 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       isOpen,
       TRANSITION_DURATION
     );
+    const modalContentRef = useRef<HTMLDivElement>(null);
 
     const hasHeader = !!title;
 
-    // Close on 'Escape' key press
-    useEffect(() => {
-      if (closeOnEsc) {
-        const close = (e: globalThis.KeyboardEvent) => {
-          if (e.key === "Escape") onClose();
-        };
-        window.addEventListener("keydown", close);
-        return () => {
-          window.removeEventListener("keydown", close);
-        };
-      }
+    // Handle keyboard shortcuts
+    const onEscape = useCallback(() => {
+      if (closeOnEsc) onClose();
     }, [closeOnEsc, onClose]);
+
+    const keyListenersMap = useMemo(
+      () => ({
+        Escape: onEscape,
+      }),
+      [onEscape]
+    );
+    useKeyboardShortcut(keyListenersMap);
 
     // Disable browser scrolling when modal is opened
     useEffect(() => {
@@ -81,63 +86,68 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     return isContentVisible
       ? createPortal(
-          <div
-            className={clsx(
-              classPrefix("Modal"),
-              styles.Modal,
-              {
-                [styles.Modal__opened]: isOpen,
-                [styles.Modal__centered]: centered,
-                [styles.Modal__hasHeader]: hasHeader,
-                [styles.Modal__fullscreen]: fullScreen,
-                [styles.Modal__transition]: isTransitionClassApplied,
-                ...themeClasses,
-              },
-              className
-            )}
-            style={{
-              ...themeStyles,
-              ...loadStyles({
-                "--modal-transition-duration": `${
-                  transitionDuration ?? TRANSITION_DURATION
-                }ms`,
-                "--modal-z-index": zIndex,
-              }),
-              ...style,
-            }}
-            role="dialog"
-            ref={ref}
-            {...restProps}
-          >
-            {showBackdrop && (
-              <ModalBackdrop
-                onClick={() => {
-                  if (closeOnClickOutside) onClose();
-                }}
-                aria-hidden="true"
-                className={backdropClassName}
-              />
-            )}
-            <ModalInner className={innerClassName}>
-              <ModalContent
-                tabIndex={-1}
-                aria-modal={true}
-                aria-labelledby={title}
-                className={contentClassName}
-              >
-                {hasHeader && (
-                  <ModalHeader className={headerClassName}>{title}</ModalHeader>
-                )}
-                {showCloseButton && (
-                  <ModalCloseButton
-                    onClose={onClose}
-                    closeButtonProps={closeButtonProps}
-                  />
-                )}
-                <ModalBody className={bodyClassName}>{children}</ModalBody>
-              </ModalContent>
-            </ModalInner>
-          </div>,
+          <FocusLock isLocked={trapFocus} autoFocusOnMount={autoFocus}>
+            <div
+              className={clsx(
+                classPrefix("Modal"),
+                styles.Modal,
+                {
+                  [styles.Modal__opened]: isOpen,
+                  [styles.Modal__centered]: centered,
+                  [styles.Modal__hasHeader]: hasHeader,
+                  [styles.Modal__fullscreen]: fullScreen,
+                  [styles.Modal__transition]: isTransitionClassApplied,
+                  ...themeClasses,
+                },
+                className
+              )}
+              style={{
+                ...themeStyles,
+                ...loadStyles({
+                  "--modal-transition-duration": `${
+                    transitionDuration ?? TRANSITION_DURATION
+                  }ms`,
+                  "--modal-z-index": zIndex,
+                }),
+                ...style,
+              }}
+              role="dialog"
+              ref={ref}
+              {...restProps}
+            >
+              {showBackdrop && (
+                <ModalBackdrop
+                  onClick={() => {
+                    if (closeOnClickOutside) onClose();
+                  }}
+                  aria-hidden="true"
+                  className={backdropClassName}
+                />
+              )}
+              <ModalInner className={innerClassName}>
+                <ModalContent
+                  tabIndex={-1}
+                  aria-modal={true}
+                  aria-labelledby={title}
+                  className={contentClassName}
+                  ref={modalContentRef}
+                >
+                  {hasHeader && (
+                    <ModalHeader className={headerClassName}>
+                      {title}
+                    </ModalHeader>
+                  )}
+                  {showCloseButton && (
+                    <ModalCloseButton
+                      onClose={onClose}
+                      closeButtonProps={closeButtonProps}
+                    />
+                  )}
+                  <ModalBody className={bodyClassName}>{children}</ModalBody>
+                </ModalContent>
+              </ModalInner>
+            </div>
+          </FocusLock>,
           document.body,
           "boldui-modal"
         )
@@ -187,24 +197,23 @@ const ModalInner = ({ children, className, style = {} }: ModalInnerProps) => {
 
 ModalInner.displayName = "ModalInner";
 
-const ModalContent = ({
-  children,
-  className,
-  style = {},
-}: ModalContentProps) => {
-  return (
-    <div
-      className={clsx(
-        classPrefix("Modal-content"),
-        styles.Modal__content,
-        className
-      )}
-      style={style}
-    >
-      {children}
-    </div>
-  );
-};
+export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
+  ({ children, className, style = {} }, ref) => {
+    return (
+      <div
+        className={clsx(
+          classPrefix("Modal-content"),
+          styles.Modal__content,
+          className
+        )}
+        style={style}
+        ref={ref}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 
 ModalContent.displayName = "ModalContent";
 

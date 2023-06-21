@@ -40,6 +40,10 @@ export type ModalProps = {
   zIndex?: number;
   /** Whether to block scrolling on mount */
   blockScrollOnMount?: boolean;
+  /** Whether first interactive element should be autofocused within modal */
+  autoFocus?: boolean;
+  /** Whether to lock the focus within modal */
+  trapFocus?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 
 export type ModalBackdropProps = HTMLAttributes<HTMLDivElement>;

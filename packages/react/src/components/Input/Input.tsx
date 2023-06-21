@@ -28,6 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled,
       value,
       defaultValue,
+      type = "text",
       ...restProps
     },
     ref
@@ -123,6 +124,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           value={value}
           defaultValue={defaultValue}
           disabled={disabled}
+          type={type}
           ref={mergeRefs(ref, inputRef)}
           {...restProps}
         />

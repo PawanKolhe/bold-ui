@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Modal } from "./Modal";
 import { Button } from "../Button/Button";
 import { type ModalProps } from "./Modal.types";
+import { Input } from "../Input/Input";
+import { Stack } from "../Stack/Stack";
 
 const meta: Meta<typeof Modal> = {
   component: Modal,
@@ -47,7 +49,8 @@ const ModalExample = (args: ModalProps) => {
 const Children = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <div>
+    <Stack direction="vertical" spacing={4} alignItems="flex-start">
+      <Input />
       <Button
         kind="fill"
         onClick={() => {
@@ -65,7 +68,7 @@ const Children = () => {
       >
         Nested Modal Content
       </Modal>
-    </div>
+    </Stack>
   );
 };
 
