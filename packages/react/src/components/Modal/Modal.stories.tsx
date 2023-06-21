@@ -15,22 +15,22 @@ export default meta;
 type Story = StoryObj<ModalProps>;
 
 const ModalExample = (args: ModalProps) => {
-  const [opened, setOpened] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
     <>
       <Button
         kind="fill"
         onClick={() => {
-          setOpened(true);
+          setIsOpen(true);
         }}
       >
         Open
       </Button>
       <Modal
         {...args}
-        opened={opened}
+        isOpen={isOpen}
         onClose={() => {
-          setOpened(false);
+          setIsOpen(false);
         }}
       >
         {args.children}
@@ -39,9 +39,40 @@ const ModalExample = (args: ModalProps) => {
   );
 };
 
+const Children = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  return (
+    <div>
+      <Button
+        kind="fill"
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      >
+        Open Nested
+      </Button>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+      >
+        Nested Modal
+      </Modal>
+    </div>
+  );
+};
+
 export const Default: Story = {
   args: {
     title: "Example Title",
+    children: <Children />,
+  },
+  render: ModalExample,
+};
+
+export const Nested: Story = {
+  args: {
     children: "Content",
   },
   render: ModalExample,
@@ -63,14 +94,6 @@ export const NoCloseButton: Story = {
   render: ModalExample,
 };
 
-export const NoHeader: Story = {
-  args: {
-    children: "Content",
-    showCloseButton: false,
-  },
-  render: ModalExample,
-};
-
 export const Centered: Story = {
   args: {
     title: "Example Title",
@@ -84,7 +107,7 @@ export const NoCloseOnEscape: Story = {
   args: {
     title: "Example Title",
     children: "Content",
-    closeOnEscape: false,
+    closeOnEsc: false,
   },
   render: ModalExample,
 };
@@ -102,7 +125,7 @@ export const NoOverlay: Story = {
   args: {
     title: "Example Title",
     children: "Content",
-    showOverlay: false,
+    showBackdrop: false,
   },
   render: ModalExample,
 };
@@ -112,6 +135,15 @@ export const Fullscreen: Story = {
     title: "Example Title",
     children: "Content",
     fullScreen: true,
+  },
+  render: ModalExample,
+};
+
+export const NoTransition: Story = {
+  args: {
+    title: "Example Title",
+    children: "Content",
+    transitionDuration: 0,
   },
   render: ModalExample,
 };

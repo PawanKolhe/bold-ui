@@ -2,17 +2,22 @@ import { forwardRef, useEffect } from "react";
 import { clsx } from "clsx";
 import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import {
-  type ModalOverlayProps,
   type ModalHeaderProps,
   type ModalProps,
   type ModalContentProps,
   type ModalBodyProps,
+  type ModalInnerProps,
+  type ModalCloseButtonProps,
+  type ModalBackdropProps,
 } from "./Modal.types";
 import styles from "./Modal.module.scss";
 import { useTheme } from "../../context/ThemeContext";
 import { createPortal } from "react-dom";
 import { MdClose } from "react-icons/md";
 import { Button } from "..";
+import { useMountTransition } from "../../hooks/useMountTransition.hook";
+
+const TRANSITION_DURATION = 200;
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (
@@ -20,26 +25,38 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       children,
       className,
       style = {},
-      opened = false,
+      isOpen,
       onClose,
       title,
       showCloseButton = true,
-      showOverlay = true,
+      closeButtonProps,
+      showBackdrop = true,
       centered = false,
       fullScreen = false,
-      closeOnEscape = true,
+      closeOnEsc = true,
       closeOnClickOutside = true,
+      backdropClassName,
+      innerClassName,
+      contentClassName,
+      headerClassName,
+      bodyClassName,
+      transitionDuration,
+      zIndex,
       ...restProps
     },
     ref
   ) => {
     const { themeStyles, themeClasses } = useTheme();
+    const { isContentVisible, isTransitionClassApplied } = useMountTransition(
+      isOpen,
+      TRANSITION_DURATION
+    );
 
-    const hasHeader = !!title || showCloseButton;
+    const hasHeader = !!title;
 
     // Close on 'Escape' key press
     useEffect(() => {
-      if (closeOnEscape) {
+      if (closeOnEsc) {
         const close = (e: globalThis.KeyboardEvent) => {
           if (e.key === "Escape") onClose();
         };
@@ -48,69 +65,78 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           window.removeEventListener("keydown", close);
         };
       }
-    }, [closeOnEscape, onClose]);
+    }, [closeOnEsc, onClose]);
 
-    // Disable scrolling on body when modal is opened
+    // Disable browser scrolling when modal is opened
     useEffect(() => {
-      if (opened) document.body.classList.add(styles.Modal__noScroll);
-      else document.body.classList.remove(styles.Modal__noScroll);
-    }, [opened]);
+      const modals = document.body.getElementsByClassName("boldui--Modal");
+      if (isContentVisible && modals.length === 1)
+        document.body.classList.add(styles.Modal__noScroll);
+      else if (modals.length === 0)
+        document.body.classList.remove(styles.Modal__noScroll);
+    }, [isContentVisible]);
 
-    return opened
+    return isContentVisible
       ? createPortal(
           <div
             className={clsx(
               classPrefix("Modal"),
               styles.Modal,
               {
-                [styles.Modal__opened]: opened,
+                [styles.Modal__opened]: isOpen,
                 [styles.Modal__centered]: centered,
                 [styles.Modal__hasHeader]: hasHeader,
-                [styles.Modal__showCloseButton]: showCloseButton,
                 [styles.Modal__fullscreen]: fullScreen,
+                [styles.Modal__transition]: isTransitionClassApplied,
                 ...themeClasses,
               },
               className
             )}
             style={{
               ...themeStyles,
-              ...loadStyles({}),
+              ...loadStyles({
+                "--modal-transition-duration": `${
+                  transitionDuration ?? TRANSITION_DURATION
+                }ms`,
+                "--modal-z-index": zIndex,
+              }),
               ...style,
             }}
             role="dialog"
             ref={ref}
             {...restProps}
           >
-            {showOverlay && (
-              <ModalOverlay
+            {showBackdrop && (
+              <ModalBackdrop
                 onClick={() => {
                   if (closeOnClickOutside) onClose();
                 }}
+                aria-hidden="true"
+                className={backdropClassName}
               />
             )}
-            <div
-              className={clsx(
-                classPrefix("Modal-inner"),
-                styles.Modal__inner,
-                {},
-                className
-              )}
-            >
-              <ModalContent>
+            <ModalInner className={innerClassName}>
+              <ModalContent
+                tabIndex={-1}
+                aria-modal={true}
+                aria-labelledby={title}
+                className={contentClassName}
+              >
                 {hasHeader && (
-                  <ModalHeader
-                    onClose={onClose}
-                    showCloseButton={showCloseButton}
-                  >
-                    {title}
-                  </ModalHeader>
+                  <ModalHeader className={headerClassName}>{title}</ModalHeader>
                 )}
-                <ModalBody>{children}</ModalBody>
+                {showCloseButton && (
+                  <ModalCloseButton
+                    onClose={onClose}
+                    closeButtonProps={closeButtonProps}
+                  />
+                )}
+                <ModalBody className={bodyClassName}>{children}</ModalBody>
               </ModalContent>
-            </div>
+            </ModalInner>
           </div>,
           document.body,
-          "boldui"
+          "boldui-modal"
         )
       : null;
   }
@@ -118,24 +144,20 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
 Modal.displayName = "Modal";
 
-const ModalOverlay = ({
+const ModalBackdrop = ({
   children,
   className,
   style = {},
   onClick,
-}: ModalOverlayProps) => {
+}: ModalBackdropProps) => {
   return (
     <div
       className={clsx(
-        classPrefix("Modal-overlay"),
-        styles.Modal__overlay,
-        {},
+        classPrefix("Modal-backdrop"),
+        styles.Modal__backdrop,
         className
       )}
-      style={{
-        ...loadStyles({}),
-        ...style,
-      }}
+      style={style}
       onClick={onClick}
     >
       {children}
@@ -143,7 +165,24 @@ const ModalOverlay = ({
   );
 };
 
-ModalOverlay.displayName = "ModalOverlay";
+ModalBackdrop.displayName = "ModalBackdrop";
+
+const ModalInner = ({ children, className, style = {} }: ModalInnerProps) => {
+  return (
+    <div
+      className={clsx(
+        classPrefix("Modal-inner"),
+        styles.Modal__inner,
+        className
+      )}
+      style={style}
+    >
+      {children}
+    </div>
+  );
+};
+
+ModalInner.displayName = "ModalInner";
 
 const ModalContent = ({
   children,
@@ -155,13 +194,9 @@ const ModalContent = ({
       className={clsx(
         classPrefix("Modal-content"),
         styles.Modal__content,
-        {},
         className
       )}
-      style={{
-        ...loadStyles({}),
-        ...style,
-      }}
+      style={style}
     >
       {children}
     </div>
@@ -170,41 +205,17 @@ const ModalContent = ({
 
 ModalContent.displayName = "ModalContent";
 
-const ModalHeader = ({
-  children,
-  className,
-  style = {},
-  onClose,
-  showCloseButton,
-}: ModalHeaderProps) => {
+const ModalHeader = ({ children, className, style = {} }: ModalHeaderProps) => {
   return (
     <div
       className={clsx(
         classPrefix("Modal-header"),
         styles.Modal__header,
-        {},
         className
       )}
-      style={{
-        ...loadStyles({}),
-        ...style,
-      }}
+      style={style}
     >
-      <div className={styles.Modal__headerLeftSection}>{children}</div>
-      {showCloseButton && (
-        <Button
-          iconOnly
-          compact
-          size="small"
-          kind="subtle"
-          onClick={() => {
-            onClose();
-          }}
-          className={styles.Modal__headerCloseButton}
-        >
-          <MdClose />
-        </Button>
-      )}
+      {children}
     </div>
   );
 };
@@ -214,16 +225,8 @@ ModalHeader.displayName = "ModalHeader";
 const ModalBody = ({ children, className, style = {} }: ModalBodyProps) => {
   return (
     <div
-      className={clsx(
-        classPrefix("Modal-body"),
-        styles.Modal__body,
-        {},
-        className
-      )}
-      style={{
-        ...loadStyles({}),
-        ...style,
-      }}
+      className={clsx(classPrefix("Modal-body"), styles.Modal__body, className)}
+      style={style}
     >
       {children}
     </div>
@@ -231,3 +234,35 @@ const ModalBody = ({ children, className, style = {} }: ModalBodyProps) => {
 };
 
 ModalBody.displayName = "ModalBody";
+
+const ModalCloseButton = ({
+  className,
+  style = {},
+  onClose,
+  closeButtonProps,
+}: ModalCloseButtonProps) => {
+  return (
+    <div
+      className={clsx(
+        classPrefix("Modal-close-button"),
+        styles.Modal__closeButton,
+        className
+      )}
+      style={style}
+    >
+      <Button
+        iconOnly
+        compact
+        kind="subtle"
+        onClick={() => {
+          onClose();
+        }}
+        {...closeButtonProps}
+      >
+        <MdClose />
+      </Button>
+    </div>
+  );
+};
+
+ModalCloseButton.displayName = "ModalCloseButton";

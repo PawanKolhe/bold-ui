@@ -311,6 +311,36 @@ export const IconOnly: Story = {
           shape={ICON_4.shape}
           children={ICON_4.icon}
         />
+        {/* Compact */}
+        <MultipleButton
+          {...args}
+          color={ICON_1.color}
+          size={ICON_1.size}
+          children={ICON_1.icon}
+          compact
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_2.color}
+          size={ICON_2.size}
+          children={ICON_2.icon}
+          compact
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_3.color}
+          size={ICON_3.size}
+          children={ICON_3.icon}
+          compact
+        />
+        <MultipleButton
+          {...args}
+          color={ICON_4.color}
+          size={ICON_4.size}
+          shape={ICON_4.shape}
+          children={ICON_4.icon}
+          compact
+        />
       </Container>
     );
   },

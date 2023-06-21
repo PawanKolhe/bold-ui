@@ -2,17 +2,25 @@
 
 .Modal {
   @include common.base;
+
+  --modal-transition-duration: var(--boldui-transition-duration-normal);
+  --modal-z-index: var(--boldui-zindex-modal);
+
+  position: relative;
+  z-index: var(--modal-z-index);
 }
 
-.Modal__overlay {
+.Modal__backdrop {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 0rem;
-  z-index: var(--boldui-zindex-overlay);
+  z-index: 10;
+  pointer-events: none;
 
+  /* Animate backdrop */
   transition-property: opacity;
-  transition-duration: var(--boldui-transition-duration-normal);
+  transition-duration: var(--modal-transition-duration);
   transition-timing-function: var(--boldui-transition-easing-ease);
   opacity: 0;
 }
@@ -23,7 +31,7 @@
   top: 0px;
   bottom: 0px;
   max-height: 100%;
-  z-index: var(--boldui-zindex-modal);
+  z-index: 20;
   pointer-events: none;
   padding: 5vh 5vw;
   display: flex;
@@ -45,18 +53,19 @@
     rgba(0, 0, 0, 0.05) 0px 2.25rem 1.75rem -0.4375rem,
     rgba(0, 0, 0, 0.04) 0px 1.0625rem 1.0625rem -0.4375rem;
   border: 1px solid var(--boldui-color-grey-100);
-  pointer-events: all;
+  pointer-events: none;
   flex: 0 0 28.5rem;
   max-width: 100%;
   max-height: calc(90vh);
   overflow-y: auto;
 
+  /* Animate content */
   transition-property: transform, opacity;
-  transition-duration: var(--boldui-transition-duration-normal);
+  transition-duration: var(--modal-transition-duration);
   transition-timing-function: var(--boldui-transition-easing-ease);
   transform-origin: center center;
   opacity: 0;
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 
 .Modal__fullscreen {
@@ -79,20 +88,7 @@
   color: var(--boldui-color-primary);
   display: flex;
   align-items: center;
-}
-
-.Modal__headerLeftSection {
-  flex: 1;
-}
-
-.Modal__header .Modal__headerCloseButton {
-  font-size: 1rem;
-}
-
-.Modal__showCloseButton {
-  .Modal__header {
-    padding-right: 0.75rem;
-  }
+  font-size: 1.125rem;
 }
 
 .Modal__body {
@@ -106,8 +102,32 @@
   }
 }
 
+.Modal__closeButton {
+  position: absolute;
+  display: flex;
+  top: 0.75rem;
+  right: 0.75rem;
+  color: var(--boldui-color-grey-500);
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+  z-index: 1;
+
+  button {
+    font-size: 1.125rem;
+  }
+}
+
 .Modal__opened {
-  .Modal__overlay {
+  .Modal__backdrop {
+    pointer-events: auto;
+  }
+  .Modal__content {
+    pointer-events: all;
+  }
+}
+
+.Modal__transition {
+  .Modal__backdrop {
     opacity: 1;
   }
   .Modal__content {
