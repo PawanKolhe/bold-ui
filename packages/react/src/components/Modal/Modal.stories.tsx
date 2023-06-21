@@ -8,6 +8,11 @@ const meta: Meta<typeof Modal> = {
   component: Modal,
   title: "Overlays/Modal",
   tags: ["autodocs"],
+  argTypes: {
+    children: {
+      control: false,
+    },
+  },
 };
 
 export default meta;
