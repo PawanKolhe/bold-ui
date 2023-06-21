@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useRef, type HTMLAttributes } from "react";
+import { FOCUSABLE_ELEMENTS } from "../constants/focusableElements.constants";
 
 type FocusLockProps = {
   children: ReactNode;
@@ -20,7 +21,7 @@ export const FocusLock = ({
       if (rootNode.current) {
         focusableItems.current =
           rootNode.current.querySelectorAll<HTMLDivElement>(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]), video'
+            FOCUSABLE_ELEMENTS.join(", ")
           );
       }
     };
