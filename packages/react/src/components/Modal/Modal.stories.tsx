@@ -46,7 +46,7 @@ const ModalExample = (args: ModalProps) => {
   );
 };
 
-const ModalExample2 = (args: ModalProps) => {
+const ModalExampleRefFocus = (args: ModalProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const buttonRef = React.useRef(null);
   return (
@@ -79,11 +79,38 @@ const ModalExample2 = (args: ModalProps) => {
   );
 };
 
-const ChildrenNested = () => {
+const Children = () => {
+  return (
+    <Stack direction="vertical" spacing={4}>
+      <span>
+        A modal (also called a modal window or lightbox) is a web page element
+        that displays in front of and deactivates all other page content.
+      </span>
+      <span>
+        To return to the main content, the user must engage with the modal by
+        completing an action or by closing it.
+      </span>
+    </Stack>
+  );
+};
+
+const ChildrenNestedModal = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <Stack direction="vertical" spacing={4} alignItems="flex-start">
-      <Input />
+      <Stack direction="vertical" spacing={2} alignItems="flex-start">
+        <label
+          htmlFor="input"
+          style={{
+            fontSize: "0.875rem",
+            fontWeight: "600",
+            color: "var(--boldui-color-grey-900)",
+          }}
+        >
+          Enter some text:
+        </label>
+        <Input id="input" />
+      </Stack>
       <Button
         kind="fill"
         onClick={() => {
@@ -105,10 +132,39 @@ const ChildrenNested = () => {
   );
 };
 
+const ChildrenLongContent = () => {
+  return (
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+      voluptatum, quibusdam, voluptates, quia voluptate quod quos dolorum
+      voluptatem quae quidem quas. Quisquam voluptatum, quibusdam, voluptates,
+      quia voluptate quod quos dolorum voluptatem quae quidem quas.
+      {Array.from({ length: 20 }).map((_, index) => (
+        <p key={index}>Item {index + 1}</p>
+      ))}
+    </div>
+  );
+};
+
+const footer: ModalProps["footer"] = ({ onClose }) => (
+  <Stack direction="horizontal-reverse" spacing={3} fullWidth>
+    <Button kind="fill" danger>
+      Delete
+    </Button>
+    <Button
+      onClick={() => {
+        onClose();
+      }}
+    >
+      Cancel
+    </Button>
+  </Stack>
+);
+
 export const Default: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
   },
   render: ModalExample,
 };
@@ -116,7 +172,7 @@ export const Default: Story = {
 export const Nested: Story = {
   args: {
     title: "Example Title",
-    children: <ChildrenNested />,
+    children: <ChildrenNestedModal />,
   },
   render: ModalExample,
 };
@@ -124,7 +180,7 @@ export const Nested: Story = {
 export const Width: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
     width: "900px",
   },
   render: ModalExample,
@@ -133,33 +189,8 @@ export const Width: Story = {
 export const LongContent: Story = {
   args: {
     title: "Example Title",
-    children: (
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-        voluptatum, quibusdam, voluptates, quia voluptate quod quos dolorum
-        voluptatem quae quidem quas. Quisquam voluptatum, quibusdam, voluptates,
-        quia voluptate quod quos dolorum voluptatem quae quidem quas.
-        {Array.from({ length: 20 }).map((_, index) => (
-          <p key={index}>Item {index + 1}</p>
-        ))}
-      </div>
-    ),
-  },
-  render: ModalExample,
-};
-
-export const NoTitle: Story = {
-  args: {
-    children: "Content",
-  },
-  render: ModalExample,
-};
-
-export const NoCloseButton: Story = {
-  args: {
-    title: "Example Title",
-    children: "Content",
-    showCloseButton: false,
+    children: <ChildrenLongContent />,
+    footer,
   },
   render: ModalExample,
 };
@@ -167,8 +198,33 @@ export const NoCloseButton: Story = {
 export const Centered: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
     centered: true,
+  },
+  render: ModalExample,
+};
+
+export const Footer: Story = {
+  args: {
+    title: "Example Title",
+    children: <Children />,
+    footer,
+  },
+  render: ModalExample,
+};
+
+export const NoTitle: Story = {
+  args: {
+    children: <Children />,
+  },
+  render: ModalExample,
+};
+
+export const NoCloseButton: Story = {
+  args: {
+    title: "Example Title",
+    children: <Children />,
+    showCloseButton: false,
   },
   render: ModalExample,
 };
@@ -176,7 +232,7 @@ export const Centered: Story = {
 export const NoCloseOnEscape: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
     closeOnEsc: false,
   },
   render: ModalExample,
@@ -185,7 +241,7 @@ export const NoCloseOnEscape: Story = {
 export const NoCloseOnClickOutside: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
     closeOnClickOutside: false,
   },
   render: ModalExample,
@@ -194,7 +250,7 @@ export const NoCloseOnClickOutside: Story = {
 export const NoOverlay: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
     showBackdrop: false,
   },
   render: ModalExample,
@@ -203,7 +259,7 @@ export const NoOverlay: Story = {
 export const Fullscreen: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
     fullScreen: true,
   },
   render: ModalExample,
@@ -212,7 +268,7 @@ export const Fullscreen: Story = {
 export const NoTransition: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
     transitionDuration: 0,
   },
   render: ModalExample,
@@ -221,7 +277,7 @@ export const NoTransition: Story = {
 export const InitialFocusRef: Story = {
   args: {
     title: "Example Title",
-    children: "Content",
+    children: <Children />,
   },
-  render: ModalExample2,
+  render: ModalExampleRefFocus,
 };

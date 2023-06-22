@@ -19,6 +19,10 @@ export type ModalProps = {
   centered?: boolean;
   /** Whether the modal should take the entire screen */
   fullScreen?: boolean;
+  /** Footer content which will be stuck to bottom of modal */
+  footer?:
+    | React.ReactNode
+    | ((props: { onClose: ModalProps["onClose"] }) => React.ReactNode);
   /** Close modal on pressing 'Escape' on keyboard */
   closeOnEsc?: boolean;
   /** Close modal on clicking outside */
@@ -41,6 +45,14 @@ export type ModalProps = {
   headerClassName?: string;
   /** Classname added to body container */
   bodyClassName?: string;
+  /** Classname added to footer container */
+  footerClassName?: string;
+  /** Styles added to header */
+  headerStyles?: React.CSSProperties;
+  /** Styles added to body */
+  bodyStyles?: React.CSSProperties;
+  /** Styles added to footer */
+  footerStyles?: React.CSSProperties;
   /** Transition duration of modal in milliseconds, 200 by default. Set to 0 to turn off transition. */
   transitionDuration?: number;
   /** z-index of modal */
@@ -76,6 +88,10 @@ export type ModalHeaderProps = {
 } & HTMLAttributes<HTMLDivElement>;
 
 export type ModalBodyProps = {
+  children?: ReactNode;
+} & HTMLAttributes<HTMLDivElement>;
+
+export type ModalFooterProps = {
   children?: ReactNode;
 } & HTMLAttributes<HTMLDivElement>;
 

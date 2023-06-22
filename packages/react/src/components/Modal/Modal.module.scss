@@ -48,6 +48,8 @@
 
 .Modal__content {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: var(--boldui-border-radius-small);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0.0625rem 0.1875rem,
@@ -83,7 +85,7 @@
 }
 
 .Modal__header {
-  position: sticky;
+  position: relative;
   top: 0;
   padding: var(--modal-padding);
   font-weight: 600;
@@ -95,14 +97,32 @@
   z-index: 30;
 }
 
+.Modal__title {
+  flex: 1;
+  padding-right: 2rem;
+}
+
 .Modal__body {
   position: relative;
   padding: var(--modal-padding);
+  overflow-y: auto;
+}
+
+.Modal__footer {
+  position: relative;
+  padding: var(--modal-padding);
+  display: flex;
 }
 
 .Modal__hasHeader {
   .Modal__body {
     padding-top: 0.25rem;
+  }
+}
+
+.Modal__hasFooter {
+  .Modal__body {
+    padding-bottom: 0.25rem;
   }
 }
 

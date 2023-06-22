@@ -11,6 +11,7 @@ import {
   type ModalInnerProps,
   type ModalCloseButtonProps,
   type ModalBackdropProps,
+  type ModalFooterProps,
 } from "./Modal.types";
 import styles from "./Modal.module.scss";
 import { useTheme } from "../../context/ThemeContext";
@@ -39,6 +40,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       showBackdrop = true,
       centered = false,
       fullScreen = false,
+      footer,
       closeOnEsc = true,
       closeOnClickOutside = true,
       backdropClassName,
@@ -46,6 +48,10 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       contentClassName,
       headerClassName,
       bodyClassName,
+      footerClassName,
+      headerStyles,
+      bodyStyles,
+      footerStyles,
       transitionDuration,
       zIndex,
       lockScroll = true,
@@ -70,6 +76,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     const modalContentRef = useRef<HTMLDivElement>(null);
 
     const hasHeader = !!title;
+    const hasFooter = !!footer;
 
     // Handle keyboard shortcuts
     const onEscape = useCallback(() => {
@@ -116,6 +123,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   [styles.Modal__opened]: isOpen,
                   [styles.Modal__centered]: centered,
                   [styles.Modal__hasHeader]: hasHeader,
+                  [styles.Modal__hasFooter]: hasFooter,
                   [styles.Modal__fullscreen]: fullScreen,
                   [styles.Modal__transition]: isTransitionClassApplied,
                   ...themeClasses,
@@ -134,7 +142,6 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 }),
                 ...style,
               }}
-              role="dialog"
               ref={mergeRefs(ref, modalRef)}
               {...restProps}
             >
@@ -151,14 +158,19 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
               <ModalInner className={innerClassName}>
                 <ModalContent
                   tabIndex={-1}
-                  aria-modal={true}
-                  aria-labelledby={title}
                   className={contentClassName}
+                  role="dialog"
+                  aria-modal={true}
+                  aria-labelledby={styles.Modal__title}
+                  aria-describedby={styles.Modal__body}
                   ref={modalContentRef}
                 >
                   {hasHeader && (
-                    <ModalHeader className={headerClassName}>
-                      {title}
+                    <ModalHeader
+                      className={headerClassName}
+                      style={headerStyles}
+                    >
+                      <div className={styles.Modal__title}>{title}</div>
                       {showCloseButton && (
                         <ModalCloseButton
                           onClose={onClose}
@@ -173,7 +185,19 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                       closeButtonProps={closeButtonProps}
                     />
                   )}
-                  <ModalBody className={bodyClassName}>{children}</ModalBody>
+                  <ModalBody className={bodyClassName} style={bodyStyles}>
+                    {children}
+                  </ModalBody>
+                  {footer && (
+                    <ModalFooter
+                      className={footerClassName}
+                      style={footerStyles}
+                    >
+                      {typeof footer === "function"
+                        ? footer({ onClose })
+                        : footer}
+                    </ModalFooter>
+                  )}
                 </ModalContent>
               </ModalInner>
             </div>
@@ -191,6 +215,7 @@ const ModalBackdrop = ({
   className,
   style = {},
   onClick,
+  ...restProps
 }: ModalBackdropProps) => {
   return (
     <div
@@ -201,6 +226,7 @@ const ModalBackdrop = ({
       )}
       style={style}
       onClick={onClick}
+      {...restProps}
     >
       {children}
     </div>
@@ -209,7 +235,12 @@ const ModalBackdrop = ({
 
 ModalBackdrop.displayName = "ModalBackdrop";
 
-const ModalInner = ({ children, className, style = {} }: ModalInnerProps) => {
+const ModalInner = ({
+  children,
+  className,
+  style = {},
+  ...restProps
+}: ModalInnerProps) => {
   return (
     <div
       className={clsx(
@@ -218,6 +249,7 @@ const ModalInner = ({ children, className, style = {} }: ModalInnerProps) => {
         className
       )}
       style={style}
+      {...restProps}
     >
       {children}
     </div>
@@ -227,34 +259,42 @@ const ModalInner = ({ children, className, style = {} }: ModalInnerProps) => {
 ModalInner.displayName = "ModalInner";
 
 export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
-  ({ children, className, style = {} }, ref) => {
+  ({ children, className, style = {}, ...restProps }, ref) => {
     return (
-      <div
+      <section
         className={clsx(
           classPrefix("Modal-content"),
           styles.Modal__content,
           className
         )}
         style={style}
+        {...restProps}
         ref={ref}
       >
         {children}
-      </div>
+      </section>
     );
   }
 );
 
 ModalContent.displayName = "ModalContent";
 
-const ModalHeader = ({ children, className, style = {} }: ModalHeaderProps) => {
+const ModalHeader = ({
+  children,
+  className,
+  style = {},
+  ...restProps
+}: ModalHeaderProps) => {
   return (
     <div
+      id={styles.Modal__header}
       className={clsx(
         classPrefix("Modal-header"),
         styles.Modal__header,
         className
       )}
       style={style}
+      {...restProps}
     >
       {children}
     </div>
@@ -263,11 +303,18 @@ const ModalHeader = ({ children, className, style = {} }: ModalHeaderProps) => {
 
 ModalHeader.displayName = "ModalHeader";
 
-const ModalBody = ({ children, className, style = {} }: ModalBodyProps) => {
+const ModalBody = ({
+  children,
+  className,
+  style = {},
+  ...restProps
+}: ModalBodyProps) => {
   return (
     <div
+      id={styles.Modal__body}
       className={clsx(classPrefix("Modal-body"), styles.Modal__body, className)}
       style={style}
+      {...restProps}
     >
       {children}
     </div>
@@ -276,11 +323,35 @@ const ModalBody = ({ children, className, style = {} }: ModalBodyProps) => {
 
 ModalBody.displayName = "ModalBody";
 
+const ModalFooter = ({
+  children,
+  className,
+  style = {},
+  ...restProps
+}: ModalFooterProps) => {
+  return (
+    <div
+      className={clsx(
+        classPrefix("Modal-footer"),
+        styles.Modal__footer,
+        className
+      )}
+      style={style}
+      {...restProps}
+    >
+      {children}
+    </div>
+  );
+};
+
+ModalFooter.displayName = "ModalFooter";
+
 const ModalCloseButton = ({
   className,
   style = {},
   onClose,
   closeButtonProps,
+  ...restProps
 }: ModalCloseButtonProps) => {
   return (
     <div
@@ -290,6 +361,7 @@ const ModalCloseButton = ({
         className
       )}
       style={style}
+      {...restProps}
     >
       <Button
         iconOnly
