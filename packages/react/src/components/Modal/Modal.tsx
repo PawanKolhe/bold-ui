@@ -170,7 +170,12 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                       className={headerClassName}
                       style={headerStyles}
                     >
-                      <div className={styles.Modal__title}>{title}</div>
+                      <div
+                        id={styles.Modal__title}
+                        className={styles.Modal__title}
+                      >
+                        {title}
+                      </div>
                       {showCloseButton && (
                         <ModalCloseButton
                           onClose={onClose}
@@ -287,7 +292,6 @@ const ModalHeader = ({
 }: ModalHeaderProps) => {
   return (
     <div
-      id={styles.Modal__header}
       className={clsx(
         classPrefix("Modal-header"),
         styles.Modal__header,
