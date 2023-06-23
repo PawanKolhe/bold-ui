@@ -195,6 +195,16 @@ export const LongContent: Story = {
   render: ModalExample,
 };
 
+export const LongContentScrollOutside: Story = {
+  args: {
+    title: "Example Title",
+    children: <ChildrenLongContent />,
+    footer,
+    scrollBehavior: "outside",
+  },
+  render: ModalExample,
+};
+
 export const Centered: Story = {
   args: {
     title: "Example Title",

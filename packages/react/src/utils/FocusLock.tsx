@@ -5,7 +5,7 @@ import { type FocusableElement } from "../types/dom.types";
 
 type FocusLockProps = {
   children: ReactNode;
-  isLocked?: boolean;
+  lockFocus?: boolean;
   autoFocusOnMount?: boolean;
   returnFocusOnClose?: boolean;
   initialFocusRef?: React.RefObject<FocusableElement>;
@@ -14,7 +14,7 @@ type FocusLockProps = {
 
 export const FocusLock = ({
   children,
-  isLocked = true,
+  lockFocus = true,
   autoFocusOnMount,
   returnFocusOnClose,
   initialFocusRef,
@@ -35,12 +35,10 @@ export const FocusLock = ({
           );
       }
     };
-
+    updateFocusableItems();
     const observer = new MutationObserver(() => {
       updateFocusableItems();
     });
-    updateFocusableItems();
-
     if (rootNode.current)
       observer.observe(rootNode.current, { childList: true });
     return () => {
@@ -67,33 +65,32 @@ export const FocusLock = ({
 
   // Handle Keyboard shortcut 'Tab'
   useEffect(() => {
-    const handleKeyPress = (event: globalThis.KeyboardEvent) => {
-      if (!focusableItems.current) return;
+    const handleKeyPress = (e: globalThis.KeyboardEvent) => {
+      if (!focusableItems.current || e.key !== "Tab") return;
 
-      const { key, shiftKey } = event;
       const {
         length,
         0: firstItem,
         [length - 1]: lastItem,
       } = focusableItems.current;
 
-      if (isLocked && key === "Tab") {
+      if (lockFocus) {
         // If only one item then prevent tabbing when locked
         if (length === 1) {
-          event.preventDefault();
+          e.preventDefault();
           return;
         }
 
         // If focused on last item then focus on first item when tab is pressed
-        if (!shiftKey && document.activeElement === lastItem) {
-          event.preventDefault();
+        if (!e.shiftKey && document.activeElement === lastItem) {
+          e.preventDefault();
           firstItem.focus();
           return;
         }
 
         // If focused on first item then focus on last item when shift + tab is pressed
-        if (shiftKey && document.activeElement === firstItem) {
-          event.preventDefault();
+        if (e.shiftKey && document.activeElement === firstItem) {
+          e.preventDefault();
           lastItem.focus();
         }
       }
@@ -103,10 +100,15 @@ export const FocusLock = ({
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [isLocked, focusableItems]);
+  }, [lockFocus]);
 
   return (
-    <div {...restProps} className={classPrefix("FocusLock")} ref={rootNode}>
+    <div
+      {...restProps}
+      className={classPrefix("FocusLock")}
+      tabIndex={-1}
+      ref={rootNode}
+    >
       {children}
     </div>
   );

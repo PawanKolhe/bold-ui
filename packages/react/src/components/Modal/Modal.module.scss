@@ -38,6 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  overflow-y: auto;
 }
 
 .Modal__centered {
@@ -59,7 +60,7 @@
   pointer-events: none;
   flex: 0 0 var(--modal-width);
   max-width: 100%;
-  max-height: calc(90vh);
+  max-height: 90vh;
   overflow-y: auto;
 
   /* Animate content */
@@ -69,6 +70,12 @@
   transform-origin: center center;
   opacity: 0;
   transform: scale(0.95);
+}
+
+.Modal__scrollOutside {
+  .Modal__content {
+    max-height: none;
+  }
 }
 
 .Modal__fullscreen {
@@ -169,5 +176,8 @@
   padding-right: 0px;
   margin-left: 0;
   margin-top: 0;
+}
+
+.Modal__preserveScrollBarGap {
   margin-right: var(--boldui-removed-body-scroll-bar-size) !important;
 }

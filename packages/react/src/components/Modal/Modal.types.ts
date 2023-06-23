@@ -55,10 +55,17 @@ export type ModalProps = {
   footerStyles?: React.CSSProperties;
   /** Transition duration of modal in milliseconds, 200 by default. Set to 0 to turn off transition. */
   transitionDuration?: number;
-  /** z-index of modal */
+  /** `z-index` of modal */
   zIndex?: number;
+  /** When content is long, whether to scroll body of modal or entire modal  */
+  scrollBehavior?: ModalScrollBehaviorValues;
   /** Whether to block scrolling on mount */
   lockScroll?: boolean;
+  /**
+   * Whether to add a `padding-right` to the body element that's equal to the width of the scrollbar.
+   * This can help prevent some unpleasant flickering effect and content adjustment when the modal opens.
+   **/
+  preserveScrollBarGap?: boolean;
   /** Whether first interactive element should be autofocused within modal */
   autoFocus?: boolean;
   /** Whether to lock the focus within modal */
@@ -72,6 +79,12 @@ export type ModalProps = {
   /** The ref of element to receive focus when the modal closes */
   finalFocusRef?: React.RefObject<FocusableElement>;
 } & HTMLAttributes<HTMLDivElement>;
+
+export enum ModalScrollBehavior {
+  INSIDE = "inside",
+  OUTSIDE = "outside",
+}
+type ModalScrollBehaviorValues = `${ModalScrollBehavior}`;
 
 export type ModalBackdropProps = HTMLAttributes<HTMLDivElement>;
 

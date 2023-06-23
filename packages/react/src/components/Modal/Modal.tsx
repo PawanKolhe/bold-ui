@@ -54,7 +54,9 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       footerStyles,
       transitionDuration,
       zIndex,
+      scrollBehavior = "inside",
       lockScroll = true,
+      preserveScrollBarGap = true,
       trapFocus = true,
       autoFocus = true,
       returnFocus = true,
@@ -99,17 +101,22 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     useEffect(() => {
       if (lockScroll) {
         const modals = getOverlayElements("Modal");
+        const bodyClasses = [styles.Modal__noScroll];
+        if (preserveScrollBarGap)
+          bodyClasses.push(styles.Modal__preserveScrollBarGap);
         if (isContentVisible && modals.length === 1)
-          document.body.classList.add(styles.Modal__noScroll);
-        else if (modals.length === 0)
-          document.body.classList.remove(styles.Modal__noScroll);
+          document.body.classList.add(...bodyClasses);
+        return () => {
+          if (modals.length === 0)
+            document.body.classList.remove(...bodyClasses);
+        };
       }
-    }, [lockScroll, isContentVisible]);
+    }, [lockScroll, isContentVisible, preserveScrollBarGap]);
 
     return isContentVisible
       ? createPortal(
           <FocusLock
-            isLocked={trapFocus}
+            lockFocus={trapFocus}
             autoFocusOnMount={autoFocus}
             returnFocusOnClose={returnFocus}
             initialFocusRef={initialFocusRef}
@@ -126,6 +133,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   [styles.Modal__hasFooter]: hasFooter,
                   [styles.Modal__fullscreen]: fullScreen,
                   [styles.Modal__transition]: isTransitionClassApplied,
+                  [styles.Modal__scrollOutside]: scrollBehavior === "outside",
                   ...themeClasses,
                 },
                 className
@@ -142,6 +150,11 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 }),
                 ...style,
               }}
+              role="dialog"
+              aria-modal={true}
+              aria-labelledby={styles.Modal__title}
+              aria-describedby={styles.Modal__body}
+              tabIndex={-1}
               ref={mergeRefs(ref, modalRef)}
               {...restProps}
             >
@@ -155,14 +168,9 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   className={backdropClassName}
                 />
               )}
-              <ModalInner className={innerClassName}>
+              <ModalInner className={innerClassName} role="document">
                 <ModalContent
-                  tabIndex={-1}
                   className={contentClassName}
-                  role="dialog"
-                  aria-modal={true}
-                  aria-labelledby={styles.Modal__title}
-                  aria-describedby={styles.Modal__body}
                   ref={modalContentRef}
                 >
                   {hasHeader && (
