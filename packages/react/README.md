@@ -89,6 +89,10 @@ Just one step required before you can use this library:
 - [**Modal**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Modal/Modal.types.ts)
 - [**Drawer**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Drawer/Drawer.types.ts)
 
+### Data Display
+
+- [**Modal**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Avatar/Avatar.types.ts)
+
 _Feel free to request a new component by [opening an issue](https://github.com/PawanKolhe/bold-ui/issues)._
 
 ## 🖱 Environment Support
