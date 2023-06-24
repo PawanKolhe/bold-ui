@@ -1,0 +1,73 @@
+@use "../../styles/common";
+
+.Drawer {
+  position: relative;
+}
+
+.Drawer__inner {
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  overflow-y: unset;
+}
+
+.Drawer__content {
+  max-height: 100vh;
+  max-height: 100dvh;
+  border-radius: unset;
+}
+
+.Drawer__header {
+  position: relative;
+}
+
+.Drawer__body {
+  flex: 1;
+}
+
+.Drawer__positionRight {
+  .Drawer__inner {
+    justify-content: flex-end;
+  }
+  .Drawer__content {
+    height: 100%;
+    transform: translateX(var(--modal-size));
+  }
+}
+.Drawer__positionLeft {
+  .Drawer__inner {
+    justify-content: flex-start;
+  }
+  .Drawer__content {
+    height: 100%;
+    transform: translateX(calc(-1 * var(--modal-size)));
+  }
+}
+.Drawer__positionTop {
+  .Drawer__inner {
+    align-items: flex-start;
+  }
+  .Drawer__content {
+    flex: 0 0 auto;
+    width: 100%;
+    height: var(--modal-size);
+    transform: translateY(calc(-1 * var(--modal-size)));
+  }
+}
+.Drawer__positionBottom {
+  .Drawer__inner {
+    align-items: flex-end;
+  }
+  .Drawer__content {
+    flex: 0 0 auto;
+    width: 100%;
+    height: var(--modal-size);
+    transform: translateY(var(--modal-size));
+  }
+}
+
+:global(.boldui--Modal-transition) {
+  .Drawer__content {
+    transform: translateX(0);
+  }
+}

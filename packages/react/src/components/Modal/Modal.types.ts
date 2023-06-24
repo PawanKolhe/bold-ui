@@ -1,4 +1,9 @@
-import { type HTMLAttributes, type ReactNode } from "react";
+import {
+  type CSSProperties,
+  type RefObject,
+  type HTMLAttributes,
+  type ReactNode,
+} from "react";
 import { type ButtonProps } from "../Button/Button.types";
 import { type FocusableElement } from "../../types/dom.types";
 
@@ -10,9 +15,9 @@ export type ModalProps = {
   /** Modal content */
   children?: ReactNode;
   /** Modal title */
-  title?: React.ReactNode;
+  title?: ReactNode;
   /** Width of modal */
-  width?: string;
+  size?: string;
   /** Padding inside of modal */
   padding?: string;
   /** Whether the modal should be centered vertically, false by default */
@@ -20,9 +25,7 @@ export type ModalProps = {
   /** Whether the modal should take the entire screen */
   fullScreen?: boolean;
   /** Footer content which will be stuck to bottom of modal */
-  footer?:
-    | React.ReactNode
-    | ((props: { onClose: ModalProps["onClose"] }) => React.ReactNode);
+  footer?: ReactNode;
   /** Close modal on pressing 'Escape' on keyboard */
   closeOnEsc?: boolean;
   /** Close modal on clicking outside */
@@ -48,11 +51,11 @@ export type ModalProps = {
   /** Classname added to footer container */
   footerClassName?: string;
   /** Styles added to header */
-  headerStyles?: React.CSSProperties;
+  headerStyles?: CSSProperties;
   /** Styles added to body */
-  bodyStyles?: React.CSSProperties;
+  bodyStyles?: CSSProperties;
   /** Styles added to footer */
-  footerStyles?: React.CSSProperties;
+  footerStyles?: CSSProperties;
   /** Transition duration of modal in milliseconds, 200 by default. Set to 0 to turn off transition. */
   transitionDuration?: number;
   /** `z-index` of modal */
@@ -75,9 +78,9 @@ export type ModalProps = {
   /** Target element where Portal should be rendered, by default new element is created and appended to the document.body */
   target?: HTMLElement;
   /** The ref of element to receive focus when the modal opens */
-  initialFocusRef?: React.RefObject<FocusableElement>;
+  initialFocusRef?: RefObject<FocusableElement>;
   /** The ref of element to receive focus when the modal closes */
-  finalFocusRef?: React.RefObject<FocusableElement>;
+  finalFocusRef?: RefObject<FocusableElement>;
 } & HTMLAttributes<HTMLDivElement>;
 
 export enum ModalScrollBehavior {
@@ -112,3 +115,7 @@ export type ModalCloseButtonProps = {
   onClose: ModalProps["onClose"];
   closeButtonProps?: ModalProps["closeButtonProps"];
 } & HTMLAttributes<HTMLDivElement>;
+
+export type ModalContextType = {
+  onClose?: ModalProps["onClose"];
+};

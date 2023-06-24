@@ -21,6 +21,7 @@ import { useKeyboardShortcut } from "../../hooks/useKeyboardShortcut.hook";
 import { FocusLock } from "../../utils/FocusLock";
 import { mergeRefs } from "../../utils/refs.utils";
 import { getOverlayElements } from "../../utils/dom.utils";
+import { ModalProvider } from "./Modal.context";
 
 const TRANSITION_DURATION = 200;
 
@@ -33,7 +34,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       isOpen,
       onClose,
       title,
-      width,
+      size,
       padding,
       showCloseButton = true,
       closeButtonProps,
@@ -113,6 +114,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       }
     }, [lockScroll, isContentVisible, preserveScrollBarGap]);
 
+    const modalContextValue = useMemo(() => ({ onClose }), [onClose]);
+
     return isContentVisible
       ? createPortal(
           <FocusLock
@@ -122,98 +125,99 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
             initialFocusRef={initialFocusRef}
             finalFocusRef={finalFocusRef}
           >
-            <div
-              className={clsx(
-                classPrefix("Modal"),
-                styles.Modal,
-                {
-                  [styles.Modal__opened]: isOpen,
-                  [styles.Modal__centered]: centered,
-                  [styles.Modal__hasHeader]: hasHeader,
-                  [styles.Modal__hasFooter]: hasFooter,
-                  [styles.Modal__fullscreen]: fullScreen,
-                  [styles.Modal__transition]: isTransitionClassApplied,
-                  [styles.Modal__scrollOutside]: scrollBehavior === "outside",
-                  ...themeClasses,
-                },
-                className
-              )}
-              style={{
-                ...themeStyles,
-                ...loadStyles({
-                  "--modal-transition-duration": `${
-                    transitionDuration ?? TRANSITION_DURATION
-                  }ms`,
-                  "--modal-z-index": zIndex,
-                  "--modal-width": width,
-                  "--modal-padding": padding,
-                }),
-                ...style,
-              }}
-              role="dialog"
-              aria-modal={true}
-              aria-labelledby={styles.Modal__title}
-              aria-describedby={styles.Modal__body}
-              tabIndex={-1}
-              ref={mergeRefs(ref, modalRef)}
-              {...restProps}
-            >
-              {showBackdrop && (
-                <ModalBackdrop
-                  onClick={() => {
-                    onBackdropClick?.();
-                    if (closeOnClickOutside) onClose();
-                  }}
-                  aria-hidden="true"
-                  className={backdropClassName}
-                />
-              )}
-              <ModalInner className={innerClassName} role="document">
-                <ModalContent
-                  className={contentClassName}
-                  ref={modalContentRef}
-                >
-                  {hasHeader && (
-                    <ModalHeader
-                      className={headerClassName}
-                      style={headerStyles}
-                    >
-                      <div
-                        id={styles.Modal__title}
-                        className={styles.Modal__title}
+            <ModalProvider value={modalContextValue}>
+              <div
+                className={clsx(
+                  classPrefix("Modal"),
+                  styles.Modal,
+                  {
+                    [styles.Modal__opened]: isOpen,
+                    [styles.Modal__centered]: centered,
+                    [styles.Modal__hasHeader]: hasHeader,
+                    [styles.Modal__hasFooter]: hasFooter,
+                    [styles.Modal__fullscreen]: fullScreen,
+                    [classPrefix("Modal-transition")]: isTransitionClassApplied,
+                    [styles.Modal__scrollOutside]: scrollBehavior === "outside",
+                    ...themeClasses,
+                  },
+                  className
+                )}
+                style={{
+                  ...themeStyles,
+                  ...loadStyles({
+                    "--modal-transition-duration": `${
+                      transitionDuration ?? TRANSITION_DURATION
+                    }ms`,
+                    "--modal-z-index": zIndex,
+                    "--modal-size": size,
+                    "--modal-padding": padding,
+                  }),
+                  ...style,
+                }}
+                role="dialog"
+                aria-modal={true}
+                aria-labelledby={styles.Modal__title}
+                aria-describedby={styles.Modal__body}
+                tabIndex={-1}
+                ref={mergeRefs(ref, modalRef)}
+                {...restProps}
+              >
+                {showBackdrop && (
+                  <ModalBackdrop
+                    onClick={() => {
+                      onBackdropClick?.();
+                      if (closeOnClickOutside) onClose();
+                    }}
+                    aria-hidden="true"
+                    className={backdropClassName}
+                  />
+                )}
+                <ModalInner className={innerClassName} tabIndex={-1}>
+                  <ModalContent
+                    className={contentClassName}
+                    role="document"
+                    ref={modalContentRef}
+                  >
+                    {hasHeader && (
+                      <ModalHeader
+                        className={headerClassName}
+                        style={headerStyles}
                       >
-                        {title}
-                      </div>
-                      {showCloseButton && (
-                        <ModalCloseButton
-                          onClose={onClose}
-                          closeButtonProps={closeButtonProps}
-                        />
-                      )}
-                    </ModalHeader>
-                  )}
-                  {!hasHeader && showCloseButton && (
-                    <ModalCloseButton
-                      onClose={onClose}
-                      closeButtonProps={closeButtonProps}
-                    />
-                  )}
-                  <ModalBody className={bodyClassName} style={bodyStyles}>
-                    {children}
-                  </ModalBody>
-                  {footer && (
-                    <ModalFooter
-                      className={footerClassName}
-                      style={footerStyles}
-                    >
-                      {typeof footer === "function"
-                        ? footer({ onClose })
-                        : footer}
-                    </ModalFooter>
-                  )}
-                </ModalContent>
-              </ModalInner>
-            </div>
+                        <div
+                          id={styles.Modal__title}
+                          className={styles.Modal__title}
+                        >
+                          {title}
+                        </div>
+                        {showCloseButton && (
+                          <ModalCloseButton
+                            onClose={onClose}
+                            closeButtonProps={closeButtonProps}
+                          />
+                        )}
+                      </ModalHeader>
+                    )}
+                    {!hasHeader && showCloseButton && (
+                      <ModalCloseButton
+                        onClose={onClose}
+                        closeButtonProps={closeButtonProps}
+                      />
+                    )}
+                    <ModalBody className={bodyClassName} style={bodyStyles}>
+                      {children}
+                    </ModalBody>
+                    {footer && (
+                      <ModalFooter
+                        className={footerClassName}
+                        style={footerStyles}
+                      >
+                        {footer}
+                      </ModalFooter>
+                    )}
+                  </ModalContent>
+                </ModalInner>
+              </div>
+            </ModalProvider>
           </FocusLock>,
           target ?? document.body
         )

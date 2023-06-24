@@ -87,6 +87,7 @@ Just one step required before you can use this library:
 ### Overlays
 
 - [**Modal**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Modal/Modal.types.ts)
+- [**Drawer**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Drawer/Drawer.types.ts)
 
 _Feel free to request a new component by [opening an issue](https://github.com/PawanKolhe/bold-ui/issues)._
 

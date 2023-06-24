@@ -1,15 +1,16 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Modal } from "./Modal";
+import { Drawer } from "./Drawer";
+import { type DrawerProps } from "./Drawer.types";
+import { useModalContext } from "../Modal/Modal.context";
 import { Button } from "../Button/Button";
-import { type ModalProps } from "./Modal.types";
 import { Input } from "../Input/Input";
 import { Stack } from "../Stack/Stack";
-import { useModalContext } from "./Modal.context";
+import { type ButtonProps } from "../Button/Button.types";
 
-const meta: Meta<typeof Modal> = {
-  component: Modal,
-  title: "Overlays/Modal",
+const meta: Meta<typeof Drawer> = {
+  component: Drawer,
+  title: "Overlays/Drawer",
   tags: ["autodocs"],
   argTypes: {
     children: {
@@ -20,9 +21,9 @@ const meta: Meta<typeof Modal> = {
 
 export default meta;
 
-type Story = StoryObj<ModalProps>;
+type Story = StoryObj<DrawerProps>;
 
-const ModalExample = (args: ModalProps) => {
+const DrawerExample = (args: DrawerProps & { buttonProps?: ButtonProps }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <>
@@ -31,10 +32,11 @@ const ModalExample = (args: ModalProps) => {
         onClick={() => {
           setIsOpen(true);
         }}
+        {...args.buttonProps}
       >
-        Open
+        {args.buttonProps?.children ?? "Open"}
       </Button>
-      <Modal
+      <Drawer
         {...args}
         isOpen={isOpen}
         onClose={() => {
@@ -42,12 +44,12 @@ const ModalExample = (args: ModalProps) => {
         }}
       >
         {args.children}
-      </Modal>
+      </Drawer>
     </>
   );
 };
 
-const ModalExampleRefFocus = (args: ModalProps) => {
+const DrawerExampleRefFocus = (args: DrawerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const buttonRef = React.useRef(null);
   return (
@@ -60,7 +62,7 @@ const ModalExampleRefFocus = (args: ModalProps) => {
       >
         Open
       </Button>
-      <Modal
+      <Drawer
         {...args}
         isOpen={isOpen}
         onClose={() => {
@@ -75,7 +77,7 @@ const ModalExampleRefFocus = (args: ModalProps) => {
             Inital Focused Button
           </Button>
         </Stack>
-      </Modal>
+      </Drawer>
     </>
   );
 };
@@ -84,18 +86,18 @@ const Children = () => {
   return (
     <Stack direction="vertical" spacing={4}>
       <span>
-        A modal (also called a modal window or lightbox) is a web page element
+        A drawer (also called a drawer window or lightbox) is a web page element
         that displays in front of and deactivates all other page content.
       </span>
       <span>
-        To return to the main content, the user must engage with the modal by
+        To return to the main content, the user must engage with the drawer by
         completing an action or by closing it.
       </span>
     </Stack>
   );
 };
 
-const ChildrenNestedModal = () => {
+const ChildrenNestedDrawer = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <Stack direction="vertical" spacing={4} alignItems="flex-start">
@@ -120,15 +122,15 @@ const ChildrenNestedModal = () => {
       >
         Open Nested
       </Button>
-      <Modal
+      <Drawer
         isOpen={isOpen}
         onClose={() => {
           setIsOpen(false);
         }}
-        title="Nested Modal"
+        title="Nested Drawer"
       >
-        Nested Modal Content
-      </Modal>
+        Nested Drawer Content
+      </Drawer>
     </Stack>
   );
 };
@@ -175,24 +177,102 @@ export const Default: Story = {
     title: "Example Title",
     children: <Children />,
   },
-  render: ModalExample,
+  render: DrawerExample,
+};
+
+export const Direction: Story = {
+  args: {
+    title: "Example Title",
+    children: <Children />,
+  },
+  render: (args) => (
+    <Stack spacing={4}>
+      <DrawerExample
+        {...args}
+        position="right"
+        buttonProps={{
+          children: "Right",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="left"
+        buttonProps={{
+          children: "Left",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="top"
+        buttonProps={{
+          children: "Top",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="bottom"
+        buttonProps={{
+          children: "Bottom",
+          kind: "outline",
+        }}
+      />
+    </Stack>
+  ),
 };
 
 export const Nested: Story = {
   args: {
     title: "Example Title",
-    children: <ChildrenNestedModal />,
+    children: <ChildrenNestedDrawer />,
   },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const Width: Story = {
   args: {
     title: "Example Title",
     children: <Children />,
-    size: "900px",
+    size: "600px",
   },
-  render: ModalExample,
+  render: (args) => (
+    <Stack spacing={4}>
+      <DrawerExample
+        {...args}
+        position="right"
+        buttonProps={{
+          children: "Right",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="left"
+        buttonProps={{
+          children: "Left",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="top"
+        buttonProps={{
+          children: "Top",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="bottom"
+        buttonProps={{
+          children: "Bottom",
+          kind: "outline",
+        }}
+      />
+    </Stack>
+  ),
 };
 
 export const LongContent: Story = {
@@ -201,26 +281,7 @@ export const LongContent: Story = {
     children: <ChildrenLongContent />,
     footer: <Footer />,
   },
-  render: ModalExample,
-};
-
-export const LongContentScrollOutside: Story = {
-  args: {
-    title: "Example Title",
-    children: <ChildrenLongContent />,
-    footer: <Footer />,
-    scrollBehavior: "outside",
-  },
-  render: ModalExample,
-};
-
-export const Centered: Story = {
-  args: {
-    title: "Example Title",
-    children: <Children />,
-    centered: true,
-  },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const WithFooter: Story = {
@@ -229,14 +290,14 @@ export const WithFooter: Story = {
     children: <Children />,
     footer: <Footer />,
   },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const NoTitle: Story = {
   args: {
     children: <Children />,
   },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const NoCloseButton: Story = {
@@ -245,7 +306,7 @@ export const NoCloseButton: Story = {
     children: <Children />,
     showCloseButton: false,
   },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const NoCloseOnEscape: Story = {
@@ -254,7 +315,7 @@ export const NoCloseOnEscape: Story = {
     children: <Children />,
     closeOnEsc: false,
   },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const NoCloseOnClickOutside: Story = {
@@ -263,7 +324,7 @@ export const NoCloseOnClickOutside: Story = {
     children: <Children />,
     closeOnClickOutside: false,
   },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const NoBackdrop: Story = {
@@ -272,16 +333,7 @@ export const NoBackdrop: Story = {
     children: <Children />,
     showBackdrop: false,
   },
-  render: ModalExample,
-};
-
-export const Fullscreen: Story = {
-  args: {
-    title: "Example Title",
-    children: <Children />,
-    fullScreen: true,
-  },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const NoTransition: Story = {
@@ -290,7 +342,7 @@ export const NoTransition: Story = {
     children: <Children />,
     transitionDuration: 0,
   },
-  render: ModalExample,
+  render: DrawerExample,
 };
 
 export const InitialFocusRef: Story = {
@@ -298,5 +350,5 @@ export const InitialFocusRef: Story = {
     title: "Example Title",
     children: <Children />,
   },
-  render: ModalExampleRefFocus,
+  render: DrawerExampleRefFocus,
 };
