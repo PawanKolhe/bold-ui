@@ -20,8 +20,8 @@ import { useMountTransition } from "../../hooks/useMountTransition.hook";
 import { useKeyboardShortcut } from "../../hooks/useKeyboardShortcut.hook";
 import { FocusLock } from "../../utils/FocusLock";
 import { mergeRefs } from "../../utils/refs.utils";
-import { getOverlayElements } from "../../utils/dom.utils";
 import { ModalProvider } from "./Modal.context";
+import { getModalElements } from "./Modal.utils";
 
 const TRANSITION_DURATION = 200;
 
@@ -65,6 +65,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       target,
       initialFocusRef,
       finalFocusRef,
+      keepMounted = false,
       ...restProps
     },
     ref
@@ -84,7 +85,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     // Handle keyboard shortcuts
     const onEscape = useCallback(() => {
       if (closeOnEsc) {
-        const modals = getOverlayElements("Modal");
+        const modals = getModalElements();
         const lastModal = modals[modals.length - 1];
         if (lastModal && lastModal === modalRef.current) onClose();
       }
@@ -101,13 +102,14 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     // Disable browser scrolling when modal is opened
     useEffect(() => {
       if (lockScroll) {
-        const modals = getOverlayElements("Modal");
+        const modals = getModalElements();
         const bodyClasses = [styles.Modal__noScroll];
         if (preserveScrollBarGap)
           bodyClasses.push(styles.Modal__preserveScrollBarGap);
         if (isContentVisible && modals.length === 1)
           document.body.classList.add(...bodyClasses);
         return () => {
+          const modals = getModalElements();
           if (modals.length === 0)
             document.body.classList.remove(...bodyClasses);
         };
@@ -116,7 +118,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     const modalContextValue = useMemo(() => ({ onClose }), [onClose]);
 
-    return isContentVisible
+    return isContentVisible || keepMounted
       ? createPortal(
           <FocusLock
             lockFocus={trapFocus}
@@ -159,6 +161,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 aria-labelledby={styles.Modal__title}
                 aria-describedby={styles.Modal__body}
                 tabIndex={-1}
+                hidden={!isContentVisible}
                 ref={mergeRefs(ref, modalRef)}
                 {...restProps}
               >

@@ -49,7 +49,7 @@ const ModalExample = (args: ModalProps) => {
 
 const ModalExampleRefFocus = (args: ModalProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const buttonRef = React.useRef(null);
+  const inputRef = React.useRef(null);
   return (
     <>
       <Button
@@ -66,14 +66,37 @@ const ModalExampleRefFocus = (args: ModalProps) => {
         onClose={() => {
           setIsOpen(false);
         }}
-        initialFocusRef={buttonRef}
+        initialFocusRef={inputRef}
       >
         <Stack direction="vertical" spacing={4} alignItems="flex-start">
           Some sample test
-          <Input />
-          <Button kind="outline" ref={buttonRef}>
-            Inital Focused Button
-          </Button>
+          <Stack direction="vertical" spacing={2} alignItems="flex-start">
+            <label
+              htmlFor="input"
+              style={{
+                fontSize: "0.875rem",
+                fontWeight: "600",
+                color: "var(--boldui-color-grey-900)",
+              }}
+            >
+              Enter some text:
+            </label>
+            <Input id="input" />
+          </Stack>
+          <Stack direction="vertical" spacing={2} alignItems="flex-start">
+            <label
+              htmlFor="input"
+              style={{
+                fontSize: "0.875rem",
+                fontWeight: "600",
+                color: "var(--boldui-color-grey-900)",
+              }}
+            >
+              Name:
+            </label>
+            <Input id="input" ref={inputRef} />
+          </Stack>
+          <Button kind="outline">Submit</Button>
         </Stack>
       </Modal>
     </>
@@ -299,4 +322,13 @@ export const InitialFocusRef: Story = {
     children: <Children />,
   },
   render: ModalExampleRefFocus,
+};
+
+export const KeepMounted: Story = {
+  args: {
+    title: "Example Title",
+    children: <ChildrenNestedModal />,
+    keepMounted: true,
+  },
+  render: ModalExample,
 };

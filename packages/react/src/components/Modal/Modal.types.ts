@@ -81,6 +81,8 @@ export type ModalProps = {
   initialFocusRef?: RefObject<FocusableElement>;
   /** The ref of element to receive focus when the modal closes */
   finalFocusRef?: RefObject<FocusableElement>;
+  /** Whether modal should't be unmounted from the DOM when it is hidden, display: none styles will be added instead */
+  keepMounted?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 
 export enum ModalScrollBehavior {

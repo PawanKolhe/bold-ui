@@ -281,7 +281,42 @@ export const LongContent: Story = {
     children: <ChildrenLongContent />,
     footer: <Footer />,
   },
-  render: DrawerExample,
+  render: (args) => (
+    <Stack spacing={4}>
+      <DrawerExample
+        {...args}
+        position="right"
+        buttonProps={{
+          children: "Right",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="left"
+        buttonProps={{
+          children: "Left",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="top"
+        buttonProps={{
+          children: "Top",
+          kind: "outline",
+        }}
+      />
+      <DrawerExample
+        {...args}
+        position="bottom"
+        buttonProps={{
+          children: "Bottom",
+          kind: "outline",
+        }}
+      />
+    </Stack>
+  ),
 };
 
 export const WithFooter: Story = {
