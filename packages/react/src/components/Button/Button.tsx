@@ -10,6 +10,10 @@ import {
 import styles from "./Button.module.scss";
 import { useTheme } from "../../context/ThemeContext";
 
+/**
+ * Button component is used to trigger an action or event, such as submitting
+ * a form, opening a Dialog, canceling an action, or performing a delete operation.
+ */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {

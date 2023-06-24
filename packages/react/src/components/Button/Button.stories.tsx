@@ -159,7 +159,7 @@ export const Color: Story = {
   args: {},
   render: (args) => {
     const COLOR_1 = "#EC4A0A";
-    const COLOR_2 = "#5341ae";
+    const COLOR_2 = "#5341AE";
     const COLOR_3 = "#047481";
     return (
       <Container direction="vertical">

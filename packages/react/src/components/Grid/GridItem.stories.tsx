@@ -1,10 +1,10 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Grid } from "./Grid";
+import { Grid, GridItem } from "./Grid";
 import { type GridItemProps } from "./Grid.types";
 
-const meta: Meta<typeof Grid.Item> = {
-  component: Grid.Item,
+const meta: Meta<typeof GridItem> = {
+  component: GridItem,
   title: "Layout/GridItem",
   tags: ["autodocs"],
   argTypes: {
@@ -62,7 +62,7 @@ export const Default: Story = {
   },
   render: (args) => (
     <Grid>
-      <Grid.Item {...args}>{args.children}</Grid.Item>
+      <GridItem {...args}>{args.children}</GridItem>
     </Grid>
   ),
 };

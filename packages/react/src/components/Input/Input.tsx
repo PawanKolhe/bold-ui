@@ -6,6 +6,7 @@ import styles from "./Input.module.scss";
 import { useTheme } from "../../context/ThemeContext";
 import { mergeRefs } from "../../utils/refs.utils";
 
+/** Input component is a component that is used to get user input in a text field. */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {

@@ -10,7 +10,7 @@ import styles from "./Grid.module.scss";
  * a grid of items with fluid width columns that break into more or
  * less columns as space is available.
  */
-const GridComponent = forwardRef<HTMLDivElement, GridProps>(
+export const Grid = forwardRef<HTMLDivElement, GridProps>(
   (
     {
       children,
@@ -59,7 +59,7 @@ const GridComponent = forwardRef<HTMLDivElement, GridProps>(
   }
 );
 
-GridComponent.displayName = "Grid";
+Grid.displayName = "Grid";
 
 export const GridItem = forwardRef<HTMLDivElement, GridItemProps>(
   (
@@ -88,8 +88,4 @@ export const GridItem = forwardRef<HTMLDivElement, GridItemProps>(
   }
 );
 
-export const Grid = GridComponent as typeof GridComponent & {
-  Item: typeof GridItem;
-};
-Grid.Item = GridItem;
 GridItem.displayName = "GridItem";

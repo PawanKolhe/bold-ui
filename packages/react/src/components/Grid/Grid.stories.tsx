@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Grid } from "./Grid";
+import { Grid, GridItem } from "./Grid";
 import { type GridProps } from "./Grid.types";
 
 const meta: Meta<typeof Grid> = {
@@ -8,17 +8,6 @@ const meta: Meta<typeof Grid> = {
   title: "Layout/Grid",
   tags: ["autodocs"],
   argTypes: {
-    // @ts-expect-error Props from 'Grid.Item' showing in table - spanColumns, spanRows
-    spanColumns: {
-      table: {
-        disable: true,
-      },
-    },
-    spanRows: {
-      table: {
-        disable: true,
-      },
-    },
     children: {
       control: false,
     },
@@ -133,24 +122,24 @@ export const ColumnSpan: Story = {
     rows: 2,
     children: (
       <>
-        <Grid.Item>
+        <GridItem>
           <Content>Item 1</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 2</Content>
-        </Grid.Item>
-        <Grid.Item spanColumns={2}>
+        </GridItem>
+        <GridItem spanColumns={2}>
           <Content>Item 3</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 4</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 5</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 6</Content>
-        </Grid.Item>
+        </GridItem>
       </>
     ),
   },
@@ -162,24 +151,24 @@ export const RowSpan: Story = {
     rows: 2,
     children: (
       <>
-        <Grid.Item>
+        <GridItem>
           <Content>Item 1</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 2</Content>
-        </Grid.Item>
-        <Grid.Item spanRows={2}>
+        </GridItem>
+        <GridItem spanRows={2}>
           <Content>Item 3</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 4</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 5</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 6</Content>
-        </Grid.Item>
+        </GridItem>
       </>
     ),
   },
@@ -192,24 +181,24 @@ export const Dense: Story = {
     dense: true,
     children: (
       <>
-        <Grid.Item>
+        <GridItem>
           <Content>Item 1</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 2</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 3</Content>
-        </Grid.Item>
-        <Grid.Item spanColumns={2}>
+        </GridItem>
+        <GridItem spanColumns={2}>
           <Content>Item 4</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 5</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 6</Content>
-        </Grid.Item>
+        </GridItem>
       </>
     ),
   },
@@ -222,24 +211,24 @@ export const Inline: Story = {
     inline: true,
     children: (
       <>
-        <Grid.Item>
+        <GridItem>
           <Content>Item 1</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 2</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 3</Content>
-        </Grid.Item>
-        <Grid.Item spanColumns={2}>
+        </GridItem>
+        <GridItem spanColumns={2}>
           <Content>Item 4</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 5</Content>
-        </Grid.Item>
-        <Grid.Item>
+        </GridItem>
+        <GridItem>
           <Content>Item 6</Content>
-        </Grid.Item>
+        </GridItem>
       </>
     ),
   },
