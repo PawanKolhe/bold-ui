@@ -1,7 +1,8 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Avatar } from "./Avatar";
-import { type AvatarProps } from "./Avatar.types";
+import { AvatarGroup } from "./AvatarGroup";
+import { type AvatarGroupProps, type AvatarProps } from "./Avatar.types";
 import { Stack } from "../Stack/Stack";
 import { BiUserCircle } from "react-icons/bi";
 
@@ -15,24 +16,49 @@ export default meta;
 
 type Story = StoryObj<AvatarProps>;
 
+const AvatarGroupExample = (args: AvatarGroupProps) => (
+  <AvatarGroup {...args}>
+    <Avatar kind="fill" name="Dan Abramov" src="https://bit.ly/dan-abramov" />
+    <Avatar kind="fill" name="Amrit Girish" />
+    <Avatar kind="fill" src="https://bit.ly/kent-c-dodds" />
+    <Avatar kind="fill" src="https://bit.ly/prosper-baba" />
+    <Avatar
+      kind="fill"
+      name="Pawan Kolhe"
+      src="https://avatars.githubusercontent.com/PawanKolhe"
+    />
+    <Avatar kind="fill" />
+    <Avatar kind="fill">+5</Avatar>
+  </AvatarGroup>
+);
+
 export const Default: Story = {
   args: {},
 };
 
 export const Sizes: Story = {
   args: {
-    src: "https://bit.ly/dan-abramov",
+    src: "https://avatars.githubusercontent.com/PawanKolhe",
   },
   render: (args) => {
     return (
       <Stack direction="vertical" spacing={4}>
         <Stack spacing={4}>
+          <Avatar size="x-small" />
           <Avatar size="small" />
           <Avatar size="default" />
           <Avatar size="large" />
           <Avatar size="x-large" />
         </Stack>
         <Stack spacing={4}>
+          <Avatar size="x-small" name="Pawan Kolhe" />
+          <Avatar size="small" name="Pawan Kolhe" />
+          <Avatar size="default" name="Pawan Kolhe" />
+          <Avatar size="large" name="Pawan Kolhe" />
+          <Avatar size="x-large" name="Pawan Kolhe" />
+        </Stack>
+        <Stack spacing={4}>
+          <Avatar size="x-small" {...args} />
           <Avatar size="small" {...args} />
           <Avatar size="default" {...args} />
           <Avatar size="large" {...args} />
@@ -65,9 +91,33 @@ export const Kinds: Story = {
   },
 };
 
+export const Shape: Story = {
+  args: {
+    name: "Pawan Kolhe",
+  },
+  render: (args) => {
+    return (
+      <Stack direction="vertical" spacing={4}>
+        <Stack spacing={4}>
+          <Avatar kind="light" shape="circle" />
+          <Avatar kind="light" shape="square" />
+        </Stack>
+        <Stack spacing={4}>
+          <Avatar kind="fill" shape="circle" />
+          <Avatar kind="fill" shape="square" />
+        </Stack>
+        <Stack spacing={4}>
+          <Avatar kind="outline" shape="circle" />
+          <Avatar kind="outline" shape="square" />
+        </Stack>
+      </Stack>
+    );
+  },
+};
+
 export const ImageURL: Story = {
   args: {
-    src: "https://bit.ly/dan-abramov",
+    src: "https://avatars.githubusercontent.com/PawanKolhe",
   },
 };
 
@@ -96,6 +146,18 @@ export const Colors: Story = {
           <Avatar color="#5341AE" {...args} />
           <Avatar color="#047481" {...args} />
         </Stack>
+        <Stack spacing={4}>
+          <Avatar color="var(--boldui-color-grey-600)" kind="fill" />
+          <Avatar color="#EC4A0A" kind="fill" />
+          <Avatar color="#5341AE" kind="fill" />
+          <Avatar color="#047481" kind="fill" />
+        </Stack>
+        <Stack spacing={4}>
+          <Avatar color="var(--boldui-color-grey-600)" kind="outline" />
+          <Avatar color="#EC4A0A" kind="outline" />
+          <Avatar color="#5341AE" kind="outline" />
+          <Avatar color="#047481" kind="outline" />
+        </Stack>
       </Stack>
     );
   },
@@ -103,41 +165,37 @@ export const Colors: Story = {
 
 export const BorderRadius: Story = {
   args: {
-    borderRadius: "4px",
-    src: "https://bit.ly/dan-abramov",
+    borderRadius: "0.625rem",
   },
   render: (args) => {
     return (
       <Stack direction="vertical" spacing={4}>
         <Stack spacing={4}>
-          <Avatar kind="light" {...args} src="https://bit.ly/broken-link" />
-          <Avatar kind="fill" {...args} src="https://bit.ly/broken-link" />
-          <Avatar kind="outline" {...args} src="https://bit.ly/broken-link" />
+          <Avatar kind="light" {...args} />
+          <Avatar kind="fill" {...args} />
+          <Avatar kind="outline" {...args} />
+        </Stack>
+        <Stack spacing={4}>
+          <Avatar kind="light" {...args} name="Pawan Kolhe" />
+          <Avatar kind="fill" {...args} name="Pawan Kolhe" />
+          <Avatar kind="outline" {...args} name="Pawan Kolhe" />
         </Stack>
         <Stack spacing={4}>
           <Avatar
             kind="light"
             {...args}
-            src="https://bit.ly/broken-link"
-            name="Pawan Kolhe"
+            src="https://avatars.githubusercontent.com/PawanKolhe"
           />
           <Avatar
             kind="fill"
             {...args}
-            src="https://bit.ly/broken-link"
-            name="Pawan Kolhe"
+            src="https://avatars.githubusercontent.com/PawanKolhe"
           />
           <Avatar
             kind="outline"
             {...args}
-            src="https://bit.ly/broken-link"
-            name="Pawan Kolhe"
+            src="https://avatars.githubusercontent.com/PawanKolhe"
           />
-        </Stack>
-        <Stack spacing={4}>
-          <Avatar kind="light" {...args} />
-          <Avatar kind="fill" {...args} />
-          <Avatar kind="outline" {...args} />
         </Stack>
       </Stack>
     );
@@ -162,4 +220,17 @@ export const CustomIcon: Story = {
   args: {
     icon: <BiUserCircle />,
   },
+};
+
+export const CustomSize: Story = {
+  args: {
+    size: "5rem",
+  },
+};
+
+export const AvatarGrouping: Story = {
+  args: {},
+  render: (args) => (
+    <AvatarGroupExample spacing={2}>{args.children}</AvatarGroupExample>
+  ),
 };

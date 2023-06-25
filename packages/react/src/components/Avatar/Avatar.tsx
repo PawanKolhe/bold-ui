@@ -12,6 +12,7 @@ import {
   type AvatarProps,
   AvatarSize,
   AvatarKind,
+  AvatarShape,
 } from "./Avatar.types";
 import styles from "./Avatar.module.scss";
 import { useTheme } from "../../context/ThemeContext";
@@ -29,7 +30,8 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       src,
       srcSet,
       kind = "light",
-      size = AvatarSize.DEFAULT,
+      size = "default",
+      shape = "circle",
       color,
       borderRadius,
       icon,
@@ -89,6 +91,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
             ...themeClasses,
             // Size
             [styles.Avatar__sizeDefault]: size === AvatarSize.DEFAULT,
+            [styles.Avatar__sizeXSmall]: size === AvatarSize.X_SMALL,
             [styles.Avatar__sizeSmall]: size === AvatarSize.SMALL,
             [styles.Avatar__sizeLarge]: size === AvatarSize.LARGE,
             [styles.Avatar__sizeXLarge]: size === AvatarSize.X_LARGE,
@@ -96,6 +99,9 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
             [styles.Avatar__kindLight]: kind === AvatarKind.LIGHT,
             [styles.Avatar__kindFill]: kind === AvatarKind.FILL,
             [styles.Avatar__sizeOutline]: kind === AvatarKind.OUTLINE,
+            // Shape
+            [styles.Avatar__shapeCircle]: shape === AvatarShape.CIRCLE,
+            [styles.Avatar__shapeSquare]: shape === AvatarShape.SQUARE,
           },
           className
         )}
@@ -157,9 +163,6 @@ export const AvatarPlaceholder = ({
       className={clsx(
         classPrefix("Avatar-placeholder"),
         styles.Avatar__placeholder,
-        {
-          [styles.Avatar__placeholderHasInitials]: !!initials,
-        },
         className
       )}
       style={style}
@@ -174,23 +177,20 @@ export const AvatarPlaceholder = ({
           className={clsx(classPrefix("Avatar-border"), styles.Avatar__border)}
         />
       </div>
-      {children ??
-        (initials && (
-          <div
-            className={clsx(
-              classPrefix("Avatar-initials"),
-              styles.Avatar__initials
-            )}
-          >
-            {initials}
-          </div>
-        )) ?? (
+      <div
+        className={clsx(
+          classPrefix("Avatar-placeholder-content"),
+          styles.Avatar__placeholderContent
+        )}
+      >
+        {children ?? initials ?? (
           <div
             className={clsx(classPrefix("Avatar-icon"), styles.Avatar__icon)}
           >
             {icon ?? <HiUser />}
           </div>
         )}
+      </div>
     </div>
   );
 };

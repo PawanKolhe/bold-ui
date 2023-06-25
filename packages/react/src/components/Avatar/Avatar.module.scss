@@ -8,11 +8,14 @@
 
   position: relative;
   overflow: hidden;
+  display: inline-flex;
+  flex-shrink: 0;
   width: var(--avatar-size);
   height: var(--avatar-size);
   border-radius: var(--avatar-border-radius);
   user-select: none;
   background-color: white;
+  border: 0.063rem solid transparent;
 }
 
 .Avatar__img {
@@ -29,20 +32,16 @@
   align-items: center;
   justify-content: center;
   flex-grow: 0;
-  font-size: calc(var(--avatar-size) * 0.45);
+  font-size: calc(var(--avatar-size) * 0.42);
   font-weight: 600;
   line-height: var(--avatar-size);
 }
 
-.Avatar__placeholderHasInitials {
-  color: var(--boldui-color-grey-600);
-}
-
 .Avatar__overlay {
-  pointer-events: none;
   position: absolute;
   inset: 0;
   border-radius: var(--avatar-border-radius);
+  pointer-events: none;
 }
 
 .Avatar__icon {
@@ -64,28 +63,30 @@
   border: 1px solid var(--boldui-color-primary);
 }
 
-.Avatar__initials {
+.Avatar__placeholderContent {
   position: absolute;
   inset: 0;
   border-radius: var(--avatar-border-radius);
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
 }
 
 /* Size */
 .Avatar__sizeDefault {
-  --avatar-size: 2rem;
+  --avatar-size: 2.125rem;
+}
+.Avatar__sizeXSmall {
+  --avatar-size: 1.125rem;
 }
 .Avatar__sizeSmall {
-  --avatar-size: 1.5rem;
+  --avatar-size: 1.625rem;
 }
 .Avatar__sizeLarge {
-  --avatar-size: 2.5rem;
+  --avatar-size: 2.625rem;
 }
 .Avatar__sizeXLarge {
-  --avatar-size: 3rem;
+  --avatar-size: 3.125rem;
 }
 
 /* Kind */
@@ -117,5 +118,26 @@
   }
   .Avatar__border {
     display: block;
+  }
+}
+
+/* Shape */
+.Avatar__shapeCircle {
+  --avatar-border-radius: var(--boldui-border-radius-circle);
+}
+.Avatar__shapeSquare {
+  --avatar-border-radius: var(--boldui-border-radius-small);
+}
+
+.AvatarGroup {
+  --avatar-group-spacing: 0;
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--avatar-group-spacing);
+
+  .Avatar {
+    border-color: white;
   }
 }

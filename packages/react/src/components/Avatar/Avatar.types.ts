@@ -13,10 +13,12 @@ export type AvatarProps = {
   src?: ImgHTMLAttributes<HTMLImageElement>["src"];
   /** List of sources to use for different screen resolutions */
   srcSet?: ImgHTMLAttributes<HTMLImageElement>["srcSet"];
-  /** Style of the avatar */
+  /** Style of avatar */
   kind?: AvatarKindValues;
   /** Width and height of avatar */
   size?: AvatarSizeValues | string;
+  /** Shape of avatar */
+  shape?: AvatarShapeValues;
   /** Color of avatar placeholder */
   color?: string;
   /** Border radius of avatar */
@@ -40,13 +42,31 @@ type AvatarKindValues = `${AvatarKind}`;
 
 export enum AvatarSize {
   DEFAULT = "default",
+  X_SMALL = "x-small",
   SMALL = "small",
   LARGE = "large",
   X_LARGE = "x-large",
 }
 type AvatarSizeValues = `${AvatarSize}`;
 
+export enum AvatarShape {
+  CIRCLE = "circle",
+  SQUARE = "square",
+}
+type AvatarShapeValues = `${AvatarShape}`;
+
 export type AvatarPlaceholderProps = {
   initials?: string;
   icon?: AvatarProps["icon"];
+} & HTMLAttributes<HTMLDivElement>;
+
+export type AvatarGroupProps = {
+  /** List of avatars */
+  children: ReactNode;
+  /**
+   * Spacing between children nodes.
+   * - If a number is provided, it will be multiplied by the base spacing unit (4px).
+   * - A string value can be any valid CSS length value, e.g. `20px`.
+   */
+  spacing?: string | number;
 } & HTMLAttributes<HTMLDivElement>;
