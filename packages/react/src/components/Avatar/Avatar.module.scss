@@ -140,4 +140,7 @@
   .Avatar {
     border-color: white;
   }
+  .Avatar:not(:first-child) {
+    margin-inline-start: calc(0.75rem * -1);
+  }
 }

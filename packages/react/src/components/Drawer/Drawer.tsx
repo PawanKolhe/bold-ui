@@ -4,6 +4,7 @@ import { Modal } from "../Modal";
 import { type DrawerProps } from "./Drawer.types";
 import styles from "./Drawer.module.scss";
 
+/** A panel which slides in from the edge of the screen */
 export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   (
     {

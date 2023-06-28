@@ -1,8 +1,7 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Avatar } from "./Avatar";
-import { AvatarGroup } from "./AvatarGroup";
-import { type AvatarGroupProps, type AvatarProps } from "./Avatar.types";
+import { type AvatarProps } from "./Avatar.types";
 import { Stack } from "../Stack/Stack";
 import { BiUserCircle } from "react-icons/bi";
 
@@ -15,22 +14,6 @@ const meta: Meta<typeof Avatar> = {
 export default meta;
 
 type Story = StoryObj<AvatarProps>;
-
-const AvatarGroupExample = (args: AvatarGroupProps) => (
-  <AvatarGroup {...args}>
-    <Avatar kind="fill" name="Dan Abramov" src="https://bit.ly/dan-abramov" />
-    <Avatar kind="fill" name="Amrit Girish" />
-    <Avatar kind="fill" src="https://bit.ly/kent-c-dodds" />
-    <Avatar kind="fill" src="https://bit.ly/prosper-baba" />
-    <Avatar
-      kind="fill"
-      name="Pawan Kolhe"
-      src="https://avatars.githubusercontent.com/PawanKolhe"
-    />
-    <Avatar kind="fill" />
-    <Avatar kind="fill">+5</Avatar>
-  </AvatarGroup>
-);
 
 export const Default: Story = {
   args: {},
@@ -226,11 +209,4 @@ export const CustomSize: Story = {
   args: {
     size: "5rem",
   },
-};
-
-export const AvatarGrouping: Story = {
-  args: {},
-  render: (args) => (
-    <AvatarGroupExample spacing={2}>{args.children}</AvatarGroupExample>
-  ),
 };

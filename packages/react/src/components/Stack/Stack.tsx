@@ -5,6 +5,7 @@ import { computeSpacing } from "../../utils/layout.utils";
 import { StackDirection, type StackProps } from "./Stack.types";
 import styles from "./Stack.module.scss";
 
+/** Stack is a layout component used to group elements together and apply a space between them */
 export const Stack = forwardRef<HTMLDivElement, StackProps>(
   (
     {

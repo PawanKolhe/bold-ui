@@ -25,6 +25,7 @@ import { getModalElements } from "./Modal.utils";
 
 const TRANSITION_DURATION = 200;
 
+/** An accessible overlay dialog */
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (
     {
