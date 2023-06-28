@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Grid, GridItem } from "./Grid";
+import { Grid } from "./Grid";
+import { GridItem } from "./GridItem/GridItem";
 import { type GridProps } from "./Grid.types";
 
 const meta: Meta<typeof Grid> = {
