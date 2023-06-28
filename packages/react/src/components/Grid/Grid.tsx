@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { clsx } from "clsx";
 import { classPrefix, loadStyles } from "../../utils/styles.utils";
 import { computeSpacing } from "../../utils/layout.utils";
-import { type GridItemProps, type GridProps } from "./Grid.types";
+import { type GridProps } from "./Grid.types";
 import styles from "./Grid.module.scss";
 
 /**
@@ -60,32 +60,3 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
 );
 
 Grid.displayName = "Grid";
-
-export const GridItem = forwardRef<HTMLDivElement, GridItemProps>(
-  (
-    { children, className, style = {}, spanColumns, spanRows, ...restProps },
-    ref
-  ) => {
-    return (
-      <div
-        className={clsx(
-          classPrefix("Grid-item"),
-          styles.GridItem,
-          {},
-          className
-        )}
-        style={{
-          ["--grid-column-span" as string]: spanColumns,
-          ["--grid-row-span" as string]: spanRows,
-          ...style,
-        }}
-        ref={ref}
-        {...restProps}
-      >
-        {children}
-      </div>
-    );
-  }
-);
-
-GridItem.displayName = "GridItem";

@@ -1,0 +1,7 @@
+.GridItem {
+  --grid-column-span: auto;
+  --grid-row-span: auto;
+
+  grid-column-end: span var(--grid-column-span);
+  grid-row-end: span var(--grid-row-span);
+}

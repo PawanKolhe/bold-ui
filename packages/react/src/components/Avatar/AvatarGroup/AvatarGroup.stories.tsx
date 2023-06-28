@@ -1,9 +1,10 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Avatar } from "./Avatar";
+import { Avatar } from "../Avatar";
 import { AvatarGroup } from "./AvatarGroup";
-import { type AvatarGroupProps, type AvatarProps } from "./Avatar.types";
-import { Stack } from "../Stack/Stack";
+import { type AvatarProps } from "../Avatar.types";
+import { type AvatarGroupProps } from "./AvatarGroup.types";
+import { Stack } from "../../Stack/Stack";
 
 const meta: Meta<typeof AvatarGroup> = {
   component: AvatarGroup,

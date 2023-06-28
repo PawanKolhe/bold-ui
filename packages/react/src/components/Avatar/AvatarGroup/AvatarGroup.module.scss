@@ -1,0 +1,15 @@
+.AvatarGroup {
+  --avatar-group-spacing: 0;
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--avatar-group-spacing);
+
+  :global(.boldui--Avatar) {
+    border-color: white;
+  }
+  :global(.boldui--Avatar):not(:first-child) {
+    margin-inline-start: calc(0.75rem * -1);
+  }
+}

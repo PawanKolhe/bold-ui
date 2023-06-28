@@ -83,6 +83,7 @@ Just one step required before you can use this library:
 
 - [**Stack**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Stack/Stack.types.ts)
 - [**Grid**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Grid/Grid.types.ts)
+  - [**GridItem**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Grid/GridItem.types.ts)
 
 ### Overlays
 
@@ -92,6 +93,7 @@ Just one step required before you can use this library:
 ### Data Display
 
 - [**Avatar**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Avatar/Avatar.types.ts)
+  - [**AvatarGroup**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Avatar/AvatarGroup.types.ts)
 
 _Feel free to request a new component by [opening an issue](https://github.com/PawanKolhe/bold-ui/issues)._
 

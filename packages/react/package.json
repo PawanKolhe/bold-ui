@@ -75,7 +75,6 @@
     "@storybook/addon-essentials": "7.0.24",
     "@storybook/addon-interactions": "7.0.24",
     "@storybook/addon-links": "7.0.24",
-    "@storybook/addon-mdx-gfm": "7.0.24",
     "@storybook/blocks": "7.0.24",
     "@storybook/react": "^7.0.24",
     "@storybook/react-vite": "7.0.24",

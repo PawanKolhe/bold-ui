@@ -7,7 +7,7 @@ import { glob } from "glob";
 
 const PLUGIN_NAME = "rollup-plugin-library-style";
 /** This path will be replaced with relative path */
-const MAGIC_PATH = "@@_MAGIC_PATH_@@";
+export const MAGIC_PATH = "@@_MAGIC_PATH_@@";
 const MAGIC_PATH_REGEX = /@@_MAGIC_PATH_@@/g;
 
 const outputPaths = [];
@@ -133,6 +133,7 @@ const onwarn = (warning, warn) => {
     warning.message.includes(MAGIC_PATH)
   )
     return;
+  if (warning.code === "THIS_IS_UNDEFINED") return;
   warn(warning);
 };
 

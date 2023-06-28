@@ -128,19 +128,3 @@
 .Avatar__shapeSquare {
   --avatar-border-radius: var(--boldui-border-radius-small);
 }
-
-.AvatarGroup {
-  --avatar-group-spacing: 0;
-
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  gap: var(--avatar-group-spacing);
-
-  .Avatar {
-    border-color: white;
-  }
-  .Avatar:not(:first-child) {
-    margin-inline-start: calc(0.75rem * -1);
-  }
-}

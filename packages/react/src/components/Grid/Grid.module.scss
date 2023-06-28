@@ -30,11 +30,3 @@
 .Grid__auto:not(.Grid__hasColumns, .Grid__hasRows) {
   grid-template-columns: repeat(auto-fit, minmax(var(--grid-min-width), 1fr));
 }
-
-.GridItem {
-  --grid-column-span: auto;
-  --grid-row-span: auto;
-
-  grid-column-end: span var(--grid-column-span);
-  grid-row-end: span var(--grid-row-span);
-}

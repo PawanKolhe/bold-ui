@@ -27,11 +27,3 @@ export type GridProps = {
   dense?: boolean;
   inline?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
-
-export type GridItemProps = {
-  children?: ReactNode;
-  /** Expand Item to specific number to columns */
-  spanColumns?: number;
-  /** Expand Item to specific number to rows */
-  spanRows?: number;
-} & HTMLAttributes<HTMLDivElement>;
