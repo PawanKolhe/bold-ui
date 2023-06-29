@@ -28,6 +28,11 @@ const options: CheckboxOption[] = [
   { label: "Option 5", value: "5" },
 ];
 
+const optionsWithDescription: CheckboxOption[] = options.map((option) => ({
+  ...option,
+  description: "This is a description",
+}));
+
 export const Default: Story = {
   args: {
     options,
@@ -67,6 +72,21 @@ export const Direction: Story = {
     defaultValue: ["2"],
     options,
     direction: "vertical",
+  },
+};
+
+export const Description: Story = {
+  args: {
+    defaultValue: ["2"],
+    options: optionsWithDescription,
+  },
+};
+
+export const Spacing: Story = {
+  args: {
+    defaultValue: ["2"],
+    options,
+    spacing: 10,
   },
 };
 

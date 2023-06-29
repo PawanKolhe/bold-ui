@@ -3,10 +3,10 @@
 .CheckboxGroup {
   @include common.base;
 
-  --checkbox-group-gap: 1rem;
+  --checkbox-group-spacing: 1rem;
 
   display: flex;
-  gap: var(--checkbox-group-gap);
+  gap: var(--checkbox-group-spacing);
   flex-wrap: wrap;
 }
 

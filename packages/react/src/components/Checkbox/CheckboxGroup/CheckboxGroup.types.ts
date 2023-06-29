@@ -13,6 +13,12 @@ export type CheckboxGroupProps = {
   options?: CheckboxValueType[] | CheckboxOption[];
   direction?: CheckboxDirectionValues;
   size?: CheckboxSizeValues;
+  /**
+   * Spacing between children nodes.
+   * - If a number is provided, it will be multiplied by the base spacing unit (4px).
+   * - A string value can be any valid CSS length value, e.g. `20px`.
+   */
+  spacing?: string | number;
   disabled?: boolean;
 } & Omit<
   HTMLAttributes<HTMLDivElement>,
@@ -27,6 +33,7 @@ type CheckboxDirectionValues = `${CheckboxDirection}`;
 
 export type CheckboxOption = {
   label: string;
+  description?: string;
   value: CheckboxValueType;
   disabled?: boolean;
 };

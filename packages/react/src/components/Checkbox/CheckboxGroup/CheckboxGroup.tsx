@@ -1,6 +1,6 @@
 import { forwardRef, useState, useCallback, useEffect } from "react";
 import { clsx } from "clsx";
-import { classPrefix, loadStyles } from "../../../utils/styles.utils";
+import { classPrefix } from "../../../utils/styles.utils";
 import {
   type CheckboxGroupProps,
   CheckboxDirection,
@@ -10,6 +10,7 @@ import styles from "./CheckboxGroup.module.scss";
 import { CheckboxGroupProvider } from "./CheckboxGroup.context";
 import { useId } from "../../../hooks/useId";
 import { type CheckboxValueType } from "../Checkbox.types";
+import { computeSpacing } from "../../../utils/layout.utils";
 
 /** Manage the checked state of its children `Checkbox` components */
 export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
@@ -25,6 +26,7 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
       options,
       direction = "horizontal",
       size,
+      spacing = 4,
       disabled,
       ...restProps
     },
@@ -71,7 +73,7 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
             className
           )}
           style={{
-            ...loadStyles({}),
+            ["--checkbox-group-spacing" as string]: computeSpacing(spacing),
             ...style,
           }}
           ref={ref}
@@ -94,6 +96,7 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
                       key={opt.value}
                       value={opt.value}
                       label={opt.label ?? value}
+                      description={opt.description}
                       disabled={opt.disabled ?? disabled}
                     />
                   );
