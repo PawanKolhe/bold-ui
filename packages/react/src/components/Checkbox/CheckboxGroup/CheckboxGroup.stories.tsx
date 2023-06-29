@@ -91,7 +91,7 @@ const ControlledCheckboxGroup = (args: CheckboxGroupProps) => {
       <Stack direction="vertical" spacing={4}>
         <Checkbox label="Checkbox 1" value="1" />
         <Checkbox label="Checkbox 2" value="2" />
-        <Checkbox label="Checkbox 3" value="3" />
+        <Checkbox label="Checkbox 3" value="3" defaultChecked />
       </Stack>
     </CheckboxGroup>
   );
