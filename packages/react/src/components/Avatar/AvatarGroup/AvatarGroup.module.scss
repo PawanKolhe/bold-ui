@@ -1,4 +1,8 @@
+@use "../../../styles/common";
+
 .AvatarGroup {
+  @include common.base;
+
   --avatar-group-spacing: 0;
 
   position: relative;

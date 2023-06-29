@@ -11,8 +11,6 @@ export type InputProps = {
   borderRadius?: string;
   /** Whether input has an error. Sets input color to red. */
   error?: boolean;
-  /** Sets input color to green. */
-  success?: boolean;
   /** Adds icon on the left side of input */
   icon?: ReactNode;
   /** Show a button to clear the input value */

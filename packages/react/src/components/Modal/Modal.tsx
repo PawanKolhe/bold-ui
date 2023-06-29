@@ -16,12 +16,13 @@ import {
 import styles from "./Modal.module.scss";
 import { useTheme } from "../../context/ThemeContext";
 import { Button } from "../Button/Button";
-import { useMountTransition } from "../../hooks/useMountTransition.hook";
-import { useKeyboardShortcut } from "../../hooks/useKeyboardShortcut.hook";
+import { useMountTransition } from "../../hooks/useMountTransition";
+import { useKeyboardShortcut } from "../../hooks/useKeyboardShortcut";
 import { FocusLock } from "../../utils/FocusLock";
 import { mergeRefs } from "../../utils/refs.utils";
 import { ModalProvider } from "./Modal.context";
 import { getModalElements } from "./Modal.utils";
+import { useId } from "../../hooks/useId";
 
 const TRANSITION_DURATION = 200;
 
@@ -76,6 +77,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       isOpen,
       TRANSITION_DURATION
     );
+    const titleId = useId("Modal");
+    const bodyId = useId("Modal");
 
     const modalRef = useRef<HTMLDivElement>(null);
     const modalContentRef = useRef<HTMLDivElement>(null);
@@ -159,8 +162,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 }}
                 role="dialog"
                 aria-modal={true}
-                aria-labelledby={styles.Modal__title}
-                aria-describedby={styles.Modal__body}
+                aria-labelledby={titleId}
+                aria-describedby={bodyId}
                 tabIndex={-1}
                 hidden={!isContentVisible}
                 ref={mergeRefs(ref, modalRef)}
@@ -187,10 +190,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                         className={headerClassName}
                         style={headerStyles}
                       >
-                        <div
-                          id={styles.Modal__title}
-                          className={styles.Modal__title}
-                        >
+                        <div id={titleId} className={styles.Modal__title}>
                           {title}
                         </div>
                         {showCloseButton && (
@@ -207,7 +207,11 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                         closeButtonProps={closeButtonProps}
                       />
                     )}
-                    <ModalBody className={bodyClassName} style={bodyStyles}>
+                    <ModalBody
+                      id={bodyId}
+                      className={bodyClassName}
+                      style={bodyStyles}
+                    >
                       {children}
                     </ModalBody>
                     {footer && (
@@ -331,7 +335,6 @@ const ModalBody = ({
 }: ModalBodyProps) => {
   return (
     <div
-      id={styles.Modal__body}
       className={clsx(classPrefix("Modal-body"), styles.Modal__body, className)}
       style={style}
       {...restProps}

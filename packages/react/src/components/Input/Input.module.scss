@@ -115,10 +115,10 @@
 
 // Kind
 .Input__kindDefault .Input {
-  --input-border-color: var(--boldui-color-grey-200);
+  --input-border-color: var(--boldui-color-grey-300);
 
   &:not(:disabled):hover {
-    --input-border-color: var(--boldui-color-grey-300);
+    --input-border-color: var(--boldui-color-grey-400);
   }
 
   &:focus-visible:focus-visible {
@@ -129,11 +129,11 @@
 }
 
 .Input__kindFilled .Input {
-  --input-border-color: var(--boldui-color-grey-200);
+  --input-border-color: var(--boldui-color-grey-300);
   --input-background-color: var(--boldui-color-grey-50);
 
   &:not(:disabled):hover {
-    --input-border-color: var(--boldui-color-grey-300);
+    --input-border-color: var(--boldui-color-grey-400);
   }
 
   &:focus-visible:focus-visible {
@@ -161,22 +161,6 @@
 }
 
 // Others
-.Input__success:not(.Input__kindUnstyled) {
-  .Input {
-    --input-border-color: var(--boldui-color-success);
-    --input-background-color: var(--boldui-color-success-25);
-
-    &:not(:disabled):hover {
-      --input-border-color: var(--boldui-color-success);
-    }
-  }
-}
-.Input__success.Input__hasIcon {
-  &.Input__hasValue .Input__icon {
-    color: var(--boldui-color-success);
-  }
-}
-
 .Input__error:not(.Input__kindUnstyled) {
   .Input {
     --input-border-color: var(--boldui-color-error);

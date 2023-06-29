@@ -121,19 +121,6 @@ export const Error: Story = {
   ),
 };
 
-export const Success: Story = {
-  args: {
-    success: true,
-  },
-  render: (args) => (
-    <Stack direction="vertical" spacing={4}>
-      <MultipleInputKinds {...args} />
-      <MultipleInputKinds {...args} icon={<FaUserAlt />} />
-      <MultipleInputKinds {...args} icon={<FaUserAlt />} disabled />
-    </Stack>
-  ),
-};
-
 const ControlledInput = (args: InputProps) => {
   const [value, setValue] = useState<string>("");
   return (

@@ -105,9 +105,9 @@ _Feel free to request a new component by [opening an issue](https://github.com/P
   - last 2 versions of each browser
   - exclude dead browser versions
 
-## 💙 Credits
+## 💙 Inspiration
 
-Bold UI is inspired by [Mantine](https://mantine.dev/).
+Bold UI is inspired by [Mantine UI](https://mantine.dev/) and [Chakra UI](https://chakra-ui.com/).
 
 ## 📜 License
 

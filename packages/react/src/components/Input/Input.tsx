@@ -20,7 +20,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       borderWidth,
       borderRadius,
       error,
-      success,
       icon,
       clearable = false,
       onClear,
@@ -43,12 +42,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const computedColor = useMemo(() => {
       if (error) {
         return "var(--boldui-color-error)";
-      } else if (success) {
-        return "var(--boldui-color-success)";
       } else {
         return color;
       }
-    }, [color, error, success]);
+    }, [color, error]);
 
     const handleOnClear = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -98,7 +95,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             [styles.Input__compact]: compact,
             [styles.Input__hasIcon]: !!icon,
             [styles.Input__error]: error,
-            [styles.Input__success]: success,
             [styles.Input__clearable]: clearable,
             [styles.Input__hasValue]: hasValue,
           },
