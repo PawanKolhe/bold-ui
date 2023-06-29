@@ -1,4 +1,13 @@
 @mixin colors {
+  --boldui-color-primary: #3366ff;
+  --boldui-color-error: #d03022;
+  --boldui-color-error-25: #fef6f6;
+  --boldui-color-success: #007a50;
+  --boldui-color-success-25: #f3fcf8;
+  --boldui-color-warning: #dba301;
+  --boldui-color-warning-25: #fff8f0;
+
+  /* Grey */
   --boldui-color-grey-900: #101828;
   --boldui-color-grey-800: #1d2939;
   --boldui-color-grey-700: #344054;
@@ -10,12 +19,6 @@
   --boldui-color-grey-100: #f2f4f7;
   --boldui-color-grey-50: #f9fafb;
   --boldui-color-grey-25: #fcfcfd;
-  --boldui-color-error: #d03022;
-  --boldui-color-error-25: #fef6f6;
-  --boldui-color-success: #007a50;
-  --boldui-color-success-25: #f3fcf8;
-  --boldui-color-warning: #dba301;
-  --boldui-color-primary: #3366ff;
 }
 
 @mixin typography {
@@ -59,6 +62,8 @@
 
 @mixin misc {
   --boldui-removed-body-scroll-bar-size: 17px;
+
+  /* Border Radius */
   --boldui-border-radius-small: 0.25rem;
   --boldui-border-radius-normal: 0.375rem;
   --boldui-border-radius-large: 0.5rem;

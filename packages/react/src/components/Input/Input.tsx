@@ -122,8 +122,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           defaultValue={defaultValue}
           disabled={disabled}
           type={type}
-          ref={mergeRefs(ref, inputRef)}
           {...restProps}
+          ref={mergeRefs(ref, inputRef)}
         />
         {clearable && hasValue && (
           <div

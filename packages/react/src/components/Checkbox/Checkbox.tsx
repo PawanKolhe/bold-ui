@@ -14,9 +14,10 @@ import { useTheme } from "../../context/ThemeContext";
 import { useId } from "../../hooks/useId";
 import { FaCheck, FaMinus } from "react-icons/fa";
 import { useCheckboxGroupContext } from "./CheckboxGroup/CheckboxGroup.context";
+import { mergeRefs } from "../../utils/refs.utils";
 
 /** Capture boolean input from user */
-export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       className,
@@ -115,7 +116,6 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
           ...style,
           ...wrapperProps?.style,
         }}
-        ref={ref}
         {...wrapperProps}
       >
         <div
@@ -146,7 +146,7 @@ export const Checkbox = forwardRef<HTMLDivElement, CheckboxProps>(
             disabled={disabled}
             {...restProps}
             type="checkbox"
-            ref={checkboxRef}
+            ref={mergeRefs(ref, checkboxRef)}
           />
         </div>
         {(label ?? description) && (
