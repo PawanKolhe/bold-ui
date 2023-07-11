@@ -20,6 +20,7 @@ export type CheckboxGroupProps = {
    */
   spacing?: string | number;
   disabled?: boolean;
+  error?: boolean;
 } & Omit<
   HTMLAttributes<HTMLDivElement>,
   "defaultChecked" | "defaultValue" | "onChange"

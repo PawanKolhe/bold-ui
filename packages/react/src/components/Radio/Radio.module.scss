@@ -1,0 +1,133 @@
+@use "../../styles/common";
+
+.Radio {
+  @include common.base;
+
+  --radio-size: 1.25rem;
+  --radio-border-radius: var(--boldui-border-radius-circle);
+  --radio-border-color: var(--boldui-color-grey-400);
+  --radio-text-font-size: 1rem;
+  --radio-input-font-size: 0.5rem;
+  --radio-gap: 0.625rem;
+  --radio-outline-color: var(--boldui-color-primary);
+
+  position: relative;
+  display: inline-flex;
+}
+
+.Radio__inputWrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--radio-size);
+  height: var(--radio-size);
+  line-height: var(--radio-size);
+  font-size: var(--radio-input-font-size);
+  border-radius: var(--radio-border-radius);
+  background-color: white;
+  order: 1;
+}
+
+.Radio__input {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  outline: none;
+  background-color: transparent;
+  border: 0.125rem solid var(--radio-border-color);
+  border-radius: var(--radio-border-radius);
+  user-select: none;
+  cursor: pointer;
+  transition-property: border-color;
+  transition-duration: var(--boldui-transition-duration-fast);
+
+  &:focus-visible:focus-visible {
+    outline: 0.125rem solid var(--radio-outline-color);
+    outline-offset: 0.125rem;
+  }
+}
+
+.Radio__icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: var(--radio-border-radius);
+  opacity: 0;
+  transition-property: background-color, opacity;
+  transition-duration: var(--boldui-transition-duration-fast);
+}
+
+.Radio__labelWrapper {
+  line-height: var(--radio-size);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  font-size: var(--radio-text-font-size);
+  order: 2;
+}
+
+.Radio__label {
+  cursor: pointer;
+  padding-left: var(--radio-gap);
+  color: var(--boldui-color-grey-900);
+}
+
+.Radio__isChecked {
+  .Radio__input {
+    --radio-border-color: var(--boldui-color-primary);
+  }
+  .Radio__icon {
+    background-color: var(--boldui-color-primary);
+    opacity: 1;
+  }
+}
+
+/* Size */
+.Radio__sizeDefault {
+  --radio-size: 1.25rem;
+  --radio-gap: 0.625rem;
+  --radio-text-font-size: 1rem;
+  --radio-input-font-size: 0.5rem;
+}
+
+.Radio__sizeSmall {
+  --radio-size: 1rem;
+  --radio-gap: 0.5rem;
+  --radio-text-font-size: 0.875rem;
+  --radio-input-font-size: 0.375rem;
+}
+
+.Radio__sizeLarge {
+  --radio-size: 1.5rem;
+  --radio-gap: 0.75rem;
+  --radio-text-font-size: 1.125rem;
+  --radio-input-font-size: 0.625rem;
+}
+
+/* Others */
+.Radio__error {
+  --radio-outline-color: var(--boldui-color-error);
+
+  .Radio__input {
+    --radio-border-color: var(--boldui-color-error);
+  }
+  .Radio__inputWrapper {
+    background-color: var(--boldui-color-error-25);
+  }
+}
+
+.Radio__disabled {
+  .Radio__input {
+    --radio-border-color: var(--boldui-color-grey-200);
+  }
+  .Radio__icon {
+    background-color: var(--boldui-color-grey-100);
+    color: var(--boldui-color-grey-400);
+  }
+  .Radio__label {
+    color: var(--boldui-color-grey-400);
+  }
+}

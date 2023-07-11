@@ -21,6 +21,7 @@ export const Default: Story = {
 
 export const DefaultChecked: Story = {
   args: {
+    label: "Label",
     defaultChecked: true,
   },
 };
@@ -86,7 +87,13 @@ export const Error: Story = {
     label: "There is an error",
     error: true,
   },
-  render: ControlledCheckbox,
+  render: (args) => (
+    <Stack direction="vertical" spacing={6}>
+      <Checkbox {...args} size="small" label="Small" />
+      <Checkbox {...args} size="default" label="Default" />
+      <Checkbox {...args} size="large" label="Large" />
+    </Stack>
+  ),
 };
 
 export const Indeterminate: Story = {

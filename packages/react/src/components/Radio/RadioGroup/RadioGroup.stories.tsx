@@ -1,26 +1,23 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { CheckboxGroup } from "./CheckboxGroup";
-import {
-  type CheckboxOption,
-  type CheckboxGroupProps,
-} from "./CheckboxGroup.types";
+import { RadioGroup } from "./RadioGroup";
+import { type RadioOption, type RadioGroupProps } from "./RadioGroup.types";
 import { useState } from "react";
 import { Stack } from "../../Stack";
-import { Checkbox } from "../Checkbox";
-import { type CheckboxValueType } from "../Checkbox.types";
+import { Radio } from "../Radio";
+import { type RadioValueType } from "../Radio.types";
 
-const meta: Meta<typeof CheckboxGroup> = {
-  component: CheckboxGroup,
-  title: "Inputs/CheckboxGroup",
+const meta: Meta<typeof RadioGroup> = {
+  component: RadioGroup,
+  title: "Inputs/RadioGroup",
   tags: ["autodocs"],
 };
 
 export default meta;
 
-type Story = StoryObj<CheckboxGroupProps>;
+type Story = StoryObj<RadioGroupProps>;
 
-const options: CheckboxOption[] = [
+const options: RadioOption[] = [
   { label: "Option 1", value: "1" },
   { label: "Option 2", value: "2" },
   { label: "Option 3", value: "3" },
@@ -28,7 +25,7 @@ const options: CheckboxOption[] = [
   { label: "Option 5", value: "5" },
 ];
 
-const optionsWithDescription: CheckboxOption[] = options.map((option) => ({
+const optionsWithDescription: RadioOption[] = options.map((option) => ({
   ...option,
   description: "This is a description",
 }));
@@ -41,7 +38,7 @@ export const Default: Story = {
 
 export const DefaultChecked: Story = {
   args: {
-    defaultValue: ["2", "5"],
+    defaultValue: "2",
     options,
   },
 };
@@ -55,21 +52,21 @@ export const Name: Story = {
 
 export const Sizes: Story = {
   args: {
-    defaultValue: ["2"],
+    defaultValue: "2",
     options,
   },
   render: (args) => (
     <Stack direction="vertical" spacing={6}>
-      <CheckboxGroup {...args} options={options} size="small" />
-      <CheckboxGroup {...args} options={options} size="default" />
-      <CheckboxGroup {...args} options={options} size="large" />
+      <RadioGroup {...args} options={options} size="small" />
+      <RadioGroup {...args} options={options} size="default" />
+      <RadioGroup {...args} options={options} size="large" />
     </Stack>
   ),
 };
 
 export const Direction: Story = {
   args: {
-    defaultValue: ["2"],
+    defaultValue: "2",
     options,
     direction: "vertical",
   },
@@ -77,14 +74,14 @@ export const Direction: Story = {
 
 export const Description: Story = {
   args: {
-    defaultValue: ["2"],
+    defaultValue: "2",
     options: optionsWithDescription,
   },
 };
 
 export const Spacing: Story = {
   args: {
-    defaultValue: ["2"],
+    defaultValue: "2",
     options,
     spacing: 10,
   },
@@ -93,7 +90,7 @@ export const Spacing: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-    defaultValue: ["2"],
+    defaultValue: "2",
     options,
   },
 };
@@ -101,31 +98,35 @@ export const Disabled: Story = {
 export const Error: Story = {
   args: {
     error: true,
-    defaultValue: ["2"],
+    defaultValue: "2",
     options,
   },
 };
 
-const ControlledCheckboxGroup = (args: CheckboxGroupProps) => {
-  const [checkboxGroupValue, setCheckboxGroupValue] = useState<
-    CheckboxValueType[]
-  >([]);
+const ControlledRadioGroup = (args: RadioGroupProps) => {
+  const [radioGroupValue, setRadioGroupValue] = useState<
+    RadioValueType | undefined
+  >();
+
   return (
-    <CheckboxGroup
+    <RadioGroup
       {...args}
-      value={checkboxGroupValue}
-      onChange={setCheckboxGroupValue}
+      value={radioGroupValue}
+      onChange={(value) => {
+        setRadioGroupValue(value);
+      }}
     >
       <Stack direction="vertical" spacing={4}>
-        <Checkbox label="Checkbox 1" value="1" />
-        <Checkbox label="Checkbox 2" value="2" />
-        <Checkbox label="Checkbox 3" value="3" />
+        <Radio label="Radio 1" value="1" />
+        <Radio label="Radio 2" value="2" />
+        <Radio label="Radio 3" value="3" />
+        Value: {radioGroupValue}
       </Stack>
-    </CheckboxGroup>
+    </RadioGroup>
   );
 };
 
 export const Controlled: Story = {
   args: {},
-  render: ControlledCheckboxGroup,
+  render: ControlledRadioGroup,
 };

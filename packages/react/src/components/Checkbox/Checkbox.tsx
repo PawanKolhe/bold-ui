@@ -26,7 +26,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       value,
       label,
       description,
-      size,
+      size = "default",
       indeterminate,
       icon,
       wrapperProps,
@@ -129,6 +129,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               classPrefix("Checkbox-icon"),
               styles.Checkbox__icon
             )}
+            aria-hidden="true"
           >
             {icon ?? indeterminate ? <FaMinus /> : <FaCheck />}
           </div>

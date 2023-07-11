@@ -1,19 +1,16 @@
 import { forwardRef, useState, useCallback, useEffect } from "react";
 import { clsx } from "clsx";
 import { classPrefix } from "../../../utils/styles.utils";
-import {
-  type CheckboxGroupProps,
-  CheckboxDirection,
-} from "./CheckboxGroup.types";
-import { Checkbox } from "../Checkbox";
-import styles from "./CheckboxGroup.module.scss";
-import { CheckboxGroupProvider } from "./CheckboxGroup.context";
+import { type RadioGroupProps, RadioDirection } from "./RadioGroup.types";
+import { Radio } from "../Radio";
+import styles from "./RadioGroup.module.scss";
+import { RadioGroupProvider } from "./RadioGroup.context";
 import { useId } from "../../../hooks/useId";
-import { type CheckboxValueType } from "../Checkbox.types";
+import { type RadioValueType } from "../Radio.types";
 import { computeSpacing } from "../../../utils/layout.utils";
 
-/** Manage the checked state of its children `Checkbox` components */
-export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
+/** Manage the checked state of its children `radio` components */
+export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
   (
     {
       children,
@@ -33,48 +30,43 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
     },
     ref
   ) => {
-    const [checkboxGroupValue, setCheckboxGroupValue] = useState<
-      CheckboxValueType[]
-    >(value ?? defaultValue ?? []);
-    const id = useId("CheckboxGroup");
+    const [radioGroupValue, setRadioGroupValue] = useState<
+      RadioValueType | undefined
+    >(value ?? defaultValue);
+    const id = useId("RadioGroup");
 
-    const handleOnChange = useCallback(
-      (value: CheckboxValueType, checked: boolean) => {
-        if (checked) setCheckboxGroupValue((prev) => [...prev, value]);
-        else setCheckboxGroupValue((prev) => prev.filter((v) => v !== value));
-      },
-      []
-    );
+    const handleOnChange = useCallback((value: RadioValueType) => {
+      setRadioGroupValue(value);
+    }, []);
 
     useEffect(() => {
-      onChange?.(checkboxGroupValue);
-    }, [checkboxGroupValue, onChange]);
+      if (radioGroupValue) onChange?.(radioGroupValue);
+    }, [radioGroupValue, onChange]);
 
     return (
-      <CheckboxGroupProvider
+      <RadioGroupProvider
         value={{
           name: name ?? id,
-          value: checkboxGroupValue,
-          defaultValue,
+          value: radioGroupValue,
           onChange: handleOnChange,
           size,
         }}
       >
         <div
           className={clsx(
-            classPrefix("CheckboxGroup"),
-            styles.CheckboxGroup,
+            classPrefix("RadioGroup"),
+            styles.RadioGroup,
             {
               // Direction
-              [styles.CheckboxGroup__directionHorizontal]:
-                direction === CheckboxDirection.HORIZONTAL,
-              [styles.CheckboxGroup__directionVertical]:
-                direction === CheckboxDirection.VERTICAL,
+              [styles.RadioGroup__directionHorizontal]:
+                direction === RadioDirection.HORIZONTAL,
+              [styles.RadioGroup__directionVertical]:
+                direction === RadioDirection.VERTICAL,
             },
             className
           )}
           style={{
-            ["--checkbox-group-spacing" as string]: computeSpacing(spacing),
+            ["--radio-group-spacing" as string]: computeSpacing(spacing),
             ...style,
           }}
           ref={ref}
@@ -84,7 +76,7 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
             ? options.map((opt) => {
                 if (typeof opt === "string" || typeof opt === "number") {
                   return (
-                    <Checkbox
+                    <Radio
                       key={opt}
                       value={opt}
                       label={opt}
@@ -94,11 +86,10 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
                   );
                 } else {
                   return (
-                    <Checkbox
+                    <Radio
                       key={opt.value}
                       value={opt.value}
                       label={opt.label ?? value}
-                      description={opt.description}
                       disabled={opt.disabled ?? disabled}
                       error={error}
                     />
@@ -107,9 +98,9 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
               })
             : children}
         </div>
-      </CheckboxGroupProvider>
+      </RadioGroupProvider>
     );
   }
 );
 
-CheckboxGroup.displayName = "CheckboxGroup";
+RadioGroup.displayName = "RadioGroup";

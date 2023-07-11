@@ -6,10 +6,10 @@
   --checkbox-size: 1.25rem;
   --checkbox-border-radius: var(--boldui-border-radius-small);
   --checkbox-border-color: var(--boldui-color-grey-400);
-  --checkbox-text-font-size: 0.875rem;
-  --checkbox-gap: 0.5rem;
+  --checkbox-text-font-size: 1rem;
+  --checkbox-input-font-size: 0.875rem;
+  --checkbox-gap: 0.625rem;
   --checkbox-outline-color: var(--boldui-color-primary);
-  --checkbox-input-font-size: 0.75rem;
 
   position: relative;
   display: inline-flex;
@@ -56,8 +56,7 @@
   color: white;
   border-radius: var(--checkbox-border-radius);
   opacity: 0;
-  transform: scale(0.9);
-  transition-property: transform, background-color, opacity;
+  transition-property: background-color, opacity;
   transition-duration: var(--boldui-transition-duration-fast);
 }
 
@@ -88,7 +87,6 @@
   }
   .Checkbox__icon {
     background-color: var(--boldui-color-primary);
-    transform: scale(1);
     opacity: 1;
   }
 }
@@ -98,14 +96,14 @@
   --checkbox-size: 1.25rem;
   --checkbox-gap: 0.625rem;
   --checkbox-text-font-size: 1rem;
-  --checkbox-input-font-size: 0.875rem;
+  --checkbox-input-font-size: 0.75rem;
 }
 
 .Checkbox__sizeSmall {
   --checkbox-size: 1rem;
   --checkbox-gap: 0.5rem;
   --checkbox-text-font-size: 0.875rem;
-  --checkbox-input-font-size: 0.75rem;
+  --checkbox-input-font-size: 0.6rem;
 }
 
 .Checkbox__sizeLarge {
