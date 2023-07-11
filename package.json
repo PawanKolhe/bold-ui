@@ -13,6 +13,7 @@
     "dev-react": "pnpm --filter @bold-ui/react run dev",
     "dev-website": "pnpm --filter @bold-ui/website run dev",
     "generate": "pnpm --filter @bold-ui/react run generate",
+    "build": "pnpm --filter @bold-ui/react run build",
     "build-storybook": "pnpm --filter @bold-ui/react run build-storybook",
     "chromatic": "pnpm --filter @bold-ui/react run chromatic",
     "eslint": "eslint . --ext js,jsx,ts,tsx --cache --max-warnings=0 ",

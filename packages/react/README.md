@@ -77,7 +77,11 @@ Just one step required before you can use this library:
 ### Inputs
 
 - [**Button**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Button/Button.types.ts)
+- [**Checkbox**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Checkbox/Checkbox.types.ts)
+  - [**CheckboxGroup**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Checkbox/CheckboxGroup/CheckboxGroup.types.ts)
 - [**Input**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Input/Input.types.ts)
+- [**Radio**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Radio/Radio.types.ts)
+  - [**RadioGroup**](https://github.com/PawanKolhe/bold-ui/blob/main/packages/react/src/components/Radio/RadioGroup/RadioGroup.types.ts)
 
 ### Layout
 

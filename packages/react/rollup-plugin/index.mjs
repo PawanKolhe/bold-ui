@@ -9,6 +9,8 @@ const PLUGIN_NAME = "rollup-plugin-library-style";
 /** This path will be replaced with relative path */
 export const MAGIC_PATH = "@@_MAGIC_PATH_@@";
 const MAGIC_PATH_REGEX = /@@_MAGIC_PATH_@@/g;
+const CSS_EXPORT_PATH_FROM_ROOT = "dist/css";
+const CSS_EXPORT_PATH_FROM_DIST = "css";
 
 const outputPaths = [];
 
@@ -27,8 +29,16 @@ const defaultLoaders = [
   },
 ];
 
-const replaceMagicPath = (fileContent) =>
-  fileContent.replace(MAGIC_PATH_REGEX, "../..");
+const replaceMagicPath = (fileContent, currentPath) =>
+  fileContent.replace(
+    MAGIC_PATH_REGEX,
+    path
+      .relative(
+        path.dirname(currentPath),
+        path.resolve(process.cwd(), CSS_EXPORT_PATH_FROM_ROOT)
+      )
+      .replace(/\\/g, "/")
+  );
 
 const libStylePlugin = (options = {}) => {
   const {
@@ -81,18 +91,17 @@ const libStylePlugin = (options = {}) => {
         /\.(module|global)$/,
         ""
       )}.css`;
-      const cssFilePath = `css/${cssFileName}`;
 
       // Create a new CSS file with the generated hash class names
       this.emitFile({
         type: "asset",
-        fileName: cssFilePath,
+        fileName: `${CSS_EXPORT_PATH_FROM_DIST}/${cssFileName}`,
         source: postCssResult.extracted.code,
       });
 
       // Import statement to be added to the js file
       const importStr = importCSS
-        ? `import "${MAGIC_PATH}/${cssFilePath}";\n`
+        ? `import "${MAGIC_PATH}/${cssFileName}";\n`
         : "";
 
       // Create a new js file with css module
@@ -119,7 +128,7 @@ const libStylePlugin = (options = {}) => {
           fs
             .readFile(currentPath)
             .then((buffer) => buffer.toString())
-            .then(replaceMagicPath)
+            .then((fileContent) => replaceMagicPath(fileContent, currentPath))
             .then((fileContent) => fs.writeFile(currentPath, fileContent))
         )
       );
