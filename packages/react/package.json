@@ -1,6 +1,6 @@
 {
   "name": "@bold-ui/react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Modern, fast, and accessible React component library",
   "files": [
     "dist/**"
@@ -19,7 +19,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic",
-    "publish-build": "pnpm run build && pnpm publish --access public",
+    "build-publish": "pnpm run build && pnpm publish --access public",
+    "build-publish-dryrun": "pnpm run build && pnpm publish --access public --dry-run --no-git-checks",
     "generate": "plop"
   },
   "repository": {

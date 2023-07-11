@@ -22,7 +22,8 @@
     "clean": "git clean -fXd",
     "clean-node-modules": "npx rimraf --glob **/node_modules",
     "prepare": "husky install",
-    "publish-build": "pnpm --filter @bold-ui/react run publish-build"
+    "build-publish": "pnpm --filter @bold-ui/react run build-publish",
+    "build-publish-dryrun": "pnpm --filter @bold-ui/react run build-publish-dryrun"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.43.0",
