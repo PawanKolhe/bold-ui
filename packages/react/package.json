@@ -10,7 +10,7 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "dev": "run-p start storybook",
+    "dev": "pnpm run storybook",
     "start": "run-s build && run-p -lcr rollup:watch",
     "build": "run-s -nlc clean-build rollup",
     "rollup": "rollup --config",

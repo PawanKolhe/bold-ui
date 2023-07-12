@@ -80,7 +80,8 @@
   @include misc;
 }
 
-.boldui-body-modal-open {
+/* Disables browser scrollbars */
+.boldui--scroll-lock {
   overflow: hidden !important;
   overscroll-behavior: contain;
   position: relative !important;

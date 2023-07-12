@@ -16,7 +16,7 @@ export const cssvarPrefix = (className: string) =>
   `--${CSS_VARIABLE_PREFIX}-${className}`;
 
 /**
- * Filters out object keys when value is falsy.
+ * Filters out object key value pairs where value is falsy.
  */
 export const loadStyles = (
   cssProperties: Record<string, string | number | undefined>
@@ -26,4 +26,11 @@ export const loadStyles = (
     if (value) styleObj[key] = value;
   });
   return styleObj;
+};
+
+/**
+ * Adds all styles from the style object to the style property of the element
+ */
+export const css = (element: HTMLElement, style: CSSStyleDeclaration) => {
+  for (const property in style) element.style[property] = style[property];
 };

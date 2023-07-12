@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useEffect, useMemo, useRef } from "react";
+import { forwardRef, useCallback, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { clsx } from "clsx";
 import { MdClose } from "react-icons/md";
@@ -21,8 +21,10 @@ import { useKeyboardShortcut } from "../../hooks/useKeyboardShortcut";
 import { FocusLock } from "../../utils/FocusLock";
 import { mergeRefs } from "../../utils/refs.utils";
 import { ModalProvider } from "./Modal.context";
-import { getModalElements } from "./Modal.utils";
 import { useId } from "../../hooks/useId";
+import { getOverlayElements } from "../../utils/overlay.utils";
+import { OverlayType } from "../../types/overlay.types";
+import { useScrollLock } from "../../hooks/useScrollLock";
 
 const TRANSITION_DURATION = 200;
 
@@ -89,7 +91,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     // Handle keyboard shortcuts
     const onEscape = useCallback(() => {
       if (closeOnEsc) {
-        const modals = getModalElements();
+        const modals = getOverlayElements(OverlayType.Modal);
         const lastModal = modals[modals.length - 1];
         if (lastModal && lastModal === modalRef.current) onClose();
       }
@@ -103,22 +105,12 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     );
     useKeyboardShortcut(keyListenersMap);
 
-    // Disable browser scrolling when modal is opened
-    useEffect(() => {
-      if (lockScroll) {
-        const modals = getModalElements();
-        const bodyClasses = [styles.Modal__noScroll];
-        if (preserveScrollBarGap)
-          bodyClasses.push(styles.Modal__preserveScrollBarGap);
-        if (isContentVisible && modals.length === 1)
-          document.body.classList.add(...bodyClasses);
-        return () => {
-          const modals = getModalElements();
-          if (modals.length === 0)
-            document.body.classList.remove(...bodyClasses);
-        };
-      }
-    }, [lockScroll, isContentVisible, preserveScrollBarGap]);
+    useScrollLock({
+      enable: lockScroll,
+      overlayType: OverlayType.Modal,
+      isContentVisible,
+      preserveScrollBarGap,
+    });
 
     const modalContextValue = useMemo(() => ({ onClose }), [onClose]);
 

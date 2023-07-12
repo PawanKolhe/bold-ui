@@ -166,18 +166,3 @@
     transform: scale(1);
   }
 }
-
-.Modal__noScroll {
-  overflow: hidden !important;
-  overscroll-behavior: contain;
-  position: relative !important;
-  padding-left: 0px;
-  padding-top: 0px;
-  padding-right: 0px;
-  margin-left: 0;
-  margin-top: 0;
-}
-
-.Modal__preserveScrollBarGap {
-  margin-right: var(--boldui-removed-body-scroll-bar-size) !important;
-}
