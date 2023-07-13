@@ -312,3 +312,9 @@
     transform: rotate(360deg);
   }
 }
+
+:global(.boldui--theme-dark) {
+  &.Button__kindDefault {
+    --button-text-color: white;
+  }
+}

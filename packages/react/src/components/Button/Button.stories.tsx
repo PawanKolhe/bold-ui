@@ -10,6 +10,7 @@ import {
 import { Stack } from "../Stack";
 import { ThemeProvider } from "../../context";
 import { MdFavorite, MdEmail } from "react-icons/md";
+import { FaStar, FaBookmark, FaClock, FaLeaf } from "react-icons/fa";
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -264,22 +265,22 @@ export const IconOnly: Story = {
   },
   render: (args) => {
     const ICON_1 = {
-      icon: "🌎",
+      icon: <FaBookmark />,
       color: "black",
       size: ButtonSize.SMALL,
     };
     const ICON_2 = {
-      icon: "🐼",
-      color: "#f98306",
+      icon: <FaLeaf />,
+      color: "#00a651",
       size: ButtonSize.DEFAULT,
     };
     const ICON_3 = {
-      icon: "⭐️",
+      icon: <FaStar />,
       color: "#f9d509",
       size: ButtonSize.LARGE,
     };
     const ICON_4 = {
-      icon: "🎅🏼",
+      icon: <FaClock />,
       color: "#e81c35",
       size: ButtonSize.DEFAULT,
       shape: ButtonShape.CIRCLE,
@@ -349,7 +350,6 @@ export const IconOnly: Story = {
 export const DarkBackground: Story = {
   args: {
     children: "DarkBackground",
-    color: "#ea80fc",
   },
   parameters: {
     backgrounds: {

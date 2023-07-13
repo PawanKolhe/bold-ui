@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import { type ThemeContextType } from "./ThemeContext.types";
-import { cssvarPrefix, loadStyles } from "../utils/styles.utils";
+import { classPrefix, cssvarPrefix, loadStyles } from "../utils/styles.utils";
 
 const ThemeContext = createContext<ThemeContextType>({ colorMode: "light" });
 
@@ -21,7 +21,7 @@ export const useTheme = () => {
 
   const themeClasses = useMemo(() => {
     return {
-      "boldui-theme-dark": theme.colorMode === "dark",
+      [classPrefix("theme-dark")]: theme.colorMode === "dark",
     };
   }, [theme]);
 

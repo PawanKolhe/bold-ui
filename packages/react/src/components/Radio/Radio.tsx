@@ -106,10 +106,19 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
           )}
         >
           <div
-            className={clsx(classPrefix("Radio-icon"), styles.Radio__icon)}
+            className={clsx(
+              classPrefix("Radio-icon-wrapper"),
+              styles.Radio__iconWrapper
+            )}
             aria-hidden="true"
           >
-            {icon ?? <FaCircle />}
+            {icon ?? (
+              <div
+                className={clsx(classPrefix("Radio-icon"), styles.Radio__icon)}
+              >
+                <FaCircle />
+              </div>
+            )}
           </div>
           <input
             id={id}
