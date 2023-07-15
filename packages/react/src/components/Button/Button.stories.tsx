@@ -348,9 +348,7 @@ export const IconOnly: Story = {
 };
 
 export const DarkBackground: Story = {
-  args: {
-    children: "DarkBackground",
-  },
+  args: {},
   parameters: {
     backgrounds: {
       default: "grey-100",
@@ -358,7 +356,10 @@ export const DarkBackground: Story = {
   },
   render: (args) => (
     <ThemeProvider value={{ colorMode: "dark" }}>
-      <MultipleButton {...args} />
+      <Container direction="vertical">
+        <MultipleButton {...args} danger />
+        <MultipleButton {...args} success />
+      </Container>
     </ThemeProvider>
   ),
 };

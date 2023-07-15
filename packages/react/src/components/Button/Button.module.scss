@@ -74,7 +74,7 @@
 
   &:focus-visible {
     outline: 0.125rem solid var(--boldui-color-primary);
-    outline-offset: 0.125rem;
+    outline-offset: 0.188rem;
   }
 
   &:disabled {
@@ -316,5 +316,33 @@
 :global(.boldui--theme-dark) {
   &.Button__kindDefault {
     --button-text-color: white;
+
+    &:not(:disabled):hover {
+      --button-border-color: var(--boldui-color-grey-200);
+    }
+
+    &:not(:disabled):hover .Button__overlay {
+      background-color: white;
+      --button-overlay-opacity: 10%;
+    }
+  }
+
+  &.Button__kindOutline {
+    &:not(:disabled):hover .Button__overlay {
+      background-color: var(--boldui-color-primary);
+      --button-overlay-opacity: 15%;
+    }
+  }
+
+  &.Button__kindLight {
+    &:before {
+      opacity: 15%;
+    }
+  }
+
+  &.Button__kindSubtle {
+    &:not(:disabled):hover .Button__overlay {
+      --button-overlay-opacity: 15%;
+    }
   }
 }
